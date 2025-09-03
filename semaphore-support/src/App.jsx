@@ -1,10 +1,11 @@
+import Description from "./components/Description/Description";
 import Rules from "./components/rules/Rules";
 
 const App = () => {
   return ( 
     <>
       <div className="bg-amber-300 h-screen w-screen"></div>
-      <Rules/>
+     <Description/>
       <div className="bg-amber-300 h-screen w-screen"></div>
     </>
   );
