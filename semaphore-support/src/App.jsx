@@ -1,6 +1,7 @@
 import Faq from "./components/FAQ/Faq";
 const App = () => {
   return ( 
+    
    <Faq/>
   );
 }
