@@ -11,7 +11,7 @@ export default function Description() {
             Semaphore 2025
           </h1>
           
-          <div className="w-full h-1 mx-auto mb-12" style={{ backgroundColor: 'var(--color-highlight)' }}></div>
+          <div className="w-full h-1 mx-auto mb-12 bg-highlight" ></div>
         </div>
         
         <div className="max-w-3xl mx-auto">
