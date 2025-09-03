@@ -1,6 +1,12 @@
+import Rules from "./components/rules/Rules";
+
 const App = () => {
   return ( 
-    <h1 className="text-amber-500">Hello World</h1>
+    <>
+      <div className="bg-amber-300 h-screen w-screen"></div>
+      <Rules/>
+      <div className="bg-amber-300 h-screen w-screen"></div>
+    </>
   );
 }
  
