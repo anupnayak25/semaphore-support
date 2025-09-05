@@ -1,4 +1,4 @@
-import FaqCard from "./FaqCard"; 
+import FaqCard from "../components/FAQ/FaqCard"; 
 const Faq = () => {
 
   const faqs = [

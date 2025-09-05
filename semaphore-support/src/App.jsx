@@ -1,10 +1,18 @@
-import Faq from "./components/FAQ/Faq";
-import Rules from "./components/rules/Rules";
+import Description from "./components/Description/Description";
+import Faq from "./pages/Faq";
+import Rules from "./pages/Rules";
 
 const App = () => {
   return ( 
-    
-   <Faq/>
+    <>
+      <div className="bg-amber-300 h-screen w-full"></div>
+     <Description/>
+      <div className="bg-amber-300 h-screen w-full"></div>
+       <Rules/>
+      <div className="bg-amber-300 h-screen w-full"></div>
+       <Faq/>
+      <div className="bg-amber-300 h-screen w-full"></div>
+    </>
   );
 }
  
