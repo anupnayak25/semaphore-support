@@ -6,8 +6,8 @@ const NavCard = ({ icon, name, route='home'}) => {
     const IconComponent=icon;
 
   return (
-    // <Link to={route}>
-      <button
+   
+      <Link to={route}
         className="group relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg
                    bg-dominant hover:bg-dominant-50 active:bg-dominant-100
                    border border-highlight hover:border-highlight-50 active:border-highlight-100
@@ -18,6 +18,7 @@ const NavCard = ({ icon, name, route='home'}) => {
                  
                  transform hover:scale-105 active:scale-95"
     >
+  
       {/* Icon Container */}
       <div className="mb-3 sm:mb-4 p-2 sm:p-3 
                       bg-highlight group-hover:bg-dominant-50
@@ -42,8 +43,9 @@ const NavCard = ({ icon, name, route='home'}) => {
                       from-transparent to-blue-50/20 
                       opacity-0 group-hover:opacity-100 
                       transition-opacity duration-200 pointer-events-none" />
-    </button>
-  // </Link>
+                     
+    </Link>
+  
   );
 };
 export default NavCard;

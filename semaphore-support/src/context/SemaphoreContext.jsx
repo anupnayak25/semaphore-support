@@ -13,7 +13,7 @@ const SemaphoreContextProvider = ({children}) => {
     { icon: CalendarCheck2Icon, name: "Events", route: "/Events" },
     { icon: AlarmClockCheckIcon, name: "Timings", route: "/Timings" },
     { icon: BadgeQuestionMarkIcon, name: "FAQ", route: "/FAQ" },
-    { icon: Mail, name: "Heads and Co-ordinators", route: "/headsAndCoordinators" },
+    { icon: Mail, name: "Heads and Co-ordinators", route: "/HeadsAndCoordinators" },
   ];
     
     return(
