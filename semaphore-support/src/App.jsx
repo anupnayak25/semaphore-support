@@ -1,5 +1,5 @@
 import Rules from "./components/rules/Rules";
-import Faq from "./components/FAQ/faq";
+import Faq from "./components/FAQ/Faq";
 import HeadsInfo from "./components/HeadDetail/HeadsInfo";
 
 
