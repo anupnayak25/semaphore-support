@@ -1,18 +1,13 @@
-import Description from "./components/Description/Description";
+import Description from "./components/Heading/Heading";
 import Faq from "./pages/Faq";
 import Rules from "./pages/Rules";
-
+import NavBar from "./components/NavBar/NavBar";
+import Home from "./pages/Home";
 const App = () => {
   return ( 
     <>
-      <div className="bg-amber-300 h-screen w-full"></div>
-     <Description/>
-      <div className="bg-amber-300 h-screen w-full"></div>
-       <Rules/>
-      <div className="bg-amber-300 h-screen w-full"></div>
-       <Faq/>
-      <div className="bg-amber-300 h-screen w-full"></div>
-    </>
+    <Home />
+     </>
   );
 }
  
