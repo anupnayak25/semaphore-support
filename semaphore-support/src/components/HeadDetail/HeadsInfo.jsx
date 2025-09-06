@@ -146,7 +146,7 @@ export default function HeadsInfo() {
                 id="event-select"
                 value={selectedEvent}
                 onChange={(e) => setSelectedEvent(e.target.value)}
-                className="px-3 py-2 bg-dominant border border-accent rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-sm min-w-[150px] sm:min-w-[180px]"
+                className="px-3 py-2 bg-accent border border-accent rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-sm min-w-[150px] sm:min-w-[180px]"
               >
                 <option value="all">All Events ({heads.length})</option>
                 {events.map((event) => (
