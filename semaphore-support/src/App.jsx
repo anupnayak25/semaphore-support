@@ -1,4 +1,5 @@
 
+
 import Faq from "./pages/Faqs";
 import Rules from "./pages/Events";
 import NavBar from "./components/NavBar/NavBar";
@@ -25,6 +26,7 @@ const App = () => {
   return ( 
     <RouterProvider router={router} />
   );
+
 }
 
 export default App;
