@@ -45,7 +45,7 @@ export default function HeadsInfo() {
       name: "Sanjana Rao",
       designation: "Tech Talk Head",
       event: "Tech Talk",
-      photo: "/images/animi.webp",
+      photo: "/images/197.jpg",
       contact: "9123422334",
       description: "Organizing technical seminars and expert speaker sessions",
     },
@@ -81,7 +81,7 @@ export default function HeadsInfo() {
       name: "Priya Sharma",
       designation: "IT Quiz Head",
       event: "IT Quiz",
-      photo: "/images/197.jpg",
+      photo: "/images/priya.jpg",
       contact: "9555566778",
       description: "Conducting technical quizzes and knowledge competitions",
     },
@@ -90,7 +90,7 @@ export default function HeadsInfo() {
       name: "Suprith Sharma",
       designation: "IT Quiz Head",
       event: "IT Quiz",
-      photo: "/images/animi.webp",
+      photo: "/images/priya.jpg",
       contact: "9555566778",
       description: "Conducting technical quizzes and knowledge competitions",
     },
@@ -125,20 +125,20 @@ export default function HeadsInfo() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50">
-      {/* Header with Event Selector */}
-      <div className="sticky top-0 bg-white/90 backdrop-blur-lg border-b border-blue-200 z-20 shadow-sm">
+    <div className="min-h-screen bg-dominant">
+      {/* Header */}
+      <div className="sticky top-0 bg-dominant/90 backdrop-blur-lg border-b border-accent z-20 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-900">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-highlight">
               Semaphore Event Heads
             </h1>
 
-            {/* Event Dropdown */}
+            {/* Dropdown */}
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <label
                 htmlFor="event-select"
-                className="text-sm font-medium text-gray-700 whitespace-nowrap"
+                className="text-sm font-medium text-accent whitespace-nowrap"
               >
                 Filter by:
               </label>
@@ -146,7 +146,7 @@ export default function HeadsInfo() {
                 id="event-select"
                 value={selectedEvent}
                 onChange={(e) => setSelectedEvent(e.target.value)}
-                className="px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-[150px] sm:min-w-[180px]"
+                className="px-3 py-2 bg-dominant border border-accent rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-sm min-w-[150px] sm:min-w-[180px]"
               >
                 <option value="all">All Events ({heads.length})</option>
                 {events.map((event) => (
@@ -160,21 +160,18 @@ export default function HeadsInfo() {
         </div>
       </div>
 
-      {/* Team Cards */}
+      {/* Cards */}
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
-          {/* Results Summary */}
           <div className="mb-6 text-center">
-            <p className="text-gray-600 text-sm">
+            <p className="text-accent text-sm">
               Showing {filteredHeads.length}{" "}
               {selectedEvent === "all"
                 ? "event heads"
-                : `${selectedEvent} head${filteredHeads.length !== 1 ? "s" : ""
-                }`}
+                : `${selectedEvent} head${filteredHeads.length !== 1 ? "s" : ""}`}
             </p>
           </div>
 
-          {/* Cards Grid */}
           <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredHeads.map((head) => (
               <HeadCard
@@ -185,29 +182,6 @@ export default function HeadsInfo() {
               />
             ))}
           </div>
-
-          {/* Empty State */}
-          {filteredHeads.length === 0 && (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🔍</div>
-              <p className="text-gray-500 text-lg">
-                No event heads found for "{selectedEvent}"
-              </p>
-              <button
-                onClick={() => setSelectedEvent("all")}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Show All Events
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-8 sm:mt-12 text-gray-600 text-xs sm:text-sm">
-          <p className="mb-2">
-            Contact any of our event heads for more information
-          </p>
         </div>
       </div>
     </div>
