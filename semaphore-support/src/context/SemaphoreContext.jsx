@@ -14,10 +14,14 @@ const SemaphoreContextProvider = ({ children }) => {
       subHeading: "Organized by SAMCA,Nitte",
     },
     pages: {
-      faq: {
+      faqPage: {
         heading: "Frequently Asked Questions",
         subHeading: "Everything you need to know in one place",
       },
+      eventPage:{
+        heading:"Event Details",
+        subHeading:"Location,Timings,Rules and Contacts"
+      }
     },
   };
   const navItems = [

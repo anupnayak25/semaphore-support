@@ -1,40 +1,37 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight, Users, Crown, UserCheck, Globe } from 'lucide-react';
+import { useContext, useState } from 'react';
+import { ChevronLeft, ChevronRight, Users, Crown, UserCheck, Globe, LocateFixedIcon, LocateOffIcon, MapPinHouseIcon,LucideScale } from 'lucide-react';
+import Heading from '../components/Heading/Heading';
+import { SemaphoreContext } from '../context/SemaphoreContext';
 
 const Rules = () => {
+    const {titles}=useContext(SemaphoreContext);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
 
     const eventRules = [
         {
-            eventId: 0,
             eventName: "Coding Marathon",
-            rules: {
-                volunteers: [
-                    "Report to venue 30 minutes before event start",
-                    "Wear volunteer ID and dress code T-shirt",
-                    "Assist participants in registration and seating"
+            info: {
+                locationAndTime: [
+                    "Venue: Computer Lab A, Ground Floor",
+                    "Event starts at 10:00 AM and ends at 4:00 PM",
+                    "Participants must check in by 9:30 AM"
                 ],
-                eventHeads: [
+                rules: [
                     "Ensure all systems are functional before start",
                     "Brief volunteers about event flow",
                     "Handle disputes and escalate if needed"
                 ],
-                participants: [
+                heads: [
                     "Bring college ID and event pass",
                     "Maintain discipline and follow instructions",
                     "No plagiarism or use of unauthorized devices"
                 ],
-                general: [
-                    "Follow code of conduct at all times",
-                    "Dress in formals or college uniform",
-                    "Be punctual; late entries may be disqualified"
-                ]
+              
             }
         },
         {
-            eventId: 1,
             eventName: "Robotics Challenge",
-            rules: {
+            info: {
                 volunteers: [
                     "Check equipment and safety protocols",
                     "Guide teams to testing area",
@@ -50,11 +47,7 @@ const Rules = () => {
                     "Robots must not exceed size/weight limits",
                     "Any damage to venue must be reported"
                 ],
-                general: [
-                    "Follow code of conduct at all times",
-                    "Dress in formals or college uniform",
-                    "Be punctual; late entries may be disqualified"
-                ]
+               
             }
         }
     ];
@@ -71,14 +64,13 @@ const Rules = () => {
 
     const getRuleIcon = (category) => {
         switch (category) {
-            case 'volunteers':
-                return <Users className="w-5 h-5" />;
-            case 'eventHeads':
+            case 'locationAndTime':
+                return <MapPinHouseIcon className="w-5 h-5" />;
+            case 'rules':
+                return <LucideScale className="w-5 h-5" />;
+            case 'heads':
                 return <Crown className="w-5 h-5" />;
-            case 'participants':
-                return <UserCheck className="w-5 h-5" />;
-            case 'general':
-                return <Globe className="w-5 h-5" />;
+           
             default:
                 return <Globe className="w-5 h-5" />;
         }
@@ -86,14 +78,13 @@ const Rules = () => {
 
     const getCategoryTitle = (category) => {
         switch (category) {
-            case 'volunteers':
-                return 'Volunteers';
-            case 'eventHeads':
-                return 'Event Heads';
-            case 'participants':
-                return 'Participants';
-            case 'general':
-                return 'General Rules';
+            case 'locationAndTime':
+                return 'Location & Time';
+            case 'rules':
+                return 'Event Rules';
+            case 'heads':
+                return 'Heads & Coordinators';
+          
             default:
                 return category;
         }
@@ -101,6 +92,7 @@ const Rules = () => {
 
     return (
         <div className="w-full bg-dominant text-white">
+        <Heading heading={titles.pages.eventPage.heading} subheading={titles.pages.eventPage.subHeading}/>
             {/* Header */}
             <div className="sticky top-0 bg-dominant border-b border-highlight/20 z-10">
                 <div className="max-w-4xl mx-auto px-4 py-6">
@@ -145,7 +137,7 @@ const Rules = () => {
             {/* Rules Content */}
             <div className="max-w-4xl mx-auto px-4 py-8">
                 <div className="grid gap-6 md:gap-8">
-                    {Object.entries(currentEvent.rules).map(([category, rules]) => (
+                    {Object.entries(currentEvent.info).map(([category, info]) => (
                         <div
                             key={category}
                             className="bg-highlight/5 rounded-xl p-6 border border-highlight/10 hover:border-highlight/20 transition-colors"
@@ -162,7 +154,7 @@ const Rules = () => {
                             </div>
                             
                             <div className="space-y-3">
-                                {rules.map((rule, index) => (
+                                {info.map((rule, index) => (
                                     <div
                                         key={index}
                                         className="flex items-start space-x-3 p-3 rounded-lg bg-dominant/50 hover:bg-highlight/5 transition-colors"

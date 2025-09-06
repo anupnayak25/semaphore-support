@@ -1,6 +1,6 @@
 
-import Faq from "./pages/Faq";
-import Rules from "./pages/Rules";
+import Faq from "./pages/Faqs";
+import Rules from "./pages/Events";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./pages/Home";
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
