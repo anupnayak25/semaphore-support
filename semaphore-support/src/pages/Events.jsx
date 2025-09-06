@@ -7,59 +7,16 @@ const Rules = () => {
     const {titles}=useContext(SemaphoreContext);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
 
-    const eventRules = [
-        {
-            eventName: "Coding Marathon",
-            info: {
-                locationAndTime: [
-                    "Venue: Computer Lab A, Ground Floor",
-                    "Event starts at 10:00 AM and ends at 4:00 PM",
-                    "Participants must check in by 9:30 AM"
-                ],
-                rules: [
-                    "Ensure all systems are functional before start",
-                    "Brief volunteers about event flow",
-                    "Handle disputes and escalate if needed"
-                ],
-                heads: [
-                    "Bring college ID and event pass",
-                    "Maintain discipline and follow instructions",
-                    "No plagiarism or use of unauthorized devices"
-                ],
-              
-            }
-        },
-        {
-            eventName: "Robotics Challenge",
-            info: {
-                volunteers: [
-                    "Check equipment and safety protocols",
-                    "Guide teams to testing area",
-                    "Report any issues to event head immediately"
-                ],
-                eventHeads: [
-                    "Verify that robots meet specifications",
-                    "Monitor scoring and maintain fairness",
-                    "Ensure proper safety measures are followed"
-                ],
-                participants: [
-                    "Teams must wear safety gear",
-                    "Robots must not exceed size/weight limits",
-                    "Any damage to venue must be reported"
-                ],
-               
-            }
-        }
-    ];
+    const { eventData } = useContext(SemaphoreContext);
 
-    const currentEvent = eventRules[currentEventIndex];
+    const currentEvent = eventData[currentEventIndex];
 
     const nextEvent = () => {
-        setCurrentEventIndex((prev) => (prev + 1) % eventRules.length);
+        setCurrentEventIndex((prev) => (prev + 1) % eventData.length);
     };
 
     const prevEvent = () => {
-        setCurrentEventIndex((prev) => (prev - 1 + eventRules.length) % eventRules.length);
+        setCurrentEventIndex((prev) => (prev - 1 + eventData.length) % eventData.length);
     };
 
     const getRuleIcon = (category) => {
@@ -100,7 +57,7 @@ const Rules = () => {
                         <button
                             onClick={prevEvent}
                             className="p-2 rounded-full bg-highlight/10 hover:bg-highlight/20 transition-colors"
-                            disabled={eventRules.length <= 1}
+                            disabled={eventData.length <= 1}
                         >
                             <ChevronLeft className="w-6 h-6 text-highlight" />
                         </button>
@@ -110,7 +67,7 @@ const Rules = () => {
                                 {currentEvent.eventName}
                             </h1>
                             <div className="flex justify-center mt-2 space-x-2">
-                                {eventRules.map((_, index) => (
+                                {eventData.map((_, index) => (
                                     <div
                                         key={index}
                                         className={`w-2 h-2 rounded-full transition-colors ${
@@ -126,7 +83,7 @@ const Rules = () => {
                         <button
                             onClick={nextEvent}
                             className="p-2 rounded-full bg-highlight/10 hover:bg-highlight/20 transition-colors"
-                            disabled={eventRules.length <= 1}
+                            disabled={eventData.length <= 1}
                         >
                             <ChevronRight className="w-6 h-6 text-highlight" />
                         </button>
