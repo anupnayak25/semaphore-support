@@ -35,7 +35,7 @@ export default function HeadsAndCoordinators() {
   };
 
   return (
-    <div className="min-h-screen bg-dominant text-white">
+    <div className="w-full bg-dominant min-h-screen text-white py-10">
     <Heading
             heading={titles.pages.headsPage.heading}
             subheading={titles.pages.headsPage.subHeading}

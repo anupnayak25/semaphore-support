@@ -23,7 +23,7 @@ const Faq = () => {
   };
 
   return (
-    <div className="w-full bg-dominant min-h-screen">
+    <div className="w-full bg-dominant min-h-screen text-white py-10">
       <Heading
         heading={titles.pages.faqPage.heading}
         subheading={titles.pages.faqPage.subHeading}

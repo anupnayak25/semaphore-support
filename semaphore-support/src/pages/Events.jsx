@@ -48,7 +48,7 @@ const Rules = () => {
     };
 
     return (
-        <div className="w-full bg-dominant text-white">
+       <div className="w-full bg-dominant min-h-screen text-white py-10">
         <Heading heading={titles.pages.eventPage.heading} subheading={titles.pages.eventPage.subHeading}/>
             {/* Header */}
             <div className="sticky top-0 bg-dominant border-b border-highlight/20 z-10">
@@ -134,7 +134,7 @@ const Rules = () => {
             <div className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2">
                 <div className="bg-highlight/10 backdrop-blur-sm rounded-full px-4 py-2 border border-highlight/20">
                     <p className="text-sm text-highlight text-center">
-                        Swipe or use arrows to navigate
+                        Use arrows to navigate
                     </p>
                 </div>
             </div>
