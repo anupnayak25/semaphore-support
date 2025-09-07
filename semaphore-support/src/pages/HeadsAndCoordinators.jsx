@@ -1,9 +1,9 @@
 import { useState, useMemo, useContext } from "react";
-import HeadCard from "../components/HeadDetail/HeadCard";
+import HeadsAndCoordinatorsCard from "../components/HeadsAndCoordinators/HeadsAndCoordinatorsCard";
 import Heading from "../components/Heading/Heading";
 import { SemaphoreContext } from "../context/SemaphoreContext";
-
-export default function HeadsInfo() {
+import toast from "react-hot-toast";
+export default function HeadsAndCoordinators() {
   const [selectedEvent, setSelectedEvent] = useState("all");
   const { titles, headsData } = useContext(SemaphoreContext);
 
@@ -28,7 +28,7 @@ export default function HeadsInfo() {
   const copyToClipboard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-      alert(`Copied: ${text}`);
+      toast.success(`Copied: ${text}`);
     } catch (err) {
       console.error("❌ Failed to copy to clipboard:", err);
     }
@@ -36,13 +36,14 @@ export default function HeadsInfo() {
 
   return (
     <div className="min-h-screen bg-dominant text-white">
-      <header className="sticky top-0 z-20 bg-dominant border-b border-accent shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <Heading
+    <Heading
             heading={titles.pages.headsPage.heading}
             subheading={titles.pages.headsPage.subHeading}
-            className="!bg-transparent !mb-0"
+           
           />
+      <header className="sticky top-0 z-20 bg-dominant ">
+        <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          
 
           <div className="flex items-center gap-2">
             <label
@@ -57,7 +58,7 @@ export default function HeadsInfo() {
               onChange={(e) => setSelectedEvent(e.target.value)}
               className="px-3 py-2 bg-dominant text-accent border border-accent rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-accent text-sm min-w-[150px] sm:min-w-[180px]"
             >
-              <option value="all">All Events ({headsData.length})</option>
+              <option value="all">All Events</option>
               {events.map((event) => {
                 const count = headsData.filter((h) => h.event === event).length;
                 return (
@@ -73,20 +74,11 @@ export default function HeadsInfo() {
 
       <main className="p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-6 text-center">
-            <p className="text-accent text-sm">
-              Showing{" "}
-              <span className="font-semibold">{filteredHeads.length}</span>{" "}
-              {selectedEvent === "all"
-                ? "event heads"
-                : `${selectedEvent} head${filteredHeads.length !== 1 ? "s" : ""
-                }`}
-            </p>
-          </div>
+         
 
           <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredHeads.map((head) => (
-              <HeadCard
+              <HeadsAndCoordinatorsCard
                 key={head.id}
                 head={head}
                 getInitials={getInitials}

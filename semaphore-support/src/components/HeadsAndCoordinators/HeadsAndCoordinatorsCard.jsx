@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function HeadCard({ head, getInitials, copyToClipboard }) {
+export default function HeadsAndCoordinatorsCard({ head, getInitials, copyToClipboard }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export default function HeadCard({ head, getInitials, copyToClipboard }) {
 
       {/* Content */}
       <div className="text-center space-y-2">
-        <h2 className="text-base sm:text-lg font-semibold text-highlight">
+        <h2 className="text-base sm:text-lg font-semibold text-accent">
           {head.name}
         </h2>
 
@@ -48,20 +48,18 @@ export default function HeadCard({ head, getInitials, copyToClipboard }) {
           <p className="text-accent font-medium text-xs sm:text-sm">
             {head.designation}
           </p>
-          <p className="text-gray-500 text-xs leading-relaxed px-2">
-            {head.description}
-          </p>
+         
         </div>
 
         {/* Contact */}
-        <div className="mt-3 flex flex-col items-center gap-2">
-          <p className="text-xs text-accent font-mono">{head.contact}</p>
+        <div className="mt-3 flex flex-col items-center gap-2 ">
+          <p className="text-xs text-accent ">Contact No : {head.contact}</p>
           <button
             onClick={() => copyToClipboard(head.contact)}
-            className="px-3 py-1.5 bg-accent text-dominant hover:bg-highlight hover:text-dominant text-xs rounded-md transition-colors duration-200 flex items-center gap-1"
+            className="px-4 py-1.5 bg-transparent text-accent hover:bg-accent border border-accent hover:text-dominant text-xs rounded-2xl font-bold transition-colors duration-200 flex items-center gap-1"
             title="Copy phone number"
           >
-            <span>📋</span> Copy
+             copy to clipboard
           </button>
         </div>
       </div>

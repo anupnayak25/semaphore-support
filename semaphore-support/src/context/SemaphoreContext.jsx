@@ -27,8 +27,8 @@ const SemaphoreContextProvider = ({ children }) => {
         subHeading:""
       },
       headsPage: {
-        heading: "Event Heads",
-        subHeading: "Meet the leaders of each event",
+        heading: "Heads and Co-ordinators",
+        subHeading: "Contact for any event related queries",
       },
     },
   };
@@ -322,9 +322,7 @@ const SemaphoreContextProvider = ({ children }) => {
       designation: "Surprise Event Head",
       event: "Surprise Event",
       photo: "/images/IMG_0619-1.JPG",
-      contact: "9880897965",
-      description:
-        "Leading innovative surprise events and coordinating special activities",
+      contact: "9880897965"
     },
     {
       id: 2,
@@ -333,7 +331,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Dance",
       photo: "/images/197.jpg",
       contact: "9876512345",
-      description: "Organizing dance competitions and cultural performances",
+     
     },
     {
       id: 3,
@@ -342,7 +340,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Coding",
       photo: "/images/197.jpg",
       contact: "9123456789",
-      description: "Managing programming contests and technical challenges",
+     
     },
     {
       id: 4,
@@ -351,7 +349,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Startup Pitch",
       photo: "/images/197.jpg",
       contact: "9988766554",
-      description: "Coordinating entrepreneurship events and pitch competitions",
+     
     },
     {
       id: 5,
@@ -360,7 +358,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Tech Talk",
       photo: "/images/197.jpg",
       contact: "9123422334",
-      description: "Organizing technical seminars and expert speaker sessions",
+     
     },
     {
       id: 6,
@@ -369,7 +367,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Photography",
       photo: "/images/197.jpg",
       contact: "9777788990",
-      description: "Managing photography contests and visual documentation",
+     
     },
     {
       id: 7,
@@ -378,7 +376,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Management",
       photo: "/images/197.jpg",
       contact: "9666644556",
-      description: "Overseeing technical infrastructure and IT operations",
+     
     },
     {
       id: 8,
@@ -387,7 +385,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Gaming",
       photo: "/images/197.jpg",
       contact: "9333322110",
-      description: "Organizing gaming tournaments and esports competitions",
+      
     },
     {
       id: 9,
@@ -396,7 +394,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Quiz",
       photo: "/images/priya.jpg",
       contact: "9555566778",
-      description: "Conducting technical quizzes and knowledge competitions",
+     
     },
     {
       id: 10,
@@ -405,7 +403,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Quiz",
       photo: "/images/priya.jpg",
       contact: "9555566778",
-      description: "Conducting technical quizzes and knowledge competitions",
+     
     },
   ];
   const scheduleData={
