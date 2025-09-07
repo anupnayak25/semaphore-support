@@ -22,9 +22,9 @@ const SemaphoreContextProvider = ({ children }) => {
         heading: "Event Details",
         subHeading: "Location,Timings,Rules and Contacts",
       },
-      timingsPage:{
-        heading:"Semaphore Schedule",
-        subHeading:""
+      timingsPage: {
+        heading: "Semaphore Schedule",
+        subHeading: ""
       },
       headsPage: {
         heading: "Heads and Co-ordinators",
@@ -44,51 +44,144 @@ const SemaphoreContextProvider = ({ children }) => {
   ];
   const faqData = [
     {
-      question: "What should I do ,if I lose my Id?",
-      answer: "You will be provided with the replacement in the office",
+      question: "Where is Cyborg Recruit taking place?",
+      answer: "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
     },
     {
-      question: "Where are the refreshments being provided?",
-      answer: "The refreshments are being provided in Sri Durga canteen ",
+      question: "At what time is Cyborg Recruit on Day 1?",
+      answer: "Day 1: 11:00 AM  12:00 PM & 02:00 PM  03:00 PM  ",
     },
     {
-      question: "Whom should i contact if there is any technical issues?",
-      answer: "give up",
+      question: "At what time is Cyborg Recruit on Day 2?",
+      answer: "Day 2: 09:00 AM  01:00 PM & 02:00 PM  03:00 PM ",
     },
     {
-      question: "What should I do ,if I lose my Id?",
-      answer: "You will be provided with the replacement in the office",
+      question: "Where is Cyber Scope happening?",
+      answer: "Venue - sowparnika Hall ",
     },
     {
-      question: "What should I do ,if I lose my Id?",
-      answer: "You will be provided with the replacement in the office",
+      question: "At what time is Cyber Scope on Day 1?",
+      answer: "Day 1: 11:00 AM  12:00 PM & 03:00 PM  04:00 PM (Sowparnika Hall)",
     },
     {
-      question: "What should I do ,if I lose my Id?",
-      answer: "You will be provided with the replacement in the office",
+      question: "When does Cyber Scope happen on Day 2?",
+      answer: "Day 2: 09:00 AM  01:00 PM (Sowparnika Hall)",
     },
     {
-      question: "What should I do ,if I lose my Id?",
-      answer: "You will be provided with the replacement in the office",
+      question: "Where is Rhythm Hack being conducted?",
+      answer: "Venue : Sambram Auditorium",
     },
     {
-      question: "What should I do ,if I lose my Id?",
-      answer: "You will be provided with the replacement in the office",
+      question: "At what time is Rhythm Hack?",
+      answer: "Day 1: 11:00 AM  12:00 PM (Sambram Auditorium)",
     },
     {
-      question: "What should I do ,if I lose my Id?",
-      answer: "You will be provided with the replacement in the office",
+      question: "Where is Neon Nexus scheduled?",
+      answer: "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor ",
     },
+    {
+      question: "At what time is Neon Nexus on Day 1?",
+      answer: "Day 1: 02:00 PM  03:00 PM ",
+    },
+    {
+      question: "At what time is Neon Nexus on Day 2?",
+      answer: "Day 2: 09:00 AM  01:00 PM ",
+    },
+    {
+      question: "Where is Spectra Flux happening?",
+      answer: "Venue -LH 402-Ramanujan Block 4th floor ",
+    },
+    {
+      question: "When is Spectra Flux on Day 1?",
+      answer: "Day 1: 02:00 PM  03:00 PM (LH 402-Ramanujan Block 4th floor )",
+    },
+    {
+      question: "When is Spectra Flux on Day 2?",
+      answer: "Day 2: 09:00 AM  01:00 PM (LH 402 )",
+    },
+    {
+      question: "Where is Cryptix being held?",
+      answer: "Venue - MCA Lab 03-Rajaram block 2nd floor ",
+    },
+    {
+      question: "Which MCA Lab is assigned for Cryptix?",
+      answer: "Day 1: 02:00 PM  03:00 PM ",
+    },
+    {
+      question: "At what time is Cryptix scheduled?",
+      answer: "Day 2: 09:00 AM  01:00 PM ",
+    },
+    {
+      question: "Where is Design Riot conducted?",
+      answer: "Venue -MCA Lab 01 - Rajaram block 2nd floor",
+    },
+    {
+      question: "What time is Design Riot on Day 1?",
+      answer: "Day 1: 02:00 PM  03:00 PM",
+    },
+    {
+      question: "What time is Design Riot on Day 2?",
+      answer: "Day 2: 09:00 AM – 01:00 PM ",
+    },
+    {
+      question: "Where is Hyper Launch taking place?",
+      answer: "Venue -Nandini Hall",
+    },
+    {
+      question: "At what time is Hyper Launch happening?",
+      answer: "Day 1: 02:00 PM  03:00 PM ",
+    },
+    {
+      question: "At what time is Hyper Launch happening?",
+      answer: "Day 2: 09:00 AM  01:00 PM & again 02:00 PM  03:00 PM",
+    },
+    {
+      question: "Where is Techno Hive happening?",
+      answer: "Day 1: 02:00 PM  03:00 PM ",
+    },
+    {
+      question: "At what time is Techno Hive scheduled?",
+      answer: "Day 2: 09:00 AM  01:00 PM",
+    },
+    {
+      question: "Where is Rampage Horizon scheduled?",
+      answer: "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
+    },
+    {
+      question: "At what time is Rampage Horizon happening?",
+      answer: "Day 1: 02:00 PM  03:00 PM (Lab 02 & Lab 04)",
+    },
+    {
+      question: "Where is the inauguration ceremony happening?",
+      answer: "Day 1 - 9:00 AM at Sambram Auditorium-Ramanujan block ground floor",
+    },
+    {
+      question: "At what time is the inauguration of Semaphore?",
+      answer: "Day 1 - 9:00 AM at Sambram Auditorium-Ramanujan block ground floor",
+    },
+    {
+      question: "Where is the valedictory function happening?",
+      answer: "Day 2, 03:00 PM onwards at Sambram Auditorium-Ramanujan block ground floor",
+    },
+    {
+      question: "At what time is the valedictory ceremony?",
+      answer: "Day 2, 03:00 PM onwards ",
+    },
+    {
+      question: "Which hall is used for valedictory?",
+      answer: "Sambram Auditorium-Ramanujan block ground floor",
+    },
+
   ];
   const eventData = [
     {
-      eventName:"Spectra flux",
+      eventName: "Real Name",
       secondaryName: "suprise event",
       info: {
         locationAndTime: [
-          "Venue -LH 402-Ramanujan Block 4th floor ",
-          "Day 1: 02:00 PM – 03:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM",
+          "Venue: Computer Lab A, Ground Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "No of participants = 2 , No of rounds = 3",
@@ -104,13 +197,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Rhythm Hack",
+      eventName: "Real Name",
       secondaryName: "Dance",
       info: {
         locationAndTime: [
-          "Venue: Sambram Auditorium",
-          "Day 1: 11:00 AM – 12:00 PM",
-          
+          "Venue: Computer Lab B, First Floor",
+          "Event starts at 11:00 AM and ends at 2:00 PM",
+          "Participants must check in by 10:30 AM",
         ],
         rules: [
           "The team must have a minimum of 4 members and a maximum of 8 members.",
@@ -130,13 +223,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-       eventName: "cryptix",
+      eventName: "Real Name",
       secondaryName: "Coding",
       info: {
         locationAndTime: [
-          "Venue- MCA Lab 03-Rajaram block 2nd floor ",
-          "Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM",
+          "Venue: Computer Lab C, 2nd Floor",
+          "Event starts at 1:00 PM and ends at 2:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "3 Rounds , 2 Members per Team",
@@ -154,13 +247,13 @@ const SemaphoreContextProvider = ({ children }) => {
     },
 
     {
-      eventName: "design riot",
+      eventName: "Real Name",
       secondaryName: "WEB DESIGN",
       info: {
         locationAndTime: [
-          "Venue -MCA Lab 01 - Rajaram block 2nd floor",
-          "Day 1: 02:00 PM – 03:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM ",
+          "Venue: Computer Lab A, Ground Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "No of participants = 2 , No of rounds = 3",
@@ -175,13 +268,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "hyper launch",
+      eventName: "Real Name",
       secondaryName: "start up",
       info: {
         locationAndTime: [
-          "Venue -Nandini Hall",
-          "Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM & again 02:00 PM – 03:00 PM",
+          "Venue: Computer Lab 7, Ground Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "The event will have 2 rounds, with teams of 2 participants each.",
@@ -196,13 +289,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "techno hive",
+      eventName: "Real Name",
       secondaryName: "TECH TALK",
       info: {
         locationAndTime: [
-          "Venue -Shambhavi Hall",
-          "Day 1: 02:00 PM – 03:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM",
+          "Venue: Computer Lab A, Ground Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "Number of participants: 1 , Number of rounds: 2",
@@ -218,13 +311,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "cyber scope",
+      eventName: "Real Name",
       secondaryName: "Photography",
       info: {
         locationAndTime: [
-          "Venue - sowparnika Hall",
-          "Day 1: 11:00 AM – 12:00 PM & 03:00 PM – 04:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM",
+          "Venue: Computer Lab A, Ground Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "Per team 1 participant.",
@@ -238,13 +331,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "cyborg recruit",
+      eventName: "Real Name",
       secondaryName: "IT Manager",
       info: {
         locationAndTime: [
-          "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
-          "Day 1: 11:00 AM – 12:00 PM & 02:00 PM – 03:00 PM",
-          " Day 2: 09:00 AM – 01:00 PM & 02:00 PM – 03:00 PM",
+          "Venue: Computer Lab V, 8th Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "Per team 1 participant.",
@@ -262,12 +355,13 @@ const SemaphoreContextProvider = ({ children }) => {
 
     },
     {
-      eventName: "rampage horizon",
+      eventName: "Real Name",
       secondaryName: "Game : Valorant ",
       info: {
         locationAndTime: [
-          "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
-          "Day 1: 02:00 PM – 03:00 PM (Lab 02 & Lab 04)"
+          "Venue: Computer Lab V, 10th Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "4 make a team",
@@ -283,13 +377,13 @@ const SemaphoreContextProvider = ({ children }) => {
 
     },
     {
-      eventName: "neon nexus",
+      eventName: "Real Name",
       secondaryName: "IT Quiz",
       info: {
         locationAndTime: [
-          "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",
-          " Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM",
+          "Venue: Computer Lab V, 8th Floor",
+          "Event starts at 10:00 AM and ends at 4:00 PM",
+          "Participants must check in by 9:30 AM",
         ],
         rules: [
           "Number of participants = 2 ,Number of rounds = 4",
@@ -330,7 +424,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Dance",
       photo: "/images/197.jpg",
       contact: "9876512345",
-     
+
     },
     {
       id: 3,
@@ -339,7 +433,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Coding",
       photo: "/images/197.jpg",
       contact: "9123456789",
-     
+
     },
     {
       id: 4,
@@ -348,7 +442,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Startup Pitch",
       photo: "/images/197.jpg",
       contact: "9988766554",
-     
+
     },
     {
       id: 5,
@@ -357,7 +451,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Tech Talk",
       photo: "/images/197.jpg",
       contact: "9123422334",
-     
+
     },
     {
       id: 6,
@@ -366,7 +460,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Photography",
       photo: "/images/197.jpg",
       contact: "9777788990",
-     
+
     },
     {
       id: 7,
@@ -375,7 +469,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Management",
       photo: "/images/197.jpg",
       contact: "9666644556",
-     
+
     },
     {
       id: 8,
@@ -384,7 +478,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Gaming",
       photo: "/images/197.jpg",
       contact: "9333322110",
-      
+
     },
     {
       id: 9,
@@ -393,7 +487,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Quiz",
       photo: "/images/priya.jpg",
       contact: "9555566778",
-     
+
     },
     {
       id: 10,
@@ -402,32 +496,32 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Quiz",
       photo: "/images/priya.jpg",
       contact: "9555566778",
-     
+
     },
   ];
-  const scheduleData={
-    day1Schedule : [
-        { time: '09:00 AM', event: 'Opening Ceremony' },
-        { time: '10:00 AM', event: 'Keynote Speech' },
-        { time: '11:30 AM', event: 'Coffee Break' },
-        { time: '12:00 PM', event: 'Panel Discussion' },
-        { time: '01:30 PM', event: 'Lunch Break' },
-        { time: '02:30 PM', event: 'Workshop Session A' },
-        { time: '04:00 PM', event: 'Networking Session' },
-        { time: '05:00 PM', event: 'Day 1 Closing' }
-      ],
-    
-      // Day2 schedule data
-      day2Schedule : [
-        { time: '09:30 AM', event: 'Morning Briefing' },
-        { time: '10:00 AM', event: 'Technical Presentation' },
-        { time: '11:15 AM', event: 'Q&A Session' },
-        { time: '12:00 PM', event: 'Group Activity' },
-        { time: '01:00 PM', event: 'Lunch & Networking' },
-        { time: '02:15 PM', event: 'Workshop Session B' },
-        { time: '03:45 PM', event: 'Final Presentations' },
-        { time: '05:00 PM', event: 'Closing Ceremony' }
-      ]
+  const scheduleData = {
+    day1Schedule: [
+      { time: '09:00 AM', event: 'Opening Ceremony' },
+      { time: '10:00 AM', event: 'Keynote Speech' },
+      { time: '11:30 AM', event: 'Coffee Break' },
+      { time: '12:00 PM', event: 'Panel Discussion' },
+      { time: '01:30 PM', event: 'Lunch Break' },
+      { time: '02:30 PM', event: 'Workshop Session A' },
+      { time: '04:00 PM', event: 'Networking Session' },
+      { time: '05:00 PM', event: 'Day 1 Closing' }
+    ],
+
+    // Day2 schedule data
+    day2Schedule: [
+      { time: '09:30 AM', event: 'Morning Briefing' },
+      { time: '10:00 AM', event: 'Technical Presentation' },
+      { time: '11:15 AM', event: 'Q&A Session' },
+      { time: '12:00 PM', event: 'Group Activity' },
+      { time: '01:00 PM', event: 'Lunch & Networking' },
+      { time: '02:15 PM', event: 'Workshop Session B' },
+      { time: '03:45 PM', event: 'Final Presentations' },
+      { time: '05:00 PM', event: 'Closing Ceremony' }
+    ]
   }
 
   return (
