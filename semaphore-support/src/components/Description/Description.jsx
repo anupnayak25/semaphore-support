@@ -1,35 +1,28 @@
-export default function Description() {
-    const description="Join us for Semaphore 2025, an innovative gathering that brings together forward-thinking individuals, industry leaders, and creative minds to explore the signals that shape our future."
+import { QuoteIcon } from "lucide-react";
+
+const Description = ({ 
+  title = "Welcome to TechCon 2024", 
+  content = "Join us for an incredible two-day journey through the latest innovations in technology, networking opportunities with industry leaders, and hands-on workshops that will enhance your skills and expand your horizons.", 
+}) => {
   return (
-    <div className="min-h-screen py-16 px-6 bg-dominant" >
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 
-            className="text-5xl md:text-6xl font-bold mb-8 tracking-tight text-accent"
-            
-          >
-            Semaphore 2025
-          </h1>
-          
-          <div className="w-full h-1 mx-auto mb-12 bg-highlight" ></div>
-        </div>
+    <div className="p-6 bg-dominant rounded-lg shadow-sm  max-w-4xl mx-auto flex flex-col">
+      <h2 className="text-3xl font-bold text-accent mb-4 text-center">
+        {title}
+      </h2>
+      
+      <div className="relative">
+        <QuoteIcon className="text-accent rotate-180 mb-2" size={24} />
         
-        <div className="max-w-3xl mx-auto">
-          <div 
-            className="bg-dominant rounded-lg shadow-lg p-8 md:p-12 "
-            
-          >
-            <p 
-              className="text-lg md:text-xl leading-relaxed mb-6 text-center text-accent"
-              
-            >
-             {description}
-            </p>
-            
-          
-          </div>
+        <p className="text-accent/90 leading-relaxed text-center px-8 py-4">
+          <span className="italic">{content}</span>
+        </p>
+        
+        <div className="flex justify-end">
+          <QuoteIcon className="text-accent mt-2" size={24} />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Description;

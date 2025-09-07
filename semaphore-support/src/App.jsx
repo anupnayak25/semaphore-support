@@ -8,6 +8,9 @@ import { createBrowserRouter, createRoutesFromElements, Route } from "react-rout
 import Layout from "./Layout";
 import ComingSoon from "./pages/ComingSoon";
 import { RouterProvider } from "react-router-dom";
+import Schedules from "./pages/Schedules";
+import HeadsAndCoordinators from "./pages/HeadsAndCoordinators";
+import { Toaster } from "react-hot-toast";
 const App = () => {
  const router = createBrowserRouter(
     createRoutesFromElements(
@@ -15,16 +18,45 @@ const App = () => {
         <Route path="" element={<Home/>} />
         <Route path="FAQ" element={<Faq />} />
         <Route path="Events" element={<Rules />} />
-        <Route path="Timings" element={<ComingSoon />} />
-        <Route path="HeadsAndCoordinators" element={<ComingSoon />} />
+        <Route path="Timings" element={<Schedules />} />
+        <Route path="HeadsAndCoordinators" element={<HeadsAndCoordinators/>} />
       </Route>
     )
   );
 
 
 
-  return ( 
+  return (
+    <>
+    <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "h-20",
+          duration: 5000,
+          removeDelay: 1000,
+          style: {
+            background: "#DFD0B8",
+            color: "#000000",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            iconTheme: {
+              secondary: "#DFD0B8",
+              primary: "#000000",
+            },
+          },
+        }}
+      />
     <RouterProvider router={router} />
+</>
+ 
   );
 
 }
