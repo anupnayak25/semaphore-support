@@ -9,6 +9,7 @@ import Layout from "./Layout";
 import ComingSoon from "./pages/ComingSoon";
 import { RouterProvider } from "react-router-dom";
 import Schedules from "./pages/Schedules";
+import HeadsInfo from "./pages/HeadsInfo";
 const App = () => {
  const router = createBrowserRouter(
     createRoutesFromElements(
@@ -17,7 +18,7 @@ const App = () => {
         <Route path="FAQ" element={<Faq />} />
         <Route path="Events" element={<Rules />} />
         <Route path="Timings" element={<Schedules />} />
-        <Route path="HeadsAndCoordinators" element={<ComingSoon />} />
+        <Route path="HeadsAndCoordinators" element={<HeadsInfo />} />
       </Route>
     )
   );
