@@ -22,9 +22,9 @@ const SemaphoreContextProvider = ({ children }) => {
         heading: "Event Details",
         subHeading: "Location,Timings,Rules and Contacts",
       },
-      timingsPage: {
-        heading: "Semaphore Schedule",
-        subHeading: ""
+      timingsPage:{
+        heading:"Semaphore Schedule",
+        subHeading:""
       },
       headsPage: {
         heading: "Heads and Co-ordinators",
@@ -175,13 +175,13 @@ const SemaphoreContextProvider = ({ children }) => {
   ];
   const eventData = [
     {
-      eventName: "Real Name",
+      eventName:"Spectra flux",
       secondaryName: "suprise event",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab A, Ground Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue -LH 402-Ramanujan Block 4th floor ",
+          "Day 1: 02:00 PM – 03:00 PM",
+          "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
           "No of participants = 2 , No of rounds = 3",
@@ -197,13 +197,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Real Name",
+      eventName: "Rhythm Hack",
       secondaryName: "Dance",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab B, First Floor",
-          "Event starts at 11:00 AM and ends at 2:00 PM",
-          "Participants must check in by 10:30 AM",
+          "Venue: Sambram Auditorium",
+          "Day 1: 11:00 AM – 12:00 PM",
+          
         ],
         rules: [
           "The team must have a minimum of 4 members and a maximum of 8 members.",
@@ -223,13 +223,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Real Name",
+       eventName: "cryptix",
       secondaryName: "Coding",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab C, 2nd Floor",
-          "Event starts at 1:00 PM and ends at 2:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue- MCA Lab 03-Rajaram block 2nd floor ",
+          "Day 1: 02:00 PM – 03:00 PM ",
+          "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
           "3 Rounds , 2 Members per Team",
@@ -247,13 +247,13 @@ const SemaphoreContextProvider = ({ children }) => {
     },
 
     {
-      eventName: "Real Name",
+      eventName: "design riot",
       secondaryName: "WEB DESIGN",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab A, Ground Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue -MCA Lab 01 - Rajaram block 2nd floor",
+          "Day 1: 02:00 PM – 03:00 PM",
+          "Day 2: 09:00 AM – 01:00 PM ",
         ],
         rules: [
           "No of participants = 2 , No of rounds = 3",
@@ -268,13 +268,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Real Name",
+      eventName: "hyper launch",
       secondaryName: "start up",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab 7, Ground Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue -Nandini Hall",
+          "Day 1: 02:00 PM – 03:00 PM ",
+          "Day 2: 09:00 AM – 01:00 PM & again 02:00 PM – 03:00 PM",
         ],
         rules: [
           "The event will have 2 rounds, with teams of 2 participants each.",
@@ -289,13 +289,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Real Name",
+      eventName: "techno hive",
       secondaryName: "TECH TALK",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab A, Ground Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue -Shambhavi Hall",
+          "Day 1: 02:00 PM – 03:00 PM",
+          "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
           "Number of participants: 1 , Number of rounds: 2",
@@ -311,13 +311,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Real Name",
+      eventName: "cyber scope",
       secondaryName: "Photography",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab A, Ground Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue - sowparnika Hall",
+          "Day 1: 11:00 AM – 12:00 PM & 03:00 PM – 04:00 PM",
+          "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
           "Per team 1 participant.",
@@ -331,13 +331,13 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Real Name",
+      eventName: "cyborg recruit",
       secondaryName: "IT Manager",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab V, 8th Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
+          "Day 1: 11:00 AM – 12:00 PM & 02:00 PM – 03:00 PM",
+          " Day 2: 09:00 AM – 01:00 PM & 02:00 PM – 03:00 PM",
         ],
         rules: [
           "Per team 1 participant.",
@@ -355,13 +355,12 @@ const SemaphoreContextProvider = ({ children }) => {
 
     },
     {
-      eventName: "Real Name",
+      eventName: "rampage horizon",
       secondaryName: "Game : Valorant ",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab V, 10th Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
+          "Day 1: 02:00 PM – 03:00 PM (Lab 02 & Lab 04)"
         ],
         rules: [
           "4 make a team",
@@ -377,13 +376,13 @@ const SemaphoreContextProvider = ({ children }) => {
 
     },
     {
-      eventName: "Real Name",
+      eventName: "neon nexus",
       secondaryName: "IT Quiz",
       info: {
         locationAndTime: [
-          "Venue: Computer Lab V, 8th Floor",
-          "Event starts at 10:00 AM and ends at 4:00 PM",
-          "Participants must check in by 9:30 AM",
+          "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",
+          " Day 1: 02:00 PM – 03:00 PM ",
+          "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
           "Number of participants = 2 ,Number of rounds = 4",
@@ -424,7 +423,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Dance",
       photo: "/images/197.jpg",
       contact: "9876512345",
-
+     
     },
     {
       id: 3,
@@ -433,7 +432,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Coding",
       photo: "/images/197.jpg",
       contact: "9123456789",
-
+     
     },
     {
       id: 4,
@@ -442,7 +441,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Startup Pitch",
       photo: "/images/197.jpg",
       contact: "9988766554",
-
+     
     },
     {
       id: 5,
@@ -451,7 +450,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Tech Talk",
       photo: "/images/197.jpg",
       contact: "9123422334",
-
+     
     },
     {
       id: 6,
@@ -460,7 +459,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Photography",
       photo: "/images/197.jpg",
       contact: "9777788990",
-
+     
     },
     {
       id: 7,
@@ -469,7 +468,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Management",
       photo: "/images/197.jpg",
       contact: "9666644556",
-
+     
     },
     {
       id: 8,
@@ -478,7 +477,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "Gaming",
       photo: "/images/197.jpg",
       contact: "9333322110",
-
+      
     },
     {
       id: 9,
@@ -487,7 +486,7 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Quiz",
       photo: "/images/priya.jpg",
       contact: "9555566778",
-
+     
     },
     {
       id: 10,
@@ -496,32 +495,32 @@ const SemaphoreContextProvider = ({ children }) => {
       event: "IT Quiz",
       photo: "/images/priya.jpg",
       contact: "9555566778",
-
+     
     },
   ];
-  const scheduleData = {
-    day1Schedule: [
-      { time: '09:00 AM', event: 'Opening Ceremony' },
-      { time: '10:00 AM', event: 'Keynote Speech' },
-      { time: '11:30 AM', event: 'Coffee Break' },
-      { time: '12:00 PM', event: 'Panel Discussion' },
-      { time: '01:30 PM', event: 'Lunch Break' },
-      { time: '02:30 PM', event: 'Workshop Session A' },
-      { time: '04:00 PM', event: 'Networking Session' },
-      { time: '05:00 PM', event: 'Day 1 Closing' }
-    ],
-
-    // Day2 schedule data
-    day2Schedule: [
-      { time: '09:30 AM', event: 'Morning Briefing' },
-      { time: '10:00 AM', event: 'Technical Presentation' },
-      { time: '11:15 AM', event: 'Q&A Session' },
-      { time: '12:00 PM', event: 'Group Activity' },
-      { time: '01:00 PM', event: 'Lunch & Networking' },
-      { time: '02:15 PM', event: 'Workshop Session B' },
-      { time: '03:45 PM', event: 'Final Presentations' },
-      { time: '05:00 PM', event: 'Closing Ceremony' }
-    ]
+  const scheduleData={
+    day1Schedule : [
+        { time: '09:00 AM', event: 'Opening Ceremony' },
+        { time: '10:00 AM', event: 'Keynote Speech' },
+        { time: '11:30 AM', event: 'Coffee Break' },
+        { time: '12:00 PM', event: 'Panel Discussion' },
+        { time: '01:30 PM', event: 'Lunch Break' },
+        { time: '02:30 PM', event: 'Workshop Session A' },
+        { time: '04:00 PM', event: 'Networking Session' },
+        { time: '05:00 PM', event: 'Day 1 Closing' }
+      ],
+    
+      // Day2 schedule data
+      day2Schedule : [
+        { time: '09:30 AM', event: 'Morning Briefing' },
+        { time: '10:00 AM', event: 'Technical Presentation' },
+        { time: '11:15 AM', event: 'Q&A Session' },
+        { time: '12:00 PM', event: 'Group Activity' },
+        { time: '01:00 PM', event: 'Lunch & Networking' },
+        { time: '02:15 PM', event: 'Workshop Session B' },
+        { time: '03:45 PM', event: 'Final Presentations' },
+        { time: '05:00 PM', event: 'Closing Ceremony' }
+      ]
   }
 
   return (
