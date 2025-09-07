@@ -1,7 +1,9 @@
 import { useContext, useState } from 'react';
 import Heading from '../components/Heading/Heading';
 import { SemaphoreContext } from '../context/SemaphoreContext';
-import Description from '../components/Description/Description';
+import { QuoteIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 const Schedules = () => {
   const [selectedDay, setSelectedDay] = useState('Day1');
 
@@ -62,7 +64,25 @@ const Schedules = () => {
           </table>
         </div>
       </div>
-    <Description title='Note:' content='Schedule of each event is given in Events page'/> </div>
+       <div className="p-6 bg-dominant rounded-lg shadow-sm  max-w-4xl mx-auto flex flex-col">
+      <h2 className="text-3xl font-bold text-accent mb-4 text-center">
+       
+      </h2>
+      
+      <div className="relative">
+        <QuoteIcon className="text-accent rotate-180 mb-2" size={24} />
+        
+        <p className="text-accent/90 leading-relaxed text-center px-8 py-4">
+          <span className="italic">Schedules for each event are available on the <Link to="/events" className="text-blue-500 underline ">Events</Link> page</span>
+        </p>
+        
+        <div className="flex justify-end">
+          <QuoteIcon className="text-accent mt-2" size={24} />
+        </div>
+      </div>
+    </div>
+  
+    </div>
   );
 };
 

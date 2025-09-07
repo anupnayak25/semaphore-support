@@ -60,10 +60,10 @@ export default function HeadsAndCoordinators() {
             >
               <option value="all">All Events</option>
               {events.map((event) => {
-                const count = headsData.filter((h) => h.event === event).length;
+               
                 return (
                   <option key={event} value={event}>
-                    {event} ({count})
+                    {event} 
                   </option>
                 );
               })}
