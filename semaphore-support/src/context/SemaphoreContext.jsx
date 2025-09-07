@@ -22,6 +22,10 @@ const SemaphoreContextProvider = ({ children }) => {
         heading: "Event Details",
         subHeading: "Location,Timings,Rules and Contacts",
       },
+      headsPage: {
+        heading: "Event Heads",
+        subHeading: "Meet the leaders of each event",
+      },
     },
   };
   const navItems = [
@@ -139,9 +143,9 @@ const SemaphoreContextProvider = ({ children }) => {
           "Bob Smith - Contact No. 8765432109",
         ],
       },
-      
+
     },
-   
+
     {
       eventName: "WEB DESIGN",
       info: {
@@ -239,11 +243,11 @@ const SemaphoreContextProvider = ({ children }) => {
           "Participants are not allowed to join any other event.",
         ],
         heads: [
-        "Alice Johnson - Contact No. 9876543210",
-        "Bob Smith - Contact No. 8765432109",
-      ],
+          "Alice Johnson - Contact No. 9876543210",
+          "Bob Smith - Contact No. 8765432109",
+        ],
       },
-      
+
     },
     {
       eventName: "Game : Valorant ",
@@ -260,11 +264,11 @@ const SemaphoreContextProvider = ({ children }) => {
           "Participants should bring their own ethernet adapter if their laptop doesn’t have ethernet port",
         ],
         heads: [
-        "Alice Johnson - Contact No. 9876543210",
-        "Bob Smith - Contact No. 8765432109",
-      ],
+          "Alice Johnson - Contact No. 9876543210",
+          "Bob Smith - Contact No. 8765432109",
+        ],
       },
-      
+
     },
     {
       eventName: "IT Quiz",
@@ -283,16 +287,112 @@ const SemaphoreContextProvider = ({ children }) => {
 
         ],
         heads: [
-        "Alice Johnson - Contact No. 9876543210",
-        "Bob Smith - Contact No. 8765432109",
-      ],
+          "Alice Johnson - Contact No. 9876543210",
+          "Bob Smith - Contact No. 8765432109",
+        ],
       },
-      
+
     },
 
 
 
 
+  ];
+
+  //Event Heads Data(HeadsInfo)
+
+  const headsData = [
+    {
+      id: 1,
+      name: "Rahul Shetty",
+      designation: "Surprise Event Head",
+      event: "Surprise Event",
+      photo: "/images/IMG_0619-1.JPG",
+      contact: "9880897965",
+      description:
+        "Leading innovative surprise events and coordinating special activities",
+    },
+    {
+      id: 2,
+      name: "Ananya Gupta",
+      designation: "Dance Head",
+      event: "Dance",
+      photo: "/images/197.jpg",
+      contact: "9876512345",
+      description: "Organizing dance competitions and cultural performances",
+    },
+    {
+      id: 3,
+      name: "Arjun Mehta",
+      designation: "Coding Event Head",
+      event: "Coding",
+      photo: "/images/197.jpg",
+      contact: "9123456789",
+      description: "Managing programming contests and technical challenges",
+    },
+    {
+      id: 4,
+      name: "Emily Davis",
+      designation: "Startup Pitch Head",
+      event: "Startup Pitch",
+      photo: "/images/197.jpg",
+      contact: "9988766554",
+      description: "Coordinating entrepreneurship events and pitch competitions",
+    },
+    {
+      id: 5,
+      name: "Sanjana Rao",
+      designation: "Tech Talk Head",
+      event: "Tech Talk",
+      photo: "/images/197.jpg",
+      contact: "9123422334",
+      description: "Organizing technical seminars and expert speaker sessions",
+    },
+    {
+      id: 6,
+      name: "Rohit Verma",
+      designation: "Photography Head",
+      event: "Photography",
+      photo: "/images/197.jpg",
+      contact: "9777788990",
+      description: "Managing photography contests and visual documentation",
+    },
+    {
+      id: 7,
+      name: "Sneha Nair",
+      designation: "IT Manager",
+      event: "IT Management",
+      photo: "/images/197.jpg",
+      contact: "9666644556",
+      description: "Overseeing technical infrastructure and IT operations",
+    },
+    {
+      id: 8,
+      name: "Vikram Singh",
+      designation: "Valorant (Gaming) Head",
+      event: "Gaming",
+      photo: "/images/197.jpg",
+      contact: "9333322110",
+      description: "Organizing gaming tournaments and esports competitions",
+    },
+    {
+      id: 9,
+      name: "Priya Sharma",
+      designation: "IT Quiz Head",
+      event: "IT Quiz",
+      photo: "/images/priya.jpg",
+      contact: "9555566778",
+      description: "Conducting technical quizzes and knowledge competitions",
+    },
+    {
+      id: 10,
+      name: "Suprith Sharma",
+      designation: "IT Quiz Head",
+      event: "IT Quiz",
+      photo: "/images/priya.jpg",
+      contact: "9555566778",
+      description: "Conducting technical quizzes and knowledge competitions",
+    },
   ];
 
   return (
@@ -302,6 +402,7 @@ const SemaphoreContextProvider = ({ children }) => {
         navItems,
         faqData,
         eventData,
+        headsData,
       }}
     >
       {children}
