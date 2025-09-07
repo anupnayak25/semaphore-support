@@ -64,7 +64,7 @@ const Rules = () => {
                         
                         <div className="text-center">
                             <h1 className="text-2xl md:text-3xl font-bold text-accent">
-                                {currentEvent.eventName}
+                                {currentEvent.eventName.toUpperCase()}<br/> <span className="text-sm font-medium italic text-highlight">({currentEvent.secondaryName.toLowerCase()})</span>
                             </h1>
                             <div className="flex justify-center mt-2 space-x-2">
                                 {eventData.map((_, index) => (

@@ -120,7 +120,7 @@ export default function HeadsInfo() {
       await navigator.clipboard.writeText(text);
       alert(`Copied: ${text}`);
     } catch (err) {
-      console.log("Failed to copy to clipboard");
+      console.log("Failed to copy to clipboard,", err);
     }
   };
 

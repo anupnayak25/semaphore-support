@@ -10,7 +10,7 @@ const NavBar = () => {
    
     
   
-    <div className="min-h-screen bg-dominant/100 p-4 sm:p-6 md:p-8">
+    <div className="min-h-full bg-dominant/100 p-4 sm:p-6 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Grid layout that's responsive */}
         <div

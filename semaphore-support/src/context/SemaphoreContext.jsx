@@ -22,11 +22,15 @@ const SemaphoreContextProvider = ({ children }) => {
         heading: "Event Details",
         subHeading: "Location,Timings,Rules and Contacts",
       },
+      timingsPage:{
+        heading:"Semaphore Schedule",
+        subHeading:""
+      }
     },
   };
   const navItems = [
     { icon: CalendarCheck2Icon, name: "Events", route: "/Events" },
-    { icon: AlarmClockCheckIcon, name: "Timings", route: "/Timings" },
+    { icon: AlarmClockCheckIcon, name: "Schedule", route: "/Timings" },
     { icon: BadgeQuestionMarkIcon, name: "FAQ", route: "/FAQ" },
     {
       icon: Mail,
@@ -74,7 +78,8 @@ const SemaphoreContextProvider = ({ children }) => {
   ];
   const eventData = [
     {
-      eventName: "Suprise Event",
+      eventName: "Real Name",
+      secondaryName: "suprise event",
       info: {
         locationAndTime: [
           "Venue: Computer Lab A, Ground Floor",
@@ -95,7 +100,8 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Dance",
+      eventName: "Real Name",
+      secondaryName: "Dance",
       info: {
         locationAndTime: [
           "Venue: Computer Lab B, First Floor",
@@ -120,7 +126,8 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Coding",
+       eventName: "Real Name",
+      secondaryName: "Coding",
       info: {
         locationAndTime: [
           "Venue: Computer Lab C, 2nd Floor",
@@ -143,7 +150,8 @@ const SemaphoreContextProvider = ({ children }) => {
     },
    
     {
-      eventName: "WEB DESIGN",
+      eventName: "Real Name",
+      secondaryName: "WEB DESIGN",
       info: {
         locationAndTime: [
           "Venue: Computer Lab A, Ground Floor",
@@ -163,7 +171,8 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Start Up",
+      eventName: "Real Name",
+      secondaryName: "start up",
       info: {
         locationAndTime: [
           "Venue: Computer Lab 7, Ground Floor",
@@ -183,7 +192,8 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "TECH TALK",
+      eventName: "Real Name",
+      secondaryName: "TECH TALK",
       info: {
         locationAndTime: [
           "Venue: Computer Lab A, Ground Floor",
@@ -204,7 +214,8 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "Photography",
+      eventName: "Real Name",
+      secondaryName: "Photography",
       info: {
         locationAndTime: [
           "Venue: Computer Lab A, Ground Floor",
@@ -223,7 +234,8 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-      eventName: "IT Manager",
+      eventName: "Real Name",
+      secondaryName: "IT Manager",
       info: {
         locationAndTime: [
           "Venue: Computer Lab V, 8th Floor",
@@ -246,7 +258,8 @@ const SemaphoreContextProvider = ({ children }) => {
       
     },
     {
-      eventName: "Game : Valorant ",
+      eventName: "Real Name",
+      secondaryName: "Game : Valorant ",
       info: {
         locationAndTime: [
           "Venue: Computer Lab V, 10th Floor",
@@ -267,7 +280,8 @@ const SemaphoreContextProvider = ({ children }) => {
       
     },
     {
-      eventName: "IT Quiz",
+      eventName: "Real Name",
+      secondaryName: "IT Quiz",
       info: {
         locationAndTime: [
           "Venue: Computer Lab V, 8th Floor",
@@ -294,6 +308,30 @@ const SemaphoreContextProvider = ({ children }) => {
 
 
   ];
+  const scheduleData={
+    day1Schedule : [
+        { time: '09:00 AM', event: 'Opening Ceremony' },
+        { time: '10:00 AM', event: 'Keynote Speech' },
+        { time: '11:30 AM', event: 'Coffee Break' },
+        { time: '12:00 PM', event: 'Panel Discussion' },
+        { time: '01:30 PM', event: 'Lunch Break' },
+        { time: '02:30 PM', event: 'Workshop Session A' },
+        { time: '04:00 PM', event: 'Networking Session' },
+        { time: '05:00 PM', event: 'Day 1 Closing' }
+      ],
+    
+      // Day2 schedule data
+      day2Schedule : [
+        { time: '09:30 AM', event: 'Morning Briefing' },
+        { time: '10:00 AM', event: 'Technical Presentation' },
+        { time: '11:15 AM', event: 'Q&A Session' },
+        { time: '12:00 PM', event: 'Group Activity' },
+        { time: '01:00 PM', event: 'Lunch & Networking' },
+        { time: '02:15 PM', event: 'Workshop Session B' },
+        { time: '03:45 PM', event: 'Final Presentations' },
+        { time: '05:00 PM', event: 'Closing Ceremony' }
+      ]
+  }
 
   return (
     <SemaphoreContext.Provider
@@ -302,6 +340,7 @@ const SemaphoreContextProvider = ({ children }) => {
         navItems,
         faqData,
         eventData,
+        scheduleData
       }}
     >
       {children}
