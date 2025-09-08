@@ -45,7 +45,7 @@ const Event = () => {
       case "rules":
         return "Event Rules";
       case "heads":
-        return "Heads & Coordinators";
+        return "Heads";
 
       default:
         return category;
