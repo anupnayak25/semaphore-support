@@ -22,7 +22,7 @@ const Location = () => {
                 <th className="px-6 py-3 text-left text-sm font-semibold text-accent border border-highlight">
                   <div className="flex items-center space-x-2">
                     <Building className="w-5 h-5" />
-                    <span>Event</span>
+                    <span>Place</span>
                   </div>
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-accent border border-highlight">

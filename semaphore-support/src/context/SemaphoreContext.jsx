@@ -1,10 +1,21 @@
 import React from "react";
 import {
-  Mail,
+  Sparkles,
+  Music,
+  Code2,
+  Layout,
+  Rocket,
+  Mic,
+  Camera,
+  BriefcaseBusiness,
+  Gamepad2,
+  CircleHelp,
   AlarmClockCheckIcon,
   BadgeQuestionMarkIcon,
   CalendarCheck2Icon, MapPinIcon,
 } from "lucide-react";
+
+
 const SemaphoreContext = React.createContext();
 
 const SemaphoreContextProvider = ({ children }) => {
@@ -173,6 +184,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "Spectra flux",
       secondaryName: "suprise event",
+      icon: Sparkles, // surprise/mystery vibe
       info: {
         locationAndTime: [
           "Venue -LH 402-Ramanujan Block 4th floor ",
@@ -195,11 +207,11 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "Rhythm Hack",
       secondaryName: "Dance",
+      icon: Music, // for dance/music events
       info: {
         locationAndTime: [
           "Venue: Sambram Auditorium",
           "Day 1: 11:00 AM – 12:00 PM",
-
         ],
         rules: [
           "The team must have a minimum of 4 members and a maximum of 8 members.",
@@ -221,6 +233,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cryptix",
       secondaryName: "Coding",
+      icon: Code2, // coding/hack vibe
       info: {
         locationAndTime: [
           "Venue- MCA Lab 03-Rajaram block 2nd floor ",
@@ -239,12 +252,11 @@ const SemaphoreContextProvider = ({ children }) => {
           "Bob Smith - Contact No. 8765432109",
         ],
       },
-
     },
-
     {
       eventName: "design riot",
       secondaryName: "WEB DESIGN",
+      icon: Layout, // design/web layout symbol
       info: {
         locationAndTime: [
           "Venue -MCA Lab 01 - Rajaram block 2nd floor",
@@ -266,6 +278,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "hyper launch",
       secondaryName: "start up",
+      icon: Rocket, // startup/launch
       info: {
         locationAndTime: [
           "Venue -Nandini Hall",
@@ -276,7 +289,6 @@ const SemaphoreContextProvider = ({ children }) => {
           "The event will have 2 rounds, with teams of 2 participants each.",
           "Participants must bring their own laptops to create and pitch their ideas.",
           "For the 1st round, each team will prepare and present their startup idea using a single slide.",
-
         ],
         heads: [
           "Alice Johnson - Contact No. 9876543210",
@@ -287,6 +299,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "techno hive",
       secondaryName: "TECH TALK",
+      icon: Mic, // talks/presentations
       info: {
         locationAndTime: [
           "Venue -Shambhavi Hall",
@@ -309,6 +322,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cyber scope",
       secondaryName: "Photography",
+      icon: Camera, // photography
       info: {
         locationAndTime: [
           "Venue - sowparnika Hall",
@@ -329,6 +343,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cyborg recruit",
       secondaryName: "IT Manager",
+      icon: BriefcaseBusiness, // management / IT manager
       info: {
         locationAndTime: [
           "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
@@ -348,15 +363,15 @@ const SemaphoreContextProvider = ({ children }) => {
           "Bob Smith - Contact No. 8765432109",
         ],
       },
-
     },
     {
       eventName: "rampage horizon",
-      secondaryName: "Game : Valorant ",
+      secondaryName: "Valorant ",
+      icon: Gamepad2, // gaming
       info: {
         locationAndTime: [
           "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
-          "Day 1: 02:00 PM – 03:00 PM (Lab 02 & Lab 04)"
+          "Day 1: 02:00 PM – 03:00 PM (Lab 02 & Lab 04)",
         ],
         rules: [
           "4 make a team",
@@ -369,11 +384,11 @@ const SemaphoreContextProvider = ({ children }) => {
           "Bob Smith - Contact No. 8765432109",
         ],
       },
-
     },
     {
       eventName: "neon nexus",
       secondaryName: "IT Quiz",
+      icon: CircleHelp, // quiz/trivia vibe
       info: {
         locationAndTime: [
           "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",
@@ -386,20 +401,16 @@ const SemaphoreContextProvider = ({ children }) => {
           "No electronic gadgets are allowed.",
           "The quiz master's decision is final.",
           "Use of unfair means will lead to disqualification.",
-
         ],
         heads: [
           "Alice Johnson - Contact No. 9876543210",
           "Bob Smith - Contact No. 8765432109",
         ],
       },
-
     },
-
-
-
-
   ];
+
+
 
   //Event Heads Data(HeadsInfo)
 
