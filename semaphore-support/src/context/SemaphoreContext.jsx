@@ -3,7 +3,7 @@ import {
   Mail,
   AlarmClockCheckIcon,
   BadgeQuestionMarkIcon,
-  CalendarCheck2Icon,
+  CalendarCheck2Icon, MapPinIcon,
 } from "lucide-react";
 const SemaphoreContext = React.createContext();
 
@@ -22,13 +22,13 @@ const SemaphoreContextProvider = ({ children }) => {
         heading: "Event Details",
         subHeading: "Location,Timings,Rules and Contacts",
       },
-      timingsPage:{
-        heading:"Semaphore Schedule",
-        subHeading:""
+      timingsPage: {
+        heading: "Semaphore Schedule",
+        subHeading: ""
       },
-      headsPage: {
-        heading: "Heads and Co-ordinators",
-        subHeading: "Contact for any event related queries",
+      locationPage: {
+        heading: "Places and Locations",
+        subHeading: "Find all Place and Locations here",
       },
     },
   };
@@ -36,11 +36,7 @@ const SemaphoreContextProvider = ({ children }) => {
     { icon: CalendarCheck2Icon, name: "Events", route: "/Events" },
     { icon: AlarmClockCheckIcon, name: "Schedule", route: "/Timings" },
     { icon: BadgeQuestionMarkIcon, name: "FAQ", route: "/FAQ" },
-    {
-      icon: Mail,
-      name: "Heads and Co-ordinators",
-      route: "/HeadsAndCoordinators",
-    },
+    { icon: MapPinIcon, name: "Map", route: "/Map" },
   ];
   const faqData = [
     {
@@ -175,7 +171,7 @@ const SemaphoreContextProvider = ({ children }) => {
   ];
   const eventData = [
     {
-      eventName:"Spectra flux",
+      eventName: "Spectra flux",
       secondaryName: "suprise event",
       info: {
         locationAndTime: [
@@ -203,7 +199,7 @@ const SemaphoreContextProvider = ({ children }) => {
         locationAndTime: [
           "Venue: Sambram Auditorium",
           "Day 1: 11:00 AM – 12:00 PM",
-          
+
         ],
         rules: [
           "The team must have a minimum of 4 members and a maximum of 8 members.",
@@ -223,7 +219,7 @@ const SemaphoreContextProvider = ({ children }) => {
       },
     },
     {
-       eventName: "cryptix",
+      eventName: "cryptix",
       secondaryName: "Coding",
       info: {
         locationAndTime: [
@@ -413,7 +409,7 @@ const SemaphoreContextProvider = ({ children }) => {
       name: "Rahul Shetty",
       designation: "Surprise Event Head",
       event: "Surprise Event",
-      photo: "/images/IMG_0619-1.JPG",
+      photo: "/",
       contact: "9880897965"
     },
     {
@@ -421,107 +417,74 @@ const SemaphoreContextProvider = ({ children }) => {
       name: "Ananya Gupta",
       designation: "Dance Head",
       event: "Dance",
-      photo: "/images/197.jpg",
+      photo: "/",
       contact: "9876512345",
-     
+
     },
     {
       id: 3,
       name: "Arjun Mehta",
       designation: "Coding Event Head",
       event: "Coding",
-      photo: "/images/197.jpg",
+      photo: "/",
       contact: "9123456789",
-     
+
+    },
+
+  ];
+
+  const scheduleData = {
+    day1Schedule: [
+      { time: '09:00 AM', event: 'Opening Ceremony' },
+      { time: '10:00 AM', event: 'Keynote Speech' },
+      { time: '11:30 AM', event: 'Coffee Break' },
+      { time: '12:00 PM', event: 'Panel Discussion' },
+      { time: '01:30 PM', event: 'Lunch Break' },
+      { time: '02:30 PM', event: 'Workshop Session A' },
+      { time: '04:00 PM', event: 'Networking Session' },
+      { time: '05:00 PM', event: 'Day 1 Closing' }
+    ],
+
+    // Day2 schedule data
+    day2Schedule: [
+      { time: '09:30 AM', event: 'Morning Briefing' },
+      { time: '10:00 AM', event: 'Technical Presentation' },
+      { time: '11:15 AM', event: 'Q&A Session' },
+      { time: '12:00 PM', event: 'Group Activity' },
+      { time: '01:00 PM', event: 'Lunch & Networking' },
+      { time: '02:15 PM', event: 'Workshop Session B' },
+      { time: '03:45 PM', event: 'Final Presentations' },
+      { time: '05:00 PM', event: 'Closing Ceremony' }
+    ],
+  }
+  const locationData = [
+    {
+      venue: "NMAMIT",
+      location: "Nitte, SH1, Karkala, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/v8JkvcoGG9CTSgCi6",
     },
     {
-      id: 4,
-      name: "Emily Davis",
-      designation: "Startup Pitch Head",
-      event: "Startup Pitch",
-      photo: "/images/197.jpg",
-      contact: "9988766554",
-     
+      venue: "SMV Block, NMAMIT",
+      location: "456 Center Rd, Townsville",
+      locationLink: "https://maps.app.goo.gl/hRM8cCqE9k74bPdo9",
     },
     {
-      id: 5,
-      name: "Sanjana Rao",
-      designation: "Tech Talk Head",
-      event: "Tech Talk",
-      photo: "/images/197.jpg",
-      contact: "9123422334",
-     
+      venue: "Sambhram Hall",
+      location: "5WMM+7M4, SH1, Kalya, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/UjwFAjqsFrvBHXpPA",
     },
     {
-      id: 6,
-      name: "Rohit Verma",
-      designation: "Photography Head",
-      event: "Photography",
-      photo: "/images/197.jpg",
-      contact: "9777788990",
-     
+      venue: "B C Alva Memorial Indoor Stadium",
+      location: "5WMQ+2GC, near NET Gents hostel, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/1moKKSW89D2NW1PJ6",
     },
+
     {
-      id: 7,
-      name: "Sneha Nair",
-      designation: "IT Manager",
-      event: "IT Management",
-      photo: "/images/197.jpg",
-      contact: "9666644556",
-     
-    },
-    {
-      id: 8,
-      name: "Vikram Singh",
-      designation: "Valorant (Gaming) Head",
-      event: "Gaming",
-      photo: "/images/197.jpg",
-      contact: "9333322110",
-      
-    },
-    {
-      id: 9,
-      name: "Priya Sharma",
-      designation: "IT Quiz Head",
-      event: "IT Quiz",
-      photo: "/images/priya.jpg",
-      contact: "9555566778",
-     
-    },
-    {
-      id: 10,
-      name: "Suprith Sharma",
-      designation: "IT Quiz Head",
-      event: "IT Quiz",
-      photo: "/images/priya.jpg",
-      contact: "9555566778",
-     
+      venue: "Sanmathi",
+      location: "Sanmathi Cafe and Park (K B)",
+      locationLink: "https://maps.app.goo.gl/BkUXs4hrhzR5W7816",
     },
   ];
-  const scheduleData={
-    day1Schedule : [
-        { time: '09:00 AM', event: 'Opening Ceremony' },
-        { time: '10:00 AM', event: 'Keynote Speech' },
-        { time: '11:30 AM', event: 'Coffee Break' },
-        { time: '12:00 PM', event: 'Panel Discussion' },
-        { time: '01:30 PM', event: 'Lunch Break' },
-        { time: '02:30 PM', event: 'Workshop Session A' },
-        { time: '04:00 PM', event: 'Networking Session' },
-        { time: '05:00 PM', event: 'Day 1 Closing' }
-      ],
-    
-      // Day2 schedule data
-      day2Schedule : [
-        { time: '09:30 AM', event: 'Morning Briefing' },
-        { time: '10:00 AM', event: 'Technical Presentation' },
-        { time: '11:15 AM', event: 'Q&A Session' },
-        { time: '12:00 PM', event: 'Group Activity' },
-        { time: '01:00 PM', event: 'Lunch & Networking' },
-        { time: '02:15 PM', event: 'Workshop Session B' },
-        { time: '03:45 PM', event: 'Final Presentations' },
-        { time: '05:00 PM', event: 'Closing Ceremony' }
-      ]
-  }
 
   return (
     <SemaphoreContext.Provider
@@ -531,7 +494,8 @@ const SemaphoreContextProvider = ({ children }) => {
         faqData,
         eventData,
         scheduleData,
-        headsData
+        headsData,
+        locationData
       }}
     >
       {children}

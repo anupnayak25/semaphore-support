@@ -10,6 +10,7 @@ import ComingSoon from "./pages/ComingSoon";
 import { RouterProvider } from "react-router-dom";
 import Schedules from "./pages/Schedules";
 import HeadsAndCoordinators from "./pages/HeadsAndCoordinators";
+import Location from "./pages/Location";
 import { Toaster } from "react-hot-toast";
 const App = () => {
  const router = createBrowserRouter(
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="" element={<Home/>} />
         <Route path="FAQ" element={<Faq />} />
         <Route path="Events" element={<Rules />} />
+        <Route path="Map" element={<Location />} />
         <Route path="Timings" element={<Schedules />} />
         <Route path="HeadsAndCoordinators" element={<HeadsAndCoordinators/>} />
       </Route>
