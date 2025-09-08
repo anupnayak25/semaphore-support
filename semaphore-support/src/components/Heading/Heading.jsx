@@ -24,7 +24,7 @@ export default function Heading({
         {/* Left side - Back to previous page */}
         <div className="flex-1 text-left ml-2">
           {previousRoute && previousRoute !== "Home" && (
-            <Link to={previousRoute} className="text-md text-accent underline">
+            <Link to={('/'.concat(previousRoute))} className="text-md text-accent underline">
               &lt;&lt; Back to {previousRoute}
             </Link>
           )}
