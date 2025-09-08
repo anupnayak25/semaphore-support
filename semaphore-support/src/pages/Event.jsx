@@ -16,7 +16,7 @@ import { SemaphoreContext } from "../context/SemaphoreContext";
 import { useParams } from "react-router-dom";
 
 const Event = () => {
-  const { titles, eventData } = useContext(SemaphoreContext);
+  const { eventData } = useContext(SemaphoreContext);
 
   const { eventName } = useParams();
   console.log(eventName);
@@ -56,7 +56,7 @@ const Event = () => {
     <div className="w-full bg-dominant min-h-screen text-white py-10">
       <Heading
         heading={currentEvent.eventName.toUpperCase()}
-        subheading={`(${currentEvent.secondaryName.toLowerCase()})`}
+        subheading={`(${currentEvent.secondaryName.toLowerCase()})` } previousRoute="/Events"
       />
       {/* Header */}
 
