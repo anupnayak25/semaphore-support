@@ -1,8 +1,7 @@
 import { Home, User, Settings, Mail } from "lucide-react";
-import NavCard from "./NavCard";
+import Card from "../Card";
 import { useContext } from "react";
 import { SemaphoreContext } from "../../context/SemaphoreContext";
-import { Link } from "react-router-dom";
 const NavBar = () => {
   const { navItems } = useContext(SemaphoreContext);
 
@@ -19,7 +18,7 @@ const NavBar = () => {
                         justify-items-center"
         >
           {navItems.map((item, index) => (
-            <NavCard
+            <Card
               key={index}
               icon={item.icon}
               name={item.name}

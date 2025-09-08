@@ -1,10 +1,21 @@
 import React from "react";
 import {
-  Mail,
+  Sparkles, 
+  Music, 
+  Code2, 
+  Layout, 
+  Rocket, 
+  Mic, 
+  Camera, 
+  BriefcaseBusiness, 
+  Gamepad2, 
+  CircleHelp ,
   AlarmClockCheckIcon,
   BadgeQuestionMarkIcon,
   CalendarCheck2Icon,
 } from "lucide-react";
+
+
 const SemaphoreContext = React.createContext();
 
 const SemaphoreContextProvider = ({ children }) => {
@@ -36,11 +47,7 @@ const SemaphoreContextProvider = ({ children }) => {
     { icon: CalendarCheck2Icon, name: "Events", route: "/Events" },
     { icon: AlarmClockCheckIcon, name: "Schedule", route: "/Timings" },
     { icon: BadgeQuestionMarkIcon, name: "FAQ", route: "/FAQ" },
-    {
-      icon: Mail,
-      name: "Heads and Co-ordinators",
-      route: "/HeadsAndCoordinators",
-    },
+    
   ];
   const faqData = [
     {
@@ -174,236 +181,236 @@ const SemaphoreContextProvider = ({ children }) => {
 
   ];
   const eventData = [
-    {
-      eventName:"Spectra flux",
-      secondaryName: "suprise event",
-      info: {
-        locationAndTime: [
-          "Venue -LH 402-Ramanujan Block 4th floor ",
-          "Day 1: 02:00 PM – 03:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM",
-        ],
-        rules: [
-          "No of participants = 2 , No of rounds = 3",
-          "Mystery unveiled on the spot (Suprise bonus alert)",
-          "Brain over Battery (no Electronic Gadgets)",
-          "Time based challenges will be used",
-          "Judges’ decisions are final, no discussions. Fair play only",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
+  {
+    eventName: "Spectra flux",
+    secondaryName: "suprise event",
+    icon: Sparkles, // surprise/mystery vibe
+    info: {
+      locationAndTime: [
+        "Venue -LH 402-Ramanujan Block 4th floor ",
+        "Day 1: 02:00 PM – 03:00 PM",
+        "Day 2: 09:00 AM – 01:00 PM",
+      ],
+      rules: [
+        "No of participants = 2 , No of rounds = 3",
+        "Mystery unveiled on the spot (Suprise bonus alert)",
+        "Brain over Battery (no Electronic Gadgets)",
+        "Time based challenges will be used",
+        "Judges’ decisions are final, no discussions. Fair play only",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-      eventName: "Rhythm Hack",
-      secondaryName: "Dance",
-      info: {
-        locationAndTime: [
-          "Venue: Sambram Auditorium",
-          "Day 1: 11:00 AM – 12:00 PM",
-          
-        ],
-        rules: [
-          "The team must have a minimum of 4 members and a maximum of 8 members.",
-          "The time limit is 4+1. Timing starts as soon as the team enters the stage.",
-          "Music will be stopped after the time limit. Marks will be deducted for exceeding the time limit.",
-          "Any dance style is allowed, including Eastern, Western, or Fusion.",
-          "Performances must not contain any vulgarity, offensive gestures, or content targeting any community or religion.",
-          "No extra preparation time will be given on stage.",
-          "Props are allowed but must be safe and manageable by the team. Participants are responsible for bringing and handling their own props.",
-          "Teams must submit their audio track in MP3 format 2 days before the event.",
-          "The decision of the judges will be final.",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
+  },
+  {
+    eventName: "Rhythm Hack",
+    secondaryName: "Dance",
+    icon: Music, // for dance/music events
+    info: {
+      locationAndTime: [
+        "Venue: Sambram Auditorium",
+        "Day 1: 11:00 AM – 12:00 PM",
+      ],
+      rules: [
+        "The team must have a minimum of 4 members and a maximum of 8 members.",
+        "The time limit is 4+1. Timing starts as soon as the team enters the stage.",
+        "Music will be stopped after the time limit. Marks will be deducted for exceeding the time limit.",
+        "Any dance style is allowed, including Eastern, Western, or Fusion.",
+        "Performances must not contain any vulgarity, offensive gestures, or content targeting any community or religion.",
+        "No extra preparation time will be given on stage.",
+        "Props are allowed but must be safe and manageable by the team. Participants are responsible for bringing and handling their own props.",
+        "Teams must submit their audio track in MP3 format 2 days before the event.",
+        "The decision of the judges will be final.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-       eventName: "cryptix",
-      secondaryName: "Coding",
-      info: {
-        locationAndTime: [
-          "Venue- MCA Lab 03-Rajaram block 2nd floor ",
-          "Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM",
-        ],
-        rules: [
-          "3 Rounds , 2 Members per Team",
-          " Basic knowledge of C/C++, Java, Python, and JavaScript is required (questions can be from any of these).",
-          "Good understanding of Computer Science fundamentals is required.",
-          "Experience in Data Structures & Algorithms and basic competitive coding is necessary.",
-          "Rules for each round will be explained on the spot.",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
-
+  },
+  {
+    eventName: "cryptix",
+    secondaryName: "Coding",
+    icon: Code2, // coding/hack vibe
+    info: {
+      locationAndTime: [
+        "Venue- MCA Lab 03-Rajaram block 2nd floor ",
+        "Day 1: 02:00 PM – 03:00 PM ",
+        "Day 2: 09:00 AM – 01:00 PM",
+      ],
+      rules: [
+        "3 Rounds , 2 Members per Team",
+        " Basic knowledge of C/C++, Java, Python, and JavaScript is required (questions can be from any of these).",
+        "Good understanding of Computer Science fundamentals is required.",
+        "Experience in Data Structures & Algorithms and basic competitive coding is necessary.",
+        "Rules for each round will be explained on the spot.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-
-    {
-      eventName: "design riot",
-      secondaryName: "WEB DESIGN",
-      info: {
-        locationAndTime: [
-          "Venue -MCA Lab 01 - Rajaram block 2nd floor",
-          "Day 1: 02:00 PM – 03:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM ",
-        ],
-        rules: [
-          "No of participants = 2 , No of rounds = 3",
-          "Participants must have knowledge in HTML, CSS, and JavaScript.",
-          "The rounds and design tasks will be provided on the spot.",
-          "Electronic gadgets are not allowed.",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
+  },
+  {
+    eventName: "design riot",
+    secondaryName: "WEB DESIGN",
+    icon: Layout, // design/web layout symbol
+    info: {
+      locationAndTime: [
+        "Venue -MCA Lab 01 - Rajaram block 2nd floor",
+        "Day 1: 02:00 PM – 03:00 PM",
+        "Day 2: 09:00 AM – 01:00 PM ",
+      ],
+      rules: [
+        "No of participants = 2 , No of rounds = 3",
+        "Participants must have knowledge in HTML, CSS, and JavaScript.",
+        "The rounds and design tasks will be provided on the spot.",
+        "Electronic gadgets are not allowed.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-      eventName: "hyper launch",
-      secondaryName: "start up",
-      info: {
-        locationAndTime: [
-          "Venue -Nandini Hall",
-          "Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM & again 02:00 PM – 03:00 PM",
-        ],
-        rules: [
-          "The event will have 2 rounds, with teams of 2 participants each.",
-          "Participants must bring their own laptops to create and pitch their ideas.",
-          "For the 1st round, each team will prepare and present their startup idea using a single slide.",
-
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
+  },
+  {
+    eventName: "hyper launch",
+    secondaryName: "start up",
+    icon: Rocket, // startup/launch
+    info: {
+      locationAndTime: [
+        "Venue -Nandini Hall",
+        "Day 1: 02:00 PM – 03:00 PM ",
+        "Day 2: 09:00 AM – 01:00 PM & again 02:00 PM – 03:00 PM",
+      ],
+      rules: [
+        "The event will have 2 rounds, with teams of 2 participants each.",
+        "Participants must bring their own laptops to create and pitch their ideas.",
+        "For the 1st round, each team will prepare and present their startup idea using a single slide.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-      eventName: "techno hive",
-      secondaryName: "TECH TALK",
-      info: {
-        locationAndTime: [
-          "Venue -Shambhavi Hall",
-          "Day 1: 02:00 PM – 03:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM",
-        ],
-        rules: [
-          "Number of participants: 1 , Number of rounds: 2",
-          "The topic for each round will be disclosed a few minutes before the round begins.",
-          "Judges’ decisions are final and binding. No objections or disputes will be entertained.",
-          "Participants must always maintain a respectful and professional demeanour.",
-          "Use of offensive language, inappropriate content, cheating, or disrespectful behaviour will result in immediate disqualification.",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
+  },
+  {
+    eventName: "techno hive",
+    secondaryName: "TECH TALK",
+    icon: Mic, // talks/presentations
+    info: {
+      locationAndTime: [
+        "Venue -Shambhavi Hall",
+        "Day 1: 02:00 PM – 03:00 PM",
+        "Day 2: 09:00 AM – 01:00 PM",
+      ],
+      rules: [
+        "Number of participants: 1 , Number of rounds: 2",
+        "The topic for each round will be disclosed a few minutes before the round begins.",
+        "Judges’ decisions are final and binding. No objections or disputes will be entertained.",
+        "Participants must always maintain a respectful and professional demeanour.",
+        "Use of offensive language, inappropriate content, cheating, or disrespectful behaviour will result in immediate disqualification.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-      eventName: "cyber scope",
-      secondaryName: "Photography",
-      info: {
-        locationAndTime: [
-          "Venue - sowparnika Hall",
-          "Day 1: 11:00 AM – 12:00 PM & 03:00 PM – 04:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM",
-        ],
-        rules: [
-          "Per team 1 participant.",
-          "Participant should have photography and videography knowledge.",
-          "DSLR can be used.",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
+  },
+  {
+    eventName: "cyber scope",
+    secondaryName: "Photography",
+    icon: Camera, // photography
+    info: {
+      locationAndTime: [
+        "Venue - sowparnika Hall",
+        "Day 1: 11:00 AM – 12:00 PM & 03:00 PM – 04:00 PM",
+        "Day 2: 09:00 AM – 01:00 PM",
+      ],
+      rules: [
+        "Per team 1 participant.",
+        "Participant should have photography and videography knowledge.",
+        "DSLR can be used.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-      eventName: "cyborg recruit",
-      secondaryName: "IT Manager",
-      info: {
-        locationAndTime: [
-          "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
-          "Day 1: 11:00 AM – 12:00 PM & 02:00 PM – 03:00 PM",
-          " Day 2: 09:00 AM – 01:00 PM & 02:00 PM – 03:00 PM",
-        ],
-        rules: [
-          "Per team 1 participant.",
-          "Participants must report on time for all rounds with their own laptops.",
-          "Judges’ decisions are final and cannot be challenged.",
-          "No communication or teamwork is allowed during rounds.",
-          "Cheating or unfair means will lead to disqualification.",
-          "Participants are not allowed to join any other event.",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
-
+  },
+  {
+    eventName: "cyborg recruit",
+    secondaryName: "IT Manager",
+    icon: BriefcaseBusiness, // management / IT manager
+    info: {
+      locationAndTime: [
+        "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
+        "Day 1: 11:00 AM – 12:00 PM & 02:00 PM – 03:00 PM",
+        " Day 2: 09:00 AM – 01:00 PM & 02:00 PM – 03:00 PM",
+      ],
+      rules: [
+        "Per team 1 participant.",
+        "Participants must report on time for all rounds with their own laptops.",
+        "Judges’ decisions are final and cannot be challenged.",
+        "No communication or teamwork is allowed during rounds.",
+        "Cheating or unfair means will lead to disqualification.",
+        "Participants are not allowed to join any other event.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-      eventName: "rampage horizon",
-      secondaryName: "Game : Valorant ",
-      info: {
-        locationAndTime: [
-          "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
-          "Day 1: 02:00 PM – 03:00 PM (Lab 02 & Lab 04)"
-        ],
-        rules: [
-          "4 make a team",
-          "Participants should bring their laptops and other necessary equipment.",
-          "Any use of hacking will result to disqualification.",
-          "Participants should bring their own ethernet adapter if their laptop doesn’t have ethernet port",
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
-
+  },
+  {
+    eventName: "rampage horizon",
+    secondaryName: "Valorant ",
+    icon: Gamepad2, // gaming
+    info: {
+      locationAndTime: [
+        "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
+        "Day 1: 02:00 PM – 03:00 PM (Lab 02 & Lab 04)",
+      ],
+      rules: [
+        "4 make a team",
+        "Participants should bring their laptops and other necessary equipment.",
+        "Any use of hacking will result to disqualification.",
+        "Participants should bring their own ethernet adapter if their laptop doesn’t have ethernet port",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
-    {
-      eventName: "neon nexus",
-      secondaryName: "IT Quiz",
-      info: {
-        locationAndTime: [
-          "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",
-          " Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM",
-        ],
-        rules: [
-          "Number of participants = 2 ,Number of rounds = 4",
-          "Questions will be based on general knowledge, technical, and programming topics.",
-          "No electronic gadgets are allowed.",
-          "The quiz master's decision is final.",
-          "Use of unfair means will lead to disqualification.",
-
-        ],
-        heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
-        ],
-      },
-
+  },
+  {
+    eventName: "neon nexus",
+    secondaryName: "IT Quiz",
+    icon: CircleHelp, // quiz/trivia vibe
+    info: {
+      locationAndTime: [
+        "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",
+        " Day 1: 02:00 PM – 03:00 PM ",
+        "Day 2: 09:00 AM – 01:00 PM",
+      ],
+      rules: [
+        "Number of participants = 2 ,Number of rounds = 4",
+        "Questions will be based on general knowledge, technical, and programming topics.",
+        "No electronic gadgets are allowed.",
+        "The quiz master's decision is final.",
+        "Use of unfair means will lead to disqualification.",
+      ],
+      heads: [
+        "Alice Johnson - Contact No. 9876543210",
+        "Bob Smith - Contact No. 8765432109",
+      ],
     },
+  },
+];
 
 
-
-
-  ];
 
   //Event Heads Data(HeadsInfo)
 

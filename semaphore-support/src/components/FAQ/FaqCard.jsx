@@ -12,7 +12,7 @@ const FaqCard = ({ question, answer }) => {
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
-        <h3 className="text-accent font-medium text-sm sm:text-base pr-2">
+        <h3 className="text-accent font-bold text-sm sm:text-base pr-2">
           {question}
         </h3>
         <ChevronRight 
@@ -25,7 +25,7 @@ const FaqCard = ({ question, answer }) => {
       <div className={`overflow-hidden transition-all delay-100 duration-200 ease-out ${
         isOpen ? 'max-h-96 opacity-100 mt-3' : 'max-h-0 opacity-0'
       }`}>
-        <p className="text-white text-sm sm:text-base leading-relaxed">
+        <p className="text-accent text-sm sm:text-base leading-relaxed">
           {answer}
         </p>
       </div>

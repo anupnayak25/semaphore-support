@@ -1,8 +1,8 @@
-import React,{useContext} from 'react'
 import Heading from '../components/Heading/Heading'
 import { SemaphoreContext } from '../context/SemaphoreContext';
 import NavBar from '../components/NavBar/NavBar';
 import Description from '../components/Description/Description';
+import { useContext } from 'react';
 function Home() {
     const {titles}=useContext(SemaphoreContext);
   return (

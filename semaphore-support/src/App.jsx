@@ -1,15 +1,15 @@
 
 
 import Faq from "./pages/Faqs";
-import Rules from "./pages/Events";
-import NavBar from "./components/NavBar/NavBar";
+import Events from "./pages/Events";
+import Event from "./pages/Event";
 import Home from "./pages/Home";
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import Layout from "./Layout";
 import ComingSoon from "./pages/ComingSoon";
 import { RouterProvider } from "react-router-dom";
 import Schedules from "./pages/Schedules";
-import HeadsAndCoordinators from "./pages/HeadsAndCoordinators";
+
 import { Toaster } from "react-hot-toast";
 const App = () => {
  const router = createBrowserRouter(
@@ -17,9 +17,12 @@ const App = () => {
       <Route path="/" element={<Layout/>}>
         <Route path="" element={<Home/>} />
         <Route path="FAQ" element={<Faq />} />
-        <Route path="Events" element={<Rules />} />
+        <Route path="Events" element={<Events/>} />
+
+        <Route path="Events/:eventName" element={<Event />} />
+
         <Route path="Timings" element={<Schedules />} />
-        <Route path="HeadsAndCoordinators" element={<HeadsAndCoordinators/>} />
+        
       </Route>
     )
   );

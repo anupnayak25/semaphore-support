@@ -36,7 +36,7 @@ const Faq = () => {
             <Search className="relative left-6  top-6 transform -translate-y-1/2 text-accent w-5 h-5 " />
             <input
               type="text"
-              placeholder="Search FAQs..."
+              placeholder="Search using event names , venues or timings"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-7/8 pl-10 pr-10 py-3 

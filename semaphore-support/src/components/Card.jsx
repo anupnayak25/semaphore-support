@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavCard = ({ icon, name, route='home'}) => {
+const Card = ({ icon, name, route='home'}) => {
   
     const IconComponent=icon;
 
@@ -25,7 +25,7 @@ const NavCard = ({ icon, name, route='home'}) => {
                       rounded-full transition-colors duration-200">
         <IconComponent 
           className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8
-                     text-accent group-hover:text-accent-50
+                     text-white  group-hover:text-accent-50
                      transition-colors duration-200"
         />
       </div>
@@ -48,4 +48,4 @@ const NavCard = ({ icon, name, route='home'}) => {
   
   );
 };
-export default NavCard;
+export default Card;
