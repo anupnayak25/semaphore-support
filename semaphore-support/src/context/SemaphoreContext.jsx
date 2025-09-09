@@ -476,7 +476,7 @@ const SemaphoreContextProvider = ({ children }) => {
     },
     {
       venue: "SMV Block, NMAMIT",
-      location: "456 Center Rd, Townsville",
+      location: "5WMM+2CC NMAMIT, Nitte, Kalya, Karnataka 574110",
       locationLink: "https://maps.app.goo.gl/hRM8cCqE9k74bPdo9",
     },
     {
@@ -495,6 +495,13 @@ const SemaphoreContextProvider = ({ children }) => {
       location: "Sanmathi Cafe and Park (K B)",
       locationLink: "https://maps.app.goo.gl/BkUXs4hrhzR5W7816",
     },
+
+    {
+      venue: "B.C Alva Sports Complex",
+      location: "5WJP+343, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/B41EqoZDRdr8KevQA",
+    },
+
   ];
 
   return (
