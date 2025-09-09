@@ -39,7 +39,7 @@ const SemaphoreContextProvider = ({ children }) => {
       },
       locationPage: {
         heading: "Places and Locations",
-        subHeading: "Find all Place and Locations here",
+        subHeading: "Find all Places and Locations here",
       },
     },
   };
@@ -417,29 +417,28 @@ const SemaphoreContextProvider = ({ children }) => {
   const headsData = [
     {
       id: 1,
-      name: "Rahul Shetty",
-      designation: "Surprise Event Head",
-      event: "Surprise Event",
+      name: "Anup Nayak",
+      designation: "Head",
+      event: "Event",
       photo: "/",
-      contact: "9880897965"
+      contact: "9480220586"
     },
     {
       id: 2,
-      name: "Ananya Gupta",
-      designation: "Dance Head",
-      event: "Dance",
+      name: "Kiran",
+      designation: "Head",
+      event: "Event",
       photo: "/",
-      contact: "9876512345",
+      contact: "8277463806"
 
     },
     {
       id: 3,
-      name: "Arjun Mehta",
-      designation: "Coding Event Head",
-      event: "Coding",
+      name: "Anvith shetty",
+      designation: "Head",
+      event: "Event",
       photo: "/",
-      contact: "9123456789",
-
+      contact: "7204947177"
     },
 
   ];

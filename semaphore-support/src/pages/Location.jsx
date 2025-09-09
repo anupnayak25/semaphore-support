@@ -39,10 +39,10 @@ const Location = () => {
                   key={index}
                   className={index % 2 === 0 ? "bg-gray-800/20" : "bg-gray-800/10"}
                 >
-                  <td className="px-6 py-4 text-gray-200 font-medium border border-highlight">
+                  <td className="px-6 py-4 text-accent font-medium border border-highlight">
                     {event.venue}
                   </td>
-                  <td className="px-6 py-4 text-gray-200 border border-highlight">
+                  <td className="px-6 py-4 text-accent border border-highlight">
                     {event.locationLink ? (
                       <a
                         href={event.locationLink}

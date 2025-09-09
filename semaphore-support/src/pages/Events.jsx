@@ -1,145 +1,89 @@
-import { useContext, useState } from 'react';
-import { ChevronLeft, ChevronRight, Users, Crown, UserCheck, Globe, LocateFixedIcon, LocateOffIcon, MapPinHouseIcon,LucideScale } from 'lucide-react';
+import React, { useContext, useState } from 'react'
+import { SemaphoreContext } from '../context/SemaphoreContext'
 import Heading from '../components/Heading/Heading';
-import { SemaphoreContext } from '../context/SemaphoreContext';
+import Card from '../components/Card';
 
-const Rules = () => {
-    const {titles}=useContext(SemaphoreContext);
-    const [currentEventIndex, setCurrentEventIndex] = useState(0);
+function Events() {
+    const { titles, eventData } = useContext(SemaphoreContext);
+    const [filter, setFilter] = useState('all');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const { eventData } = useContext(SemaphoreContext);
+    // Get unique event names for filter options
+    const uniqueEventNames = [...new Set(eventData.map(event =>( `${event.eventName} (${event.secondaryName.toLowerCase()})`)))];
 
-    const currentEvent = eventData[currentEventIndex];
+    // Filter events based on selected filter
+    const filteredEvents = filter === 'all' 
+        ? eventData 
+        : eventData.filter(event => event.eventName.includes(filter.split(' (')[0]));
 
-    const nextEvent = () => {
-        setCurrentEventIndex((prev) => (prev + 1) % eventData.length);
-    };
-
-    const prevEvent = () => {
-        setCurrentEventIndex((prev) => (prev - 1 + eventData.length) % eventData.length);
-    };
-
-    const getRuleIcon = (category) => {
-        switch (category) {
-            case 'locationAndTime':
-                return <MapPinHouseIcon className="w-5 h-5" />;
-            case 'rules':
-                return <LucideScale className="w-5 h-5" />;
-            case 'heads':
-                return <Crown className="w-5 h-5" />;
-           
-            default:
-                return <Globe className="w-5 h-5" />;
-        }
-    };
-
-    const getCategoryTitle = (category) => {
-        switch (category) {
-            case 'locationAndTime':
-                return 'Location & Time';
-            case 'rules':
-                return 'Event Rules';
-            case 'heads':
-                return 'Heads & Coordinators';
-          
-            default:
-                return category;
-        }
+    const handleFilterChange = (selectedFilter) => {
+        setFilter(selectedFilter);
+        setIsDropdownOpen(false);
     };
 
     return (
-       <div className="w-full bg-dominant min-h-screen text-white py-10">
-        <Heading heading={titles.pages.eventPage.heading} subheading={titles.pages.eventPage.subHeading}/>
-            {/* Header */}
-            <div className="sticky top-0 bg-dominant border-b border-highlight/20 z-10">
-                <div className="max-w-4xl mx-auto px-4 py-6">
-                    <div className="flex items-center justify-between">
-                        <button
-                            onClick={prevEvent}
-                            className="p-2 rounded-full bg-highlight/10 hover:bg-highlight/20 transition-colors"
-                            disabled={eventData.length <= 1}
-                        >
-                            <ChevronLeft className="w-6 h-6 text-highlight" />
-                        </button>
-                        
-                        <div className="text-center">
-                            <h1 className="text-2xl md:text-3xl font-bold text-accent">
-                                {currentEvent.eventName.toUpperCase()}<br/> <span className="text-sm font-medium italic text-highlight">({currentEvent.secondaryName.toLowerCase()})</span>
-                            </h1>
-                            <div className="flex justify-center mt-2 space-x-2">
-                                {eventData.map((_, index) => (
-                                    <div
-                                        key={index}
-                                        className={`w-2 h-2 rounded-full transition-colors ${
-                                            index === currentEventIndex
-                                                ? 'bg-accent'
-                                                : 'bg-highlight/30'
-                                        }`}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                        
-                        <button
-                            onClick={nextEvent}
-                            className="p-2 rounded-full bg-highlight/10 hover:bg-highlight/20 transition-colors"
-                            disabled={eventData.length <= 1}
-                        >
-                            <ChevronRight className="w-6 h-6 text-highlight" />
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div className="container mx-auto px-4 py-8 space-y-8">
+            <Heading 
+                heading={titles.pages.eventPage.heading} 
+                subheading={titles.pages.eventPage.subHeading} 
+            />
+            
+            {/* Filter Dropdown */}
+            <div className="mb-8 flex justify-start">
+                <div className="relative">
+                    <button
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        className="bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 flex items-center space-x-2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent min-w-58"
+                    >
+                        <span>{filter === 'all' ? 'All Events' : filter}</span>
+                        <svg 
+                            className={`w-4 h-4 ml-30 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
 
-            {/* Rules Content */}
-            <div className="max-w-4xl mx-auto px-4 py-8">
-                <div className="grid gap-6 md:gap-8">
-                    {Object.entries(currentEvent.info).map(([category, info]) => (
-                        <div
-                            key={category}
-                            className="bg-highlight/5 rounded-xl p-6 border border-highlight/10 hover:border-highlight/20 transition-colors"
                         >
-                            <div className="flex items-center space-x-3 mb-4">
-                                <div className="p-2 rounded-lg bg-accent/10">
-                                    <div className="text-accent">
-                                        {getRuleIcon(category)}
-                                    </div>
-                                </div>
-                                <h2 className="text-xl md:text-2xl font-semibold text-accent">
-                                    {getCategoryTitle(category)}
-                                </h2>
-                            </div>
-                            
-                            <div className="space-y-3">
-                                {info.map((rule, index) => (
-                                    <div
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    {isDropdownOpen && (
+                        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10 min-w-full">
+                            <div className="py-1">
+                                <button
+                                    onClick={() => handleFilterChange('all')}
+                                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                >
+                                    All Events
+                                </button>
+                                {uniqueEventNames.map((eventName, index) => (
+                                    <button
                                         key={index}
-                                        className="flex items-start space-x-3 p-3 rounded-lg bg-dominant/50 hover:bg-highlight/5 transition-colors"
+                                        onClick={() => handleFilterChange(eventName)}
+                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                                     >
-                                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent text-sm font-semibold mt-0.5">
-                                            {index + 1}
-                                        </div>
-                                        <p className="text-gray-200 leading-relaxed">
-                                            {rule}
-                                        </p>
-                                    </div>
+                                        {eventName}
+                                    </button>
                                 ))}
                             </div>
                         </div>
-                    ))}
+                    )}
                 </div>
             </div>
 
-            {/* Mobile Navigation Hint */}
-            <div className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-highlight/10 backdrop-blur-sm rounded-full px-4 py-2 border border-highlight/20">
-                    <p className="text-sm text-highlight text-center">
-                        Use arrows to navigate
-                    </p>
-                </div>
+            {/* Events Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {filteredEvents.map((event, index) => (
+                    <Card 
+                        key={index} 
+                        icon={event.icon} 
+                        name={event.eventName} 
+                        route={`/Events/${event.eventName}`} 
+                    />
+                ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Rules;
+export default Events
