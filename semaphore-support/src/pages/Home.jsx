@@ -4,6 +4,7 @@ import { SemaphoreContext } from "../context/SemaphoreContext";
 import NavBar from "../components/NavBar/NavBar";
 import Description from "../components/Description/Description";
 import HeadsAndCoordinatorsCard from "../components/HeadsAndCoordinators/HeadsAndCoordinatorsCard";
+import GeneralPage from "./GeneralRules";
 
 function Home() {
   const { titles, headsData } = useContext(SemaphoreContext); // headsData array
@@ -29,9 +30,22 @@ function Home() {
       />
       <NavBar />
       <Description
-        title="Need Help?,We Got You Covered!"
-        content="You can find all the event-related information and the full schedule of Semaphore here. If you have any questions, check out the FAQ section or feel free to reach out to any of our team members. For direct support, you can also contact the heads  listed below. All the information you need is just a click away!"
+        title="Need Help?, We Got You Covered!"
+        content={
+          <>
+            You can find all the event-related information, the full schedule of Semaphore, and the{" "}
+            <a
+              href="#general-rules"
+              className="text-accent underline hover:text-accent/80 cursor-pointer"
+            >
+              General rules
+            </a>{" "}
+            here. If you have any questions, check out the FAQ section or feel free to reach out to any of our team members.
+            For direct support, you can also contact the heads listed below. All the information you need is just a click away!
+          </>
+        }
       />
+
       {/* Paragraph info above cards */}
       <p className="text-center text-accent font-semibold mt-10 mb-8 text-lg">
         Contact the following heads for more information..
@@ -46,6 +60,7 @@ function Home() {
           />
         ))}
       </div>
+      <GeneralPage />
     </div>
   );
 }

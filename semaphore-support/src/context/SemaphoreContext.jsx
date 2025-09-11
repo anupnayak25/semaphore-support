@@ -418,7 +418,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       id: 1,
       name: "Anup Nayak",
-      designation: "Head",
+      designation: "Technical Co-ordinator",
       event: "Event",
       photo: "/",
       contact: "9480220586"
@@ -426,7 +426,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       id: 2,
       name: "Kiran",
-      designation: "Head",
+      designation: "President ",
       event: "Event",
       photo: "/",
       contact: "8277463806"
@@ -435,7 +435,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       id: 3,
       name: "Anvith shetty",
-      designation: "Head",
+      designation: "",
       event: "Event",
       photo: "/",
       contact: "7204947177"
@@ -502,6 +502,24 @@ const SemaphoreContextProvider = ({ children }) => {
     },
 
   ];
+  const generalRules = [
+    "A team should consist of a maximum of 16 members.",
+    "The fest is open to all MCA students.",
+    "Teams must confirm their participation through our website [ semaphore2k25.in ].",
+    "The registration fee is ₹2025 per team.",
+    "All participants must be present before 9:00 AM.",
+    "A team must participate in all events to be eligible for the Overall Championship.",
+    "IT Manager and Photography participants cannot join other events, while Dance participants may join any events except IT Manager and Photography.",
+    "Participants are required to produce their college ID on the fest day.",
+    "All participants must be available on campus for both days of the event.",
+    "The department/convenor reserves the right to take action in case of any misconduct.",
+    "The decisions of the judges will be final and binding.",
+    "For any issues regarding the payment of registration fees, please contact the core committee members.",
+    "A cash prize and trophy will be awarded to the overall champions and runners-up.",
+    "Participants must bring a permission letter from their respective colleges.",
+    "Participants must bring accessories such as pens, laptops, chargers, etc., themselves.",
+
+  ];
 
   return (
     <SemaphoreContext.Provider
@@ -512,7 +530,8 @@ const SemaphoreContextProvider = ({ children }) => {
         eventData,
         scheduleData,
         headsData,
-        locationData
+        locationData,
+        generalRules,
       }}
     >
       {children}
