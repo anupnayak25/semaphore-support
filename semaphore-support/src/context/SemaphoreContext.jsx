@@ -180,7 +180,7 @@ const SemaphoreContextProvider = ({ children }) => {
     },
 
   ];
-  const eventData = [
+ const eventData = [
     {
       eventName: "Spectra flux",
       secondaryName: "suprise event",
@@ -199,8 +199,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "Judges’ decisions are final, no discussions. Fair play only",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "K Kavyashree Karanth - Contact No. 7019361906",
+          "Shetty Shamitha Vasanth - Contact No. 8884311489",
         ],
       },
     },
@@ -225,8 +225,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "The decision of the judges will be final.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "Shrajan G Shetty - Contact No. 8105643829",
+          "Shivani D S - Contact No. 6363860880",
         ],
       },
     },
@@ -248,8 +248,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "Rules for each round will be explained on the spot.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "Prajwal - Contact No. 8296697351",
+          "Rashmi - Contact No. 9591870457",
         ],
       },
     },
@@ -270,8 +270,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "Electronic gadgets are not allowed.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "Maneesh Kumar - Contact No. 8792489207",
+          "Anvith Shetty - Contact No. 7204947177",
         ],
       },
     },
@@ -291,8 +291,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "For the 1st round, each team will prepare and present their startup idea using a single slide.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "Vidyashree - Contact No. 7204471565",
+          "J T Akshay Kanna - Contact No. 8310215620",
         ],
       },
     },
@@ -314,8 +314,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "Use of offensive language, inappropriate content, cheating, or disrespectful behaviour will result in immediate disqualification.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "T Namratha Padiyar - Contact No. 7349652173",
+          "Kavya - Contact No. 8762188501",
         ],
       },
     },
@@ -335,8 +335,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "DSLR can be used.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "Saketh - Contact No. 9353470536",
+          "Ranjith Raj - Contact No. 7337756754",
         ],
       },
     },
@@ -359,8 +359,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "Participants are not allowed to join any other event.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "A Samved Rao - Contact No. 7204551543",
+          "Vrashika - Contact No. 6360432266",
         ],
       },
     },
@@ -380,8 +380,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "Participants should bring their own ethernet adapter if their laptop doesn’t have ethernet port",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "Shujan - Contact No. 6360491384",
+          "Lawrence Linesh Quadras - Contact No. 6360119517",
         ],
       },
     },
@@ -403,8 +403,8 @@ const SemaphoreContextProvider = ({ children }) => {
           "Use of unfair means will lead to disqualification.",
         ],
         heads: [
-          "Alice Johnson - Contact No. 9876543210",
-          "Bob Smith - Contact No. 8765432109",
+          "Yuneeth K - Contact No. 9741125023",
+          "Adarsh Gogate - Contact No. 7619338271",
         ],
       },
     },
