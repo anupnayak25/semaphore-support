@@ -14,7 +14,7 @@ const Schedules = () => {
 
   return (
     <div className="w-full bg-dominant min-h-screen text-white py-10">
-      <Heading heading={titles.pages.timingsPage.heading} subheading={titles.pages.timingsPage.subHeading} />
+      <Heading heading={titles.pages.timingsPage.heading} subheading={titles.pages.timingsPage.subHeading} previousRoute='/'/>
       
       <div className="max-w-2xl mx-auto p-6 bg-dominant shadow-lg">
         
