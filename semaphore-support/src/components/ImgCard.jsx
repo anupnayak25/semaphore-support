@@ -5,7 +5,7 @@ function ImgCard({route,img}) {
     <Link to={route}>
     <div className="border-2 border-black/10 max-w-100 rounded-lg overflow-hidden shadow-lg outline-2 outline-offset-2 outline-black/50 hover:scale-105 transition-transform duration-300 cursor-pointer">
 
-      <img src={img} alt="" />
+      <img src={img} alt={route} />
     </div>
     </Link>
   )
