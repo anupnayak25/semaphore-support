@@ -35,7 +35,7 @@ const SemaphoreContextProvider = ({ children }) => {
       },
       timingsPage: {
         heading: "Semaphore Schedule",
-        subHeading: ""
+        subHeading: "...."
       },
       locationPage: {
         heading: "Places and Locations",
@@ -184,7 +184,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "Spectra flux",
       secondaryName: "suprise event",
-      icon: Sparkles, // surprise/mystery vibe
+      img: 'event_logos/sf.png',
       info: {
         locationAndTime: [
           "Venue -LH 402-Ramanujan Block 4th floor ",
@@ -207,7 +207,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "Rhythm Hack",
       secondaryName: "Dance",
-      icon: Music, // for dance/music events
+      img: '/event_logos/rhdance.png',
       info: {
         locationAndTime: [
           "Venue: Sambram Auditorium",
@@ -233,7 +233,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cryptix",
       secondaryName: "Coding",
-      icon: Code2, // coding/hack vibe
+      img: '/event_logos/coding.png',
       info: {
         locationAndTime: [
           "Venue- MCA Lab 03-Rajaram block 2nd floor ",
@@ -256,7 +256,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "design riot",
       secondaryName: "WEB DESIGN",
-      icon: Layout, // design/web layout symbol
+      img: '/event_logos/dr.png',
       info: {
         locationAndTime: [
           "Venue -MCA Lab 01 - Rajaram block 2nd floor",
@@ -278,7 +278,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "hyper launch",
       secondaryName: "start up",
-      icon: Rocket, // startup/launch
+      img: '/event_logos/hl.png',
       info: {
         locationAndTime: [
           "Venue -Nandini Hall",
@@ -299,7 +299,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "techno hive",
       secondaryName: "TECH TALK",
-      icon: Mic, // talks/presentations
+      img: '/event_logos/th.png',
       info: {
         locationAndTime: [
           "Venue -Shambhavi Hall",
@@ -322,7 +322,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cyber scope",
       secondaryName: "Photography",
-      icon: Camera, // photography
+      img: '/event_logos/cyberscope.png',
       info: {
         locationAndTime: [
           "Venue - sowparnika Hall",
@@ -343,7 +343,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cyborg recruit",
       secondaryName: "IT Manager",
-      icon: BriefcaseBusiness, // management / IT manager
+      img: '/event_logos/cr.png',
       info: {
         locationAndTime: [
           "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
@@ -367,7 +367,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "rampage horizon",
       secondaryName: "Valorant ",
-      icon: Gamepad2, // gaming
+      img: '/event_logos/rh.png',
       info: {
         locationAndTime: [
           "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
@@ -388,7 +388,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "neon nexus",
       secondaryName: "IT Quiz",
-      icon: CircleHelp, // quiz/trivia vibe
+      img: '/event_logos/nn.png',
       info: {
         locationAndTime: [
           "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",
@@ -445,30 +445,54 @@ const SemaphoreContextProvider = ({ children }) => {
 
   ];
 
-  const scheduleData = {
-    day1Schedule: [
-      { time: '09:00 AM', event: 'Opening Ceremony', classroom: 'LH' },
-      { time: '10:00 AM', event: 'Keynote Speech', classroom: 'LH' },
-      { time: '11:30 AM', event: 'Coffee Break', classroom: 'LH' },
-      { time: '12:00 PM', event: 'Panel Discussion', classroom: 'LH' },
-      { time: '01:30 PM', event: 'Lunch Break', classroom: 'LH' },
-      { time: '02:30 PM', event: 'Workshop Session A', classroom: 'LH' },
-      { time: '04:00 PM', event: 'Networking Session', classroom: 'LH' },
-      { time: '05:00 PM', event: 'Day 1 Closing', classroom: 'LH' }
-    ],
 
-    // Day2 schedule data
-    day2Schedule: [
-      { time: '09:30 AM', event: 'Morning Briefing' },
-      { time: '10:00 AM', event: 'Technical Presentation' },
-      { time: '11:15 AM', event: 'Q&A Session' },
-      { time: '12:00 PM', event: 'Group Activity' },
-      { time: '01:00 PM', event: 'Lunch & Networking' },
-      { time: '02:15 PM', event: 'Workshop Session B' },
-      { time: '03:45 PM', event: 'Final Presentations' },
-      { time: '05:00 PM', event: 'Closing Ceremony' }
-    ],
-  }
+  const scheduleData = {
+    day1: {
+      registration: "8:00 AM",
+      inauguration: "9:00 AM (Sambram Auditorium)",
+      timeSlots: [
+        "11:00 AM TO 12:00 PM",
+        "12:00 PM TO 01:00 PM",
+        "01:00 TO 02:00",
+        "02:00 PM TO 03:00 PM",
+        "03:00 PM TO 04:00 PM",
+      ],
+      events: [
+        { name: "CYBORG RECRUIT", venue: "(MCA SEMINAR HALL)" },
+        { name: "CYBER SCOPE", venue: "(SOWPARNIKA HALL)" },
+        { name: "RHYTHM HACK", venue: "(SAMBRAM AUDITORIUM)" },
+        { name: "NEON NEXUS", venue: "(SMV 12 & 36)" },
+        { name: "SPECTRA FLUX", venue: "(LH 402)" },
+        { name: "CRYPTIX", venue: "(MCA LAB 03)" },
+        { name: "DESIGN RIOT", venue: "(MCA LAB 01)" },
+        { name: "HYPER LAUNCH", venue: "(NANDINI HALL)" },
+        { name: "TECHNO HIVE", venue: "(SHAMBHAVI HALL)" },
+        { name: "RAMPAGE HORIZON", venue: "(LAB 02 & LAB 04)" },
+      ],
+    },
+    day2: {
+      registration: "8:00 AM",
+      sessionsStart: "9:00 AM",
+      timeSlots: [
+        "09:00 AM TO 01:00 PM",
+        "01:00 PM TO 02:00 PM",
+        "02:00 PM TO 03:00 PM",
+      ],
+      events: [
+        { name: "CYBORG RECRUIT", venue: "(MCA SEMINAR HALL)" },
+        { name: "CYBER SCOPE", venue: "(SOWPARNIKA HALL)" },
+        { name: "NEON NEXUS", venue: "(SMV NC 12 & NC 36)" },
+        { name: "SPECTRA FLUX", venue: "(LH 402)" },
+        { name: "CRYPTIX", venue: "(MCA LAB 03)" },
+        { name: "DESIGN RIOT", venue: "(MCA LAB 01)" },
+        { name: "HYPER LAUNCH", venue: "(NANDINI HALL)" },
+        { name: "TECHNO HIVE", venue: "(SHAMBHAVI HALL)" },
+        { name: "RAMPAGE HORIZON", venue: "(LAB 02 & LAB 04)" },
+      ],
+    },
+  };
+
+
   const locationData = [
     {
       venue: "NMAMIT",
