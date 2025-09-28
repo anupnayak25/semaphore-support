@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { Copy } from "lucide-react";
+import { Copy, Phone } from "lucide-react";
 
-export default function HeadsAndCoordinatorsCard({
-  head,
-  getInitials,
-}) {
+export default function HeadsAndCoordinatorsCard({ head, getInitials }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -76,20 +73,35 @@ export default function HeadsAndCoordinatorsCard({
             {head.designation}
           </p>
 
-          {/* Added spacing between name and number */}
+          {/* Contact & Buttons */}
           <div className="mt-1 flex items-center justify-between">
             <p className="text-sm text-accent truncate">{head.contact}</p>
 
-            {/* Copy Button */}
-            <button
-              onClick={() => handleCopy(head.contact)}
-              className="ml-2 p-1.5 rounded-md border border-accent text-accent 
-                         hover:bg-accent hover:text-dominant 
-                         transition-colors duration-200"
-              title="Copy phone number"
-            >
-              <Copy className="w-4 h-4" />
-            </button>
+            <div className="flex gap-2">
+              {/* Copy Button */}
+              <button
+                onClick={() => handleCopy(head.contact)}
+                className="p-1.5 rounded-md border border-accent text-accent 
+                           hover:border-blue-500 hover:text-blue-500 
+                           hover:shadow-[0_0_8px_rgba(59,130,246,0.7)]
+                           transition-all duration-200"
+                title="Copy phone number"
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+
+              {/* Call Button */}
+              <a
+                href={`tel:${head.contact}`}
+                className="p-1.5 rounded-md border border-green-600 text-green-600 
+                           hover:bg-green-600 hover:text-white 
+                           hover:shadow-[0_0_8px_rgba(34,197,94,0.7)]
+                           transition-all duration-200"
+                title="Call now"
+              >
+                <Phone className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

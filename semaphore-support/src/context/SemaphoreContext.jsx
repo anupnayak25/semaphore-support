@@ -180,7 +180,7 @@ const SemaphoreContextProvider = ({ children }) => {
     },
 
   ];
- const eventData = [
+  const eventData = [
     {
       eventName: "Spectra flux",
       secondaryName: "suprise event",
@@ -417,42 +417,44 @@ const SemaphoreContextProvider = ({ children }) => {
   const headsData = [
     {
       id: 1,
-      name: "Anup Nayak",
-      designation: "Technical Co-ordinator",
+      name: "K KIRAN",
+      designation: "PRESIDENT ",
       event: "Event",
       photo: "/",
-      contact: "9480220586"
-    },
-    {
-      id: 2,
-      name: "Kiran",
-      designation: "President ",
-      event: "Event",
-      photo: "/",
-      contact: "8277463806"
+      contact: "82774 63806"
 
     },
     {
-      id: 3,
-      name: "Anvith shetty",
-      designation: "",
+      id: 2,
+      name: "RAKSHITHA",
+      designation: "SECRETARY",
       event: "Event",
       photo: "/",
-      contact: "7204947177"
+      contact: "79759 67009"
     },
+
+    {
+      id: 3,
+      name: "ANUP NAYAK",
+      designation: "TECHNICAL COORDINATOR",
+      event: "Event",
+      photo: "/",
+      contact: "94802 20586"
+    },
+
 
   ];
 
   const scheduleData = {
     day1Schedule: [
-      { time: '09:00 AM', event: 'Opening Ceremony' },
-      { time: '10:00 AM', event: 'Keynote Speech' },
-      { time: '11:30 AM', event: 'Coffee Break' },
-      { time: '12:00 PM', event: 'Panel Discussion' },
-      { time: '01:30 PM', event: 'Lunch Break' },
-      { time: '02:30 PM', event: 'Workshop Session A' },
-      { time: '04:00 PM', event: 'Networking Session' },
-      { time: '05:00 PM', event: 'Day 1 Closing' }
+      { time: '09:00 AM', event: 'Opening Ceremony', classroom: 'LH' },
+      { time: '10:00 AM', event: 'Keynote Speech', classroom: 'LH' },
+      { time: '11:30 AM', event: 'Coffee Break', classroom: 'LH' },
+      { time: '12:00 PM', event: 'Panel Discussion', classroom: 'LH' },
+      { time: '01:30 PM', event: 'Lunch Break', classroom: 'LH' },
+      { time: '02:30 PM', event: 'Workshop Session A', classroom: 'LH' },
+      { time: '04:00 PM', event: 'Networking Session', classroom: 'LH' },
+      { time: '05:00 PM', event: 'Day 1 Closing', classroom: 'LH' }
     ],
 
     // Day2 schedule data
