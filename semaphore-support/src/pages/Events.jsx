@@ -35,6 +35,7 @@ function Events() {
       <Heading
         heading={titles.pages.eventPage.heading}
         subheading={titles.pages.eventPage.subHeading}
+        previousRoute="/"
       />
 
       {/* Filter Dropdown */}

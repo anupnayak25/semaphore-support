@@ -56,9 +56,9 @@ const Event = () => {
     <div className="w-full bg-dominant min-h-screen text-white py-10">
       <Heading
         heading={currentEvent.eventName.toUpperCase()}
-        subheading={`(${currentEvent.secondaryName.toLowerCase()})` } previousRoute="Events"
+        subheading={`(${currentEvent.secondaryName.toLowerCase()})` } 
+        previousRoute="events"
       />
-      {/* Header */}
 
       {/* Rules Content */}
       <div className="max-w-4xl mx-auto px-4 py-8">
