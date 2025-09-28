@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Home } from "lucide-react"; // ✅ Import icons
+import { Home } from "lucide-react"; 
 import { Undo2Icon } from "lucide-react";
 export default function Heading({ 
+  img="",
   heading = "Heading", 
   subheading = "SubHeading", 
   className = "", 
@@ -10,12 +11,15 @@ export default function Heading({
 }) {
   return (
     <div className={`text-center ${className} bg-dominant`}>
-      <h1 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight text-accent">
+    {
+      img?(<img src={img} alt={heading} className="mx-auto mb-8" />):(<h1 className="text-3xl md:text-6xl font-bold mb-8 tracking-tight text-accent">
         {heading.toUpperCase()}
-      </h1>
+      </h1>)
+    }
+      
       
       {subheading && (
-        <p className="text-lg md:text-xl leading-relaxed text-accent mb-6">
+        <p className="text md:text-xl leading-relaxed text-accent mb-6">
           {subheading}
         </p>
       )}
@@ -30,7 +34,7 @@ export default function Heading({
               to={previousRoute === "/" ? `/` : `/${previousRoute}`} 
               className="text-accent inline-flex items-center gap-1 hover:underline"
             >
-              <Undo2Icon size={30}  /> {/* 👈 Back icon */}
+              <Undo2Icon size={20}  /> {/* 👈 Back icon */}
             </Link>
         </div>
           )}
@@ -42,7 +46,7 @@ export default function Heading({
               to="/" 
               className="text-accent inline-flex items-center gap-1 hover:underline justify-end"
             >
-              <Home size={30} /> {/* 👈 Home icon */}
+              <Home size={20} /> {/* 👈 Home icon */}
             </Link>
           </div>
         )}
