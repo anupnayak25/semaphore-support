@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Home } from "lucide-react"; // ✅ Import icons
+import { Home } from "lucide-react"; // 
 import { Undo2Icon } from "lucide-react";
 export default function Heading({ 
   heading = "Heading", 
@@ -30,7 +30,7 @@ export default function Heading({
               to={previousRoute === "/" ? `/` : `/${previousRoute}`} 
               className="text-accent inline-flex items-center gap-1 hover:underline"
             >
-              <Undo2Icon size={30}  /> {/* 👈 Back icon */}
+              <Undo2Icon size={20}  /> {/* 👈 Back icon */}
             </Link>
         </div>
           )}
@@ -42,7 +42,7 @@ export default function Heading({
               to="/" 
               className="text-accent inline-flex items-center gap-1 hover:underline justify-end"
             >
-              <Home size={30} /> {/* 👈 Home icon */}
+              <Home size={20} /> {/* 👈 Home icon */}
             </Link>
           </div>
         )}
