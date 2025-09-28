@@ -12,7 +12,7 @@ export default function Heading({
   return (
     <div className={`text-center ${className} bg-dominant`}>
     {
-      img?(<img src={img} alt={heading} className="mx-auto mb-8" />):(<h1 className="text-3xl md:text-6xl font-bold mb-8 tracking-tight text-accent">
+      img?(<img src={img} alt={heading} width="200" className="mx-auto" />):(<h1 className="text-3xl md:text-6xl font-bold mb-8 tracking-tight text-accent">
         {heading.toUpperCase()}
       </h1>)
     }
