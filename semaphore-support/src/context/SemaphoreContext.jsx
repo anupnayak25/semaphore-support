@@ -184,7 +184,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "Spectra flux",
       secondaryName: "suprise event",
-      icon: Sparkles, // surprise/mystery vibe
+      img:'event_logos/sf.png',
       info: {
         locationAndTime: [
           "Venue -LH 402-Ramanujan Block 4th floor ",
@@ -207,7 +207,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "Rhythm Hack",
       secondaryName: "Dance",
-      icon: Music, // for dance/music events
+      img: '/event_logos/rhdance.png',
       info: {
         locationAndTime: [
           "Venue: Sambram Auditorium",
@@ -233,7 +233,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cryptix",
       secondaryName: "Coding",
-      icon: Code2, // coding/hack vibe
+      img: '/event_logos/coding.png',
       info: {
         locationAndTime: [
           "Venue- MCA Lab 03-Rajaram block 2nd floor ",
@@ -256,7 +256,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "design riot",
       secondaryName: "WEB DESIGN",
-      icon: Layout, // design/web layout symbol
+      img:'/event_logos/dr.png',
       info: {
         locationAndTime: [
           "Venue -MCA Lab 01 - Rajaram block 2nd floor",
@@ -278,7 +278,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "hyper launch",
       secondaryName: "start up",
-      icon: Rocket, // startup/launch
+      img: '/event_logos/hl.png',
       info: {
         locationAndTime: [
           "Venue -Nandini Hall",
@@ -299,7 +299,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "techno hive",
       secondaryName: "TECH TALK",
-      icon: Mic, // talks/presentations
+      img: '/event_logos/th.png',
       info: {
         locationAndTime: [
           "Venue -Shambhavi Hall",
@@ -322,7 +322,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cyber scope",
       secondaryName: "Photography",
-      icon: Camera, // photography
+      img: '/event_logos/cyberscope.png',
       info: {
         locationAndTime: [
           "Venue - sowparnika Hall",
@@ -343,7 +343,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "cyborg recruit",
       secondaryName: "IT Manager",
-      icon: BriefcaseBusiness, // management / IT manager
+      img: '/event_logos/cr.png',
       info: {
         locationAndTime: [
           "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
@@ -367,7 +367,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "rampage horizon",
       secondaryName: "Valorant ",
-      icon: Gamepad2, // gaming
+      img: '/event_logos/rh.png',
       info: {
         locationAndTime: [
           "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
@@ -388,7 +388,7 @@ const SemaphoreContextProvider = ({ children }) => {
     {
       eventName: "neon nexus",
       secondaryName: "IT Quiz",
-      icon: CircleHelp, // quiz/trivia vibe
+      img: '/event_logos/nn.png',
       info: {
         locationAndTime: [
           "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { SemaphoreContext } from "../context/SemaphoreContext";
 import Heading from "../components/Heading/Heading";
 import Card from "../components/Card";
-
+import ImgCard from "../components/ImgCard";
 function Events() {
   const { titles, eventData } = useContext(SemaphoreContext);
   const [filter, setFilter] = useState("all");
@@ -90,10 +90,9 @@ function Events() {
       {/* Events Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredEvents.map((event, index) => (
-          <Card
+          <ImgCard
             key={index}
-            icon={event.icon}
-            name={event.eventName}
+            img={event.img}
             route={`/Events/${event.eventName}`}
           />
         ))}
