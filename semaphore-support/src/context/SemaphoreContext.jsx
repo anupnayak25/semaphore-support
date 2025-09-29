@@ -420,7 +420,7 @@ const SemaphoreContextProvider = ({ children }) => {
       name: "DR. ANANTHA MURTHY",
       designation: "SEMAPHORE CONVENOR ",
       event: "Event",
-      photo: "public/core/ananth_sir.png",
+      photo: "/core/ananth_sir.png",
       contact: "82774 63806"
 
     },
@@ -429,7 +429,7 @@ const SemaphoreContextProvider = ({ children }) => {
       name: "K KIRAN",
       designation: "PRESIDENT ",
       event: "Event",
-      photo: "public/core/kiran.png",
+      photo: "/core/kiran.png",
       contact: "82774 63806"
 
     },
@@ -438,7 +438,7 @@ const SemaphoreContextProvider = ({ children }) => {
       name: "RAKSHITHA",
       designation: "SECRETARY",
       event: "Event",
-      photo: "public/core/rakshitha.png",
+      photo: "/core/rakshitha.png",
       contact: "79759 67009"
     },
 
@@ -447,7 +447,7 @@ const SemaphoreContextProvider = ({ children }) => {
       name: "ANUP NAYAK",
       designation: "TECHNICAL COORDINATOR",
       event: "Event",
-      photo: "public/core/anup.png",
+      photo: "/core/anup.png",
       contact: "94802 20586"
     },
 
