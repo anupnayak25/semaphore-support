@@ -35,7 +35,7 @@ const SemaphoreContextProvider = ({ children }) => {
       },
       timingsPage: {
         heading: "Semaphore Schedule",
-        subHeading: "...."
+        subHeading: "Plan your participation across multiple events"
       },
       locationPage: {
         heading: "Places and Locations",
@@ -417,28 +417,37 @@ const SemaphoreContextProvider = ({ children }) => {
   const headsData = [
     {
       id: 1,
-      name: "K KIRAN",
-      designation: "PRESIDENT ",
+      name: "DR. ANANTHA MURTHY",
+      designation: "SEMAPHORE CONVENOR ",
       event: "Event",
-      photo: "/",
+      photo: "public/core/ananth_sir.png",
       contact: "82774 63806"
 
     },
     {
       id: 2,
+      name: "K KIRAN",
+      designation: "PRESIDENT ",
+      event: "Event",
+      photo: "public/core/kiran.png",
+      contact: "82774 63806"
+
+    },
+    {
+      id: 3,
       name: "RAKSHITHA",
       designation: "SECRETARY",
       event: "Event",
-      photo: "/",
+      photo: "public/core/rakshitha.png",
       contact: "79759 67009"
     },
 
     {
-      id: 3,
+      id: 4,
       name: "ANUP NAYAK",
       designation: "TECHNICAL COORDINATOR",
       event: "Event",
-      photo: "/",
+      photo: "public/core/anup.png",
       contact: "94802 20586"
     },
 
@@ -446,51 +455,152 @@ const SemaphoreContextProvider = ({ children }) => {
   ];
 
 
-  const scheduleData = {
-    day1: {
-      registration: "8:00 AM",
-      inauguration: "9:00 AM (Sambram Auditorium)",
-      timeSlots: [
-        "11:00 AM TO 12:00 PM",
-        "12:00 PM TO 01:00 PM",
-        "01:00 TO 02:00",
-        "02:00 PM TO 03:00 PM",
-        "03:00 PM TO 04:00 PM",
-      ],
-      events: [
-        { name: "CYBORG RECRUIT", venue: "(MCA SEMINAR HALL)" },
-        { name: "CYBER SCOPE", venue: "(SOWPARNIKA HALL)" },
-        { name: "RHYTHM HACK", venue: "(SAMBRAM AUDITORIUM)" },
-        { name: "NEON NEXUS", venue: "(SMV 12 & 36)" },
-        { name: "SPECTRA FLUX", venue: "(LH 402)" },
-        { name: "CRYPTIX", venue: "(MCA LAB 03)" },
-        { name: "DESIGN RIOT", venue: "(MCA LAB 01)" },
-        { name: "HYPER LAUNCH", venue: "(NANDINI HALL)" },
-        { name: "TECHNO HIVE", venue: "(SHAMBHAVI HALL)" },
-        { name: "RAMPAGE HORIZON", venue: "(LAB 02 & LAB 04)" },
-      ],
-    },
-    day2: {
-      registration: "8:00 AM",
-      sessionsStart: "9:00 AM",
-      timeSlots: [
-        "09:00 AM TO 01:00 PM",
-        "01:00 PM TO 02:00 PM",
-        "02:00 PM TO 03:00 PM",
-      ],
-      events: [
-        { name: "CYBORG RECRUIT", venue: "(MCA SEMINAR HALL)" },
-        { name: "CYBER SCOPE", venue: "(SOWPARNIKA HALL)" },
-        { name: "NEON NEXUS", venue: "(SMV NC 12 & NC 36)" },
-        { name: "SPECTRA FLUX", venue: "(LH 402)" },
-        { name: "CRYPTIX", venue: "(MCA LAB 03)" },
-        { name: "DESIGN RIOT", venue: "(MCA LAB 01)" },
-        { name: "HYPER LAUNCH", venue: "(NANDINI HALL)" },
-        { name: "TECHNO HIVE", venue: "(SHAMBHAVI HALL)" },
-        { name: "RAMPAGE HORIZON", venue: "(LAB 02 & LAB 04)" },
-      ],
-    },
+  const contextData = {
+    schedule: {
+      day1: {
+        registration: "8:00 AM",
+        inauguration: "9:00 AM (SAMBRAM AUDITORIUM)",
+        timeSlots: [
+          "11:00 AM TO 12:00 PM",
+          "12:00 PM TO 01:00 PM",
+          "01:00 TO 02:00",
+          "02:00 PM TO 03:00 PM",
+          "03:00 PM TO 04:00 PM"
+        ],
+        events: [
+          {
+            name: "CYBORG RECRUIT",
+            venue: "(MCA SEMINAR HALL)",
+            timeSlots: [0, 1, 3, 4], // spans first two slots and last two slots
+            colSpan: [2, 2, 2, 2]
+          },
+          {
+            name: "CYBER SCOPE",
+            venue: "(SOWPARNIKA HALL)",
+            timeSlots: [0, 1, 3, 4],
+            colSpan: [2, 2, 2, 2]
+          },
+          {
+            name: "RHYTHM HACK",
+            venue: "(SAMBRAM AUDITORIUM)",
+            timeSlots: [0, 1],
+            colSpan: [2, 2]
+          },
+          {
+            name: "NEON NEXUS",
+            venue: "(SMV 12 & 36)",
+            timeSlots: [3, 4],
+            colSpan: [2, 2]
+          },
+          {
+            name: "SPECTRA FLUX",
+            venue: "(LH 402)",
+            timeSlots: [3, 4],
+            colSpan: [2, 2]
+          },
+          {
+            name: "CRYPTIX",
+            venue: "(MCA LAB 03)",
+            timeSlots: [3, 4],
+            colSpan: [2, 2]
+          },
+          {
+            name: "DESIGN RIOT",
+            venue: "(MCA LAB 01)",
+            timeSlots: [3, 4],
+            colSpan: [2, 2]
+          },
+          {
+            name: "HYPER LAUNCH",
+            venue: "(NANDINI HALL)",
+            timeSlots: [3, 4],
+            colSpan: [2, 2]
+          },
+          {
+            name: "TECHNO HIVE",
+            venue: "(SHAMBHAVI HALL)",
+            timeSlots: [3, 4],
+            colSpan: [2, 2]
+          },
+          {
+            name: "RAMPAGE HORIZON",
+            venue: "(LAB 02 & LAB 04)",
+            timeSlots: [3, 4],
+            colSpan: [2, 2]
+          }
+        ],
+        lunchBreak: ["L", "U", "N", "C", "H"]
+      },
+      day2: {
+        registration: "8:00 AM",
+        sessionsStart: "9:00 AM",
+        timeSlots: [
+          "09:00 AM TO 01:00 PM",
+          "01:00 PM TO 02:00 PM",
+          "02:00 PM TO 03:00 PM"
+        ],
+        events: [
+          {
+            name: "CYBORG RECRUIT",
+            venue: "(MCA SEMINAR HALL)",
+            timeSlots: [0, 2],
+            colSpan: [1, 1]
+          },
+          {
+            name: "CYBER SCOPE",
+            venue: "(SOWPARNIKA HALL)",
+            timeSlots: [0],
+            colSpan: [1]
+          },
+          {
+            name: "NEON NEXUS",
+            venue: "(SMV NC 12 & NC 36)",
+            timeSlots: [0],
+            colSpan: [1]
+          },
+          {
+            name: "SPECTRA FLUX",
+            venue: "(LH 402)",
+            timeSlots: [0],
+            colSpan: [1]
+          },
+          {
+            name: "CRYPTIX",
+            venue: "(MCA LAB 03)",
+            timeSlots: [0],
+            colSpan: [1]
+          },
+          {
+            name: "DESIGN RIOT",
+            venue: "(MCA LAB 01)",
+            timeSlots: [0],
+            colSpan: [1]
+          },
+          {
+            name: "HYPER LAUNCH",
+            venue: "(NANDINI HALL)",
+            timeSlots: [0],
+            colSpan: [1]
+          },
+          {
+            name: "TECHNO HIVE",
+            venue: "(SHAMBHAVI HALL)",
+            timeSlots: [0],
+            colSpan: [1]
+          },
+          {
+            name: "RAMPAGE HORIZON",
+            venue: "(LAB 02 & LAB 04)",
+            timeSlots: [0],
+            colSpan: [1]
+          }
+        ],
+        lunchBreak: ["L", "U", "N", "C", "H"],
+        valedictory: ["VALEDICTORY FROM 03:00 PM (SAMBRAM AUDITORIUM)"]
+      }
+    }
   };
+
 
 
   const locationData = [
@@ -554,7 +664,7 @@ const SemaphoreContextProvider = ({ children }) => {
         navItems,
         faqData,
         eventData,
-        scheduleData,
+        contextData,
         headsData,
         locationData,
         generalRules,
