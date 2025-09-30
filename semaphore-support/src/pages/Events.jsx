@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import { SemaphoreContext } from "../context/SemaphoreContext";
 import Heading from "../components/Heading/Heading";
-import Card from "../components/Card";
 import ImgCard from "../components/ImgCard";
+import { Link } from "react-router-dom";
+
+
 function Events() {
   const { titles, eventData } = useContext(SemaphoreContext);
   const [filter, setFilter] = useState("all");
@@ -22,8 +24,8 @@ function Events() {
     filter === "all"
       ? eventData
       : eventData.filter((event) =>
-          event.eventName.includes(filter.split(" (")[0])
-        );
+        event.eventName.includes(filter.split(" (")[0])
+      );
 
   const handleFilterChange = (selectedFilter) => {
     setFilter(selectedFilter);
@@ -31,71 +33,107 @@ function Events() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
-      <Heading
-        heading={titles.pages.eventPage.heading}
-        subheading={titles.pages.eventPage.subHeading}
-        previousRoute="/"
-      />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <div className="container mx-auto px-4 py-12 space-y-10">
+        <Heading
+          heading={titles.pages.eventPage.heading}
+          subheading={titles.pages.eventPage.subHeading}
+          previousRoute="/"
+        />
 
-      {/* Filter Dropdown */}
-      <div className="mb-8 flex justify-start">
-        <div className="relative">
-          <button
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 flex items-center space-x-2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent min-w-58"
-          >
-            <span>{filter === "all" ? "All Events" : filter}</span>
-            <svg
-              className={`w-4 h-4 transition-transform ${
-                isDropdownOpen ? "rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+        {/* Filter Section with Card */}
+        <div className="flex  md:justify-start">
+          <div className="relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="bg-white border-2 border-gray-200 rounded-xl px-6 py-3 text-gray-800 font-medium flex items-center space-x-3 hover:border-gray-300 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all duration-200 min-w-64 shadow-sm"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </button>
 
-          {isDropdownOpen && (
-            <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10 min-w-full">
-              <div className="py-1">
-                <button
-                  onClick={() => handleFilterChange("all")}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  All Events
-                </button>
-                {uniqueEventNames.map((eventName, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleFilterChange(eventName)}
-                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  >
-                    {eventName}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+              <span className="flex-1 text-left">{filter === "all" ? "All Events" : filter}</span>
+              <svg
+                className={`w-5 h-5 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+
+            {isDropdownOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setIsDropdownOpen(false)}
+                ></div>
+                <div className="absolute top-full left-0 mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl z-20 min-w-full overflow-hidden">
+                  <div className="py-2 max-h-80 overflow-y-auto">
+                    <button
+                      onClick={() => handleFilterChange("all")}
+                      className={`block w-full text-left px-6 py-3 text-gray-800 font-medium hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-150 ${filter === "all" ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700" : ""
+                        }`}
+                    >
+                      All Events
+                    </button>
+                    {uniqueEventNames.map((eventName, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleFilterChange(eventName)}
+                        className={`block w-full text-left px-6 py-3 text-gray-800 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-150 ${filter === eventName ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-medium" : ""
+                          }`}
+                      >
+                        {eventName}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Events Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredEvents.map((event, index) => (
-          <ImgCard
-            key={index}
-            img={event.img}
-            route={`/Events/${event.eventName}`}
-          />
-        ))}
+
+
+        {/* Events Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {filteredEvents.map((event, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center group"
+            >
+              <div className="transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 w-full">
+                <ImgCard
+                  img={event.img}
+                  route={`/Events/${event.eventName}`}
+                />
+              </div>
+              <Link to={`/Events/${event.eventName}`}>
+                <h2 className="mt-4 text-center text-gray-800 font-semibold text-base group-hover:text-blue-600 transition-colors duration-200 px-2">
+                  {event.secondaryName}
+                </h2>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+
+        {/* Empty State */}
+        {filteredEvents.length === 0 && (
+          <div className="text-center py-16">
+            <div className="bg-gray-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
+              <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">No events found</h3>
+            <p className="text-gray-600">Try adjusting your filter to see more events</p>
+          </div>
+        )}
       </div>
     </div>
   );
