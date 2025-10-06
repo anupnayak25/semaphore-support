@@ -52,43 +52,43 @@ const SemaphoreContextProvider = ({ children }) => {
   const faqData = [
     {
       question: "Where is Cyborg Recruit taking place?",
-      answer: "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
+      answer: "Venue - MCA Seminar Hall- Ramanujan block 4th floor & SAMBRAM AUDITORIUM",
     },
     {
       question: "At what time is Cyborg Recruit on Day 1?",
-      answer: "Day 1: 11:00 AM  12:00 PM & 02:00 PM  03:00 PM  ",
+      answer: "Day 1: 11:00 AM  12:00 PM & 02:00 PM  04:00 PM  ",
     },
     {
       question: "At what time is Cyborg Recruit on Day 2?",
-      answer: "Day 2: 09:00 AM  01:00 PM & 02:00 PM  03:00 PM ",
+      answer: "Day 2: 09:00 AM  12:30 PM & 02:00 PM  03:30 PM ",
     },
     {
       question: "Where is Cyber Scope happening?",
-      answer: "Venue - sowparnika Hall ",
+      answer: "Venue - sowparnika Hall",
     },
     {
       question: "At what time is Cyber Scope on Day 1?",
-      answer: "Day 1: 11:00 AM  12:00 PM & 03:00 PM  04:00 PM (Sowparnika Hall)",
+      answer: "Day 1: 11:00 AM  1:00 PM & 02:00 PM  04:00 PM",
     },
     {
       question: "When does Cyber Scope happen on Day 2?",
-      answer: "Day 2: 09:00 AM  01:00 PM (Sowparnika Hall)",
+      answer: "Day 2: 09:00 AM  01:00 PM",
     },
     {
       question: "Where is Rhythm Hack being conducted?",
       answer: "Venue : Sambram Auditorium",
     },
     {
-      question: "At what time is Rhythm Hack?",
-      answer: "Day 1: 11:00 AM  12:00 PM (Sambram Auditorium)",
+      question: "At what time is Rhythm Hack? (Day - 1)",
+      answer: "Day 1: 11:00 AM  1:00 PM (Sambram Auditorium)",
     },
     {
       question: "Where is Neon Nexus scheduled?",
-      answer: "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor ",
+      answer: "Venue-SMV NC 12  1 st floor & NC 36 3rd floor ",
     },
     {
       question: "At what time is Neon Nexus on Day 1?",
-      answer: "Day 1: 02:00 PM  03:00 PM ",
+      answer: "Day 1: 02:00 PM  04:00 PM ",
     },
     {
       question: "At what time is Neon Nexus on Day 2?",
@@ -100,7 +100,7 @@ const SemaphoreContextProvider = ({ children }) => {
     },
     {
       question: "When is Spectra Flux on Day 1?",
-      answer: "Day 1: 02:00 PM  03:00 PM (LH 402-Ramanujan Block 4th floor )",
+      answer: "Day 1: 02:00 PM  04:00 PM (LH 402-Ramanujan Block 4th floor)",
     },
     {
       question: "When is Spectra Flux on Day 2?",
@@ -111,12 +111,12 @@ const SemaphoreContextProvider = ({ children }) => {
       answer: "Venue - MCA Lab 03-Rajaram block 2nd floor ",
     },
     {
-      question: "Which MCA Lab is assigned for Cryptix?",
-      answer: "Day 1: 02:00 PM  03:00 PM ",
+      question: "What time is Cryptix on Day 1?",
+      answer: "Day 1: 02:30 PM  03:30 PM ",
     },
     {
-      question: "At what time is Cryptix scheduled?",
-      answer: "Day 2: 09:00 AM  01:00 PM ",
+      question: "What time is Cryptix on Day 2?",
+      answer: "Day 2: 09:30 AM  01:00 PM ",
     },
     {
       question: "Where is Design Riot conducted?",
@@ -124,7 +124,7 @@ const SemaphoreContextProvider = ({ children }) => {
     },
     {
       question: "What time is Design Riot on Day 1?",
-      answer: "Day 1: 02:00 PM  03:00 PM",
+      answer: "Day 1: 02:00 PM  04:30 PM",
     },
     {
       question: "What time is Design Riot on Day 2?",
@@ -132,23 +132,28 @@ const SemaphoreContextProvider = ({ children }) => {
     },
     {
       question: "Where is Hyper Launch taking place?",
-      answer: "Venue -Nandini Hall",
+      answer: "Venue -Nandini Seminar Hall",
     },
     {
-      question: "At what time is Hyper Launch happening?",
-      answer: "Day 1: 02:00 PM  03:00 PM ",
+      question: "At what time is Hyper Launch happening? (Day - 1)",
+      answer: "Day 1: 01:30 PM  04:30 PM ",
     },
     {
-      question: "At what time is Hyper Launch happening?",
-      answer: "Day 2: 09:00 AM  01:00 PM & again 02:00 PM  03:00 PM",
+      question: "At what time is Hyper Launch happening? (Day - 2)",
+      answer: "Day 2: 09:00 AM  01:00 PM ",
     },
     {
       question: "Where is Techno Hive happening?",
-      answer: "Day 1: 02:00 PM  03:00 PM ",
+      answer: "Shambhavi hall ",
     },
     {
-      question: "At what time is Techno Hive scheduled?",
-      answer: "Day 2: 09:00 AM  01:00 PM",
+      question: "At what time is Techno Hive scheduled? (Day - 1)",
+      answer: "Day 2: 02:00 AM  04:00 PM",
+    },
+    {
+      question: "At what time is Techno Hive scheduled? (Day - 2)",
+      answer: "Day 2: 10:00 AM  01:00 PM",
+    
     },
     {
       question: "Where is Rampage Horizon scheduled?",
@@ -156,7 +161,7 @@ const SemaphoreContextProvider = ({ children }) => {
     },
     {
       question: "At what time is Rampage Horizon happening?",
-      answer: "Day 1: 02:00 PM  03:00 PM (Lab 02 & Lab 04)",
+      answer: "Day 1: 02:00 PM  04:30 PM (Lab 02 & Lab 04)",
     },
     {
       question: "Where is the inauguration ceremony happening?",
@@ -188,14 +193,14 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue -LH 402-Ramanujan Block 4th floor ",
-          "Day 1: 02:00 PM – 03:00 PM",
+          "Day 1: 01:30 PM – 04:30 PM",
           "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
           "No of participants = 2 , No of rounds = 3",
-          "Mystery unveiled on the spot (Suprise bonus alert)",
-          "Brain over Battery (no Electronic Gadgets)",
-          "Time based challenges will be used",
+         "On-the-spot mystery challenges with surprise bonuses will be conducted.",
+"No electronic gadgets permitted – tasks will be time-bound and test participants’ problem-solving skills.",
+"Fair play is mandatory – judges’ decisions are final and binding.",
           "Judges’ decisions are final, no discussions. Fair play only",
         ],
         heads: [
@@ -211,18 +216,16 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue: Sambram Auditorium",
-          "Day 1: 11:00 AM – 12:00 PM",
+          "Day 1: 11:00 AM – 1:00 PM",
         ],
         rules: [
-          "The team must have a minimum of 4 members and a maximum of 8 members.",
-          "The time limit is 4+1. Timing starts as soon as the team enters the stage.",
-          "Music will be stopped after the time limit. Marks will be deducted for exceeding the time limit.",
-          "Any dance style is allowed, including Eastern, Western, or Fusion.",
-          "Performances must not contain any vulgarity, offensive gestures, or content targeting any community or religion.",
-          "No extra preparation time will be given on stage.",
-          "Props are allowed but must be safe and manageable by the team. Participants are responsible for bringing and handling their own props.",
-          "Teams must submit their audio track in MP3 format 2 days before the event.",
-          "The decision of the judges will be final.",
+       "Timing begins once the team enters the stage no extra preparation time will be given.",
+"Any dance style (Eastern, Western, or Fusion) is allowed.",
+"Performances must avoid vulgarity, offensive gestures, or content against any community or religion.",
+"Props are permitted but must be safe and managed by the team.",
+"Audio tracks (MP3) must be submitted 2 days prior to the event.",
+"Judges’ decisions are final and binding."
+
         ],
         heads: [
           "Shrajan G Shetty - Contact No. 8105643829",
@@ -237,15 +240,15 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue- MCA Lab 03-Rajaram block 2nd floor ",
-          "Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM",
+          "Day 1: 02:30 PM – 04:00 PM ",
+          "Day 2: 09:30 AM – 01:00 PM",
         ],
         rules: [
           "3 Rounds , 2 Members per Team",
-          " Basic knowledge of C/C++, Java, Python, and JavaScript is required (questions can be from any of these).",
-          "Good understanding of Computer Science fundamentals is required.",
-          "Experience in Data Structures & Algorithms and basic competitive coding is necessary.",
-          "Rules for each round will be explained on the spot.",
+          "Basic knowledge of C/C++ & Java is required",
+"Good understanding of Computer Science fundamentals is required",
+"Experience in Data Structures & Algorithms and basic competitive coding is necessary",
+"Rules for each round will be explained on the spot"
         ],
         heads: [
           "Prajwal - Contact No. 8296697351",
@@ -260,14 +263,14 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue -MCA Lab 01 - Rajaram block 2nd floor",
-          "Day 1: 02:00 PM – 03:00 PM",
+          "Day 1: 02:00 PM – 04:00 PM",
           "Day 2: 09:00 AM – 01:00 PM ",
         ],
         rules: [
           "No of participants = 2 , No of rounds = 3",
-          "Participants must have knowledge in HTML, CSS, and JavaScript.",
-          "The rounds and design tasks will be provided on the spot.",
-          "Electronic gadgets are not allowed.",
+         "Participants must have knowledge in HTML, CSS, and JavaScript.",
+"The rounds and design tasks will be provided on the spot.",
+"Electronic gadgets are not allowed."
         ],
         heads: [
           "Maneesh Kumar - Contact No. 8792489207",
@@ -287,8 +290,10 @@ const SemaphoreContextProvider = ({ children }) => {
         ],
         rules: [
           "The event will have 2 rounds, with teams of 2 participants each.",
-          "Participants must bring their own laptops to create and pitch their ideas.",
-          "For the 1st round, each team will prepare and present their startup idea using a single slide.",
+         "Participants must bring their own laptops.",
+"The details of each round will be disclosed on the spot.",
+"The judges’ decision will be final."
+
         ],
         heads: [
           "Vidyashree - Contact No. 7204471565",
@@ -303,15 +308,15 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue -Shambhavi Hall",
-          "Day 1: 02:00 PM – 03:00 PM",
-          "Day 2: 09:00 AM – 01:00 PM",
+          "Day 1: 02:00 PM – 04:00 PM",
+          "Day 2: 10:00 AM – 01:00 PM",
         ],
         rules: [
           "Number of participants: 1 , Number of rounds: 2",
-          "The topic for each round will be disclosed a few minutes before the round begins.",
-          "Judges’ decisions are final and binding. No objections or disputes will be entertained.",
-          "Participants must always maintain a respectful and professional demeanour.",
-          "Use of offensive language, inappropriate content, cheating, or disrespectful behaviour will result in immediate disqualification.",
+        "Topics will be announced shortly before each round begins.",
+"Judges’ decisions are final and not open to dispute.",
+"Participants must remain respectful and professional at all times.",
+"Any cheating, offensive language, or inappropriate behavior will lead to disqualification."
         ],
         heads: [
           "T Namratha Padiyar - Contact No. 7349652173",
@@ -326,13 +331,15 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue - sowparnika Hall",
-          "Day 1: 11:00 AM – 12:00 PM & 03:00 PM – 04:00 PM",
+          "Day 1: 11:00 AM – 1:00 PM & 02:00 PM – 04:00 PM",
           "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
-          "Per team 1 participant.",
-          "Participant should have photography and videography knowledge.",
-          "DSLR can be used.",
+          "Per team 1 participant &  Number of Rounds : 3",
+          "Participant should have photography and videography knowledge DSLR can be used.",
+"Photos/videos must be taken strictly within the campus.",
+"Drones are not allowed.",
+"Participants must bring their own cameras, laptops and pen drives."
         ],
         heads: [
           "Saketh - Contact No. 9353470536",
@@ -346,17 +353,17 @@ const SemaphoreContextProvider = ({ children }) => {
       img: '/event_logos/cr.png',
       info: {
         locationAndTime: [
-          "Venue - MCA Seminar Hall- Ramanujan block 4th floor ",
-          "Day 1: 11:00 AM – 12:00 PM & 02:00 PM – 03:00 PM",
-          " Day 2: 09:00 AM – 01:00 PM & 02:00 PM – 03:00 PM",
+          "Venue - MCA Seminar Hall- Ramanujan block 4th floor & SAMBRAM AUDITORIUM ",
+          "Day 1: 11:00 AM – 12:00 PM & 02:00 PM – 04:00 PM",
+          " Day 2: 09:00 AM – 12:30 PM & 02:00 PM – 03:30 PM",
         ],
         rules: [
-          "Per team 1 participant.",
-          "Participants must report on time for all rounds with their own laptops.",
-          "Judges’ decisions are final and cannot be challenged.",
-          "No communication or teamwork is allowed during rounds.",
-          "Cheating or unfair means will lead to disqualification.",
-          "Participants are not allowed to join any other event.",
+          "Per team 1 participant & Number of Rounds : 3 ",
+         "Participants must report on time for all rounds with their own laptops.",
+"Judges’ decisions are final and cannot be challenged.",
+"No communication or teamwork is allowed during rounds.",
+"Cheating or unfair means will lead to disqualification.",
+"Participants are not allowed to join any other event."
         ],
         heads: [
           "A Samved Rao - Contact No. 7204551543",
@@ -371,13 +378,15 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue -MCA Lab 02 & Lab 04 - Rajaram block 2 nd floor",
-          "Day 1: 02:00 PM – 03:00 PM (Lab 02 & Lab 04)",
+          "Day 1: 02:00 PM – 04:30 PM (Lab 02 & Lab 04)",
+          "Day 2: 09:00 PM – 01:00 PM (Lab 02 & Lab 04)",
         ],
         rules: [
           "4 make a team",
-          "Participants should bring their laptops and other necessary equipment.",
-          "Any use of hacking will result to disqualification.",
-          "Participants should bring their own ethernet adapter if their laptop doesn’t have ethernet port",
+         "Game: Valorant",
+"Participants need to bring their laptops & other necessary equipment.",
+"Any form of hacking, cheating, or using unauthorized third-party tools will lead to immediate disqualification.",
+"Organizers will provide network access, but backup internet (mobile hotspot, etc.) is recommended."
         ],
         heads: [
           "Shujan - Contact No. 6360491384",
@@ -392,15 +401,15 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue-SMV  NC 12  1 st floor & NC 36 3rd floor",
-          " Day 1: 02:00 PM – 03:00 PM ",
+          " Day 1: 02:00 PM – 04:00 PM ",
           "Day 2: 09:00 AM – 01:00 PM",
         ],
         rules: [
-          "Number of participants = 2 ,Number of rounds = 4",
-          "Questions will be based on general knowledge, technical, and programming topics.",
-          "No electronic gadgets are allowed.",
-          "The quiz master's decision is final.",
-          "Use of unfair means will lead to disqualification.",
+          "Number of participants = 2 ,Number of rounds = 3",
+         "Questions will be based on general knowledge, technical, and programming topics.",
+"No electronic gadgets are allowed.",
+"The quiz master's decision is final.",
+"Use of unfair means will lead to disqualification."
         ],
         heads: [
           "Yuneeth K - Contact No. 9741125023",
