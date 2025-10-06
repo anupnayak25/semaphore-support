@@ -613,6 +613,8 @@ const SemaphoreContextProvider = ({ children }) => {
 
 
   const locationData = [
+  
+
     {
       venue: "NMAMIT",
       location: "Nitte, SH1, Karkala, Karnataka 574110",
@@ -623,10 +625,40 @@ const SemaphoreContextProvider = ({ children }) => {
       location: "5WMM+2CC NMAMIT, Nitte, Kalya, Karnataka 574110",
       locationLink: "https://maps.app.goo.gl/hRM8cCqE9k74bPdo9",
     },
+        {
+      venue: "Rajaram Block (2nd floor Lab 1-4)",
+      location: "Rajaram Block, 2nd Floor, Labs 1-4, NMAMIT, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/D42nDNvccfiKiMAH6",
+    },
+    {
+      venue: "MCA Seminar Hall (4th floor)",
+      location: "MCA Seminar Hall, 4th Floor, Ramanujan Block, NMAMIT, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/hFy42rDjDZDVHJqT8",
+    },
     {
       venue: "Sambhram Hall",
       location: "5WMM+7M4, SH1, Kalya, Karnataka 574110",
       locationLink: "https://maps.app.goo.gl/UjwFAjqsFrvBHXpPA",
+    },
+      {
+      venue: "Boy Main Hostel",
+      location: "Boys Main Hostel, NMAMIT, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/vLD4pa9eMDnzTYu19",
+    },
+    {
+      venue: "Shambhavi Hall",
+      location: "Shambhavi Hall, NMAMIT, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/njtVDc6FDEdtsfMt6",
+    },
+    {
+      venue: "Sowparnika Hall",
+      location: "Sowparnika Hall, NMAMIT, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/QSAr5cBbBgG4yZ3w7",
+    },
+     {
+      venue: "Atal Block",
+      location: "Atal Block, NMAMIT, Nitte, Karnataka 574110",
+      locationLink: "https://maps.app.goo.gl/Qjor3s12sPd1PiB98",
     },
     {
       venue: "B C Alva Memorial Indoor Stadium",
