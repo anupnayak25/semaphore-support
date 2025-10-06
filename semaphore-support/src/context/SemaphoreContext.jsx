@@ -148,7 +148,7 @@ const SemaphoreContextProvider = ({ children }) => {
     },
     {
       question: "At what time is Techno Hive scheduled? (Day - 1)",
-      answer: "Day 2: 02:00 AM  04:00 PM",
+      answer: "Day 1: 02:00 AM  04:00 PM",
     },
     {
       question: "At what time is Techno Hive scheduled? (Day - 2)",
@@ -285,8 +285,8 @@ const SemaphoreContextProvider = ({ children }) => {
       info: {
         locationAndTime: [
           "Venue -Nandini Hall",
-          "Day 1: 02:00 PM – 03:00 PM ",
-          "Day 2: 09:00 AM – 01:00 PM & again 02:00 PM – 03:00 PM",
+          "Day 1: 02:00 PM – 04:00 PM ",
+          "Day 2: 09:00 AM – 01:00 PM ",
         ],
         rules: [
           "The event will have 2 rounds, with teams of 2 participants each.",
@@ -382,7 +382,7 @@ const SemaphoreContextProvider = ({ children }) => {
           "Day 2: 09:00 PM – 01:00 PM (Lab 02 & Lab 04)",
         ],
         rules: [
-          "4 make a team",
+          "3 make a team",
          "Game: Valorant",
 "Participants need to bring their laptops & other necessary equipment.",
 "Any form of hacking, cheating, or using unauthorized third-party tools will lead to immediate disqualification.",
