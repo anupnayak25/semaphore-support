@@ -484,7 +484,7 @@ const SemaphoreContextProvider = ({ children }) => {
             colSpan: [2, 2, 2, 2]
           },
           {
-            name: "CYBER SCOPE",
+            name: "CYBER SCOPE(PHOTOGRAPHY)",
             venue: "(RESEARCH LAB 1)",
             timeSlots: [0, 1, 3, 4],
             colSpan: [2, 2, 2, 2]
