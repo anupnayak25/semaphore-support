@@ -25,7 +25,7 @@ const EventCell = ({ event, rowSpan, colSpan }) => (
     {
       <span className="text-sm text-gray-600">
         {console.log(event)}
-        {event?.timeSlots[1] == 2 ? "SEMINAR HALL" : event?.venue}
+        {event?.timeSlots[1] == 2 ? "(SEMINAR HALL)" : event?.venue}
       </span>
     }
   </td>
@@ -235,7 +235,19 @@ const EventScheduleContent = () => {
                   <tr>
                     <EventCell event={contextData.schedule.day2.events[0]} />
                     <td className="border border-gray-300 px-3 py-2"></td>
-                    <EventCell event={contextData.schedule.day2.events[0]} />
+                    <td
+                      rowSpan="1"
+                      colSpan="1"
+                      className="border border-gray-300 px-3 py-2 text-center font-semibold text-gray-800"
+                    >
+                      CYBORG RECRUIT(IT MANAGER)
+                      <br />
+                      {
+                        <span className="text-sm text-gray-600">
+                          (SAMBHRAM HALL)
+                        </span>
+                      }
+                    </td>
                   </tr>
                   <tr>
                     <EventCell event={contextData.schedule.day2.events[1]} />
