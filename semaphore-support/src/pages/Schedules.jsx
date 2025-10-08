@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import { SemaphoreContext } from '../context/SemaphoreContext';
-import Heading from '../components/Heading/Heading';
+import { SemaphoreContext } from "../context/SemaphoreContext";
+import Heading from "../components/Heading/Heading";
 
 // ✅ Reusable LunchCell
 const LunchCell = ({ text, rowSpan, colSpan }) => (
@@ -22,7 +22,12 @@ const EventCell = ({ event, rowSpan, colSpan }) => (
   >
     {event?.name}
     <br />
-    <span className="text-sm text-gray-600">{event?.venue}</span>
+    {
+      <span className="text-sm text-gray-600">
+        {console.log(event)}
+        {event?.timeSlots[1] == 2 ? "SEMINAR HALL" : event?.venue}
+      </span>
+    }
   </td>
 );
 
@@ -47,27 +52,42 @@ const EventScheduleContent = () => {
             onClick={() => setIsDayDropdownOpen(!isDayDropdownOpen)}
             className="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 flex justify-between items-center hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-accent"
           >
-            <span className="font-medium">{activeDay === 1 ? "Day 1" : "Day 2"}</span>
+            <span className="font-medium">
+              {activeDay === 1 ? "Day 1" : "Day 2"}
+            </span>
             <svg
-              className={`w-4 h-4 text-gray-600 transform transition-transform ${isDayDropdownOpen ? "rotate-180" : ""}`}
+              className={`w-4 h-4 text-gray-600 transform transition-transform ${
+                isDayDropdownOpen ? "rotate-180" : ""
+              }`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           </button>
 
           {isDayDropdownOpen && (
             <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
               <button
-                onClick={() => { setActiveDay(1); setIsDayDropdownOpen(false); }}
+                onClick={() => {
+                  setActiveDay(1);
+                  setIsDayDropdownOpen(false);
+                }}
                 className="w-full text-left px-4 py-2 hover:bg-gray-100"
               >
                 Day 1
               </button>
               <button
-                onClick={() => { setActiveDay(2); setIsDayDropdownOpen(false); }}
+                onClick={() => {
+                  setActiveDay(2);
+                  setIsDayDropdownOpen(false);
+                }}
                 className="w-full text-left px-4 py-2 hover:bg-gray-100"
               >
                 Day 2
@@ -82,55 +102,101 @@ const EventScheduleContent = () => {
           {activeDay === 1 && (
             <table className="w-full border-collapse border border-gray-300 text-sm md:text-base">
               <caption className="text-gray-500 text-left mb-2">
-                REGISTRATION – {contextData.schedule.day1.registration} | INAUGURATION – {contextData.schedule.day1.inauguration}
+                REGISTRATION – {contextData.schedule.day1.registration} |
+                INAUGURATION – {contextData.schedule.day1.inauguration}
               </caption>
               <thead className="bg-gray-50">
                 <tr>
-                  {contextData.schedule.day1.timeSlots.map((timeSlot, index) => (
-                    <th key={index} className="border border-gray-300 px-2 py-2 font-semibold">
-                      {timeSlot}
-                    </th>
-                  ))}
+                  {contextData.schedule.day1.timeSlots.map(
+                    (timeSlot, index) => (
+                      <th
+                        key={index}
+                        className="border border-gray-300 px-2 py-2 font-semibold"
+                      >
+                        {timeSlot}
+                      </th>
+                    )
+                  )}
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <EventCell event={contextData.schedule.day1.events[0]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[0]}
+                    colSpan={2}
+                  />
                   <td className="border border-gray-300 px-3 py-2"></td>
-                  <EventCell event={contextData.schedule.day1.events[0]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[0]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
-                  <EventCell event={contextData.schedule.day1.events[1]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[1]}
+                    colSpan={2}
+                  />
                   <LunchCell text={contextData.schedule.day1.lunchBreak[0]} />
-                  <EventCell event={contextData.schedule.day1.events[1]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[1]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
-                  <EventCell event={contextData.schedule.day1.events[2]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[2]}
+                    colSpan={2}
+                  />
                   <LunchCell text={contextData.schedule.day1.lunchBreak[1]} />
-                  <EventCell event={contextData.schedule.day1.events[3]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[3]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
-                  <td colSpan={2} rowSpan={8} className="border border-gray-300 px-3 py-2"></td>
+                  <td
+                    colSpan={2}
+                    rowSpan={8}
+                    className="border border-gray-300 px-3 py-2"
+                  ></td>
                   <LunchCell text={contextData.schedule.day1.lunchBreak[2]} />
-                  <EventCell event={contextData.schedule.day1.events[4]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[4]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
                   <LunchCell text={contextData.schedule.day1.lunchBreak[3]} />
-                  <EventCell event={contextData.schedule.day1.events[5]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[5]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
                   <LunchCell text={contextData.schedule.day1.lunchBreak[4]} />
-                  <EventCell event={contextData.schedule.day1.events[6]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[6]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
                   <td rowSpan={3}></td>
-                  <EventCell event={contextData.schedule.day1.events[7]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[7]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
-                  <EventCell event={contextData.schedule.day1.events[8]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[8]}
+                    colSpan={2}
+                  />
                 </tr>
                 <tr>
-                  <EventCell event={contextData.schedule.day1.events[9]} colSpan={2} />
+                  <EventCell
+                    event={contextData.schedule.day1.events[9]}
+                    colSpan={2}
+                  />
                 </tr>
               </tbody>
             </table>
@@ -141,21 +207,28 @@ const EventScheduleContent = () => {
             <>
               <table className="w-full border-collapse border border-gray-300 text-sm md:text-base">
                 <caption className="text-gray-500 text-left mb-2">
-                  BREAKFAST – {contextData.schedule.day2.registration} | SESSIONS STARTS – {contextData.schedule.day2.sessionsStart}
+                  BREAKFAST – {contextData.schedule.day2.registration} |
+                  SESSIONS STARTS – {contextData.schedule.day2.sessionsStart}
                 </caption>
                 <thead className="bg-gray-50">
                   <tr>
-                    {contextData.schedule.day2.timeSlots.map((timeSlot, index) => (
-                      <th key={index} className="border border-gray-300 px-2 py-2 font-semibold">
-                        {index === 1 ? (
-                          <>
-                            {timeSlot.split(' TO ')[0]} <br /> TO <br /> {timeSlot.split(' TO ')[1]}
-                          </>
-                        ) : (
-                          timeSlot
-                        )}
-                      </th>
-                    ))}
+                    {contextData.schedule.day2.timeSlots.map(
+                      (timeSlot, index) => (
+                        <th
+                          key={index}
+                          className="border border-gray-300 px-2 py-2 font-semibold"
+                        >
+                          {index === 1 ? (
+                            <>
+                              {timeSlot.split(" TO ")[0]} <br /> TO <br />{" "}
+                              {timeSlot.split(" TO ")[1]}
+                            </>
+                          ) : (
+                            timeSlot
+                          )}
+                        </th>
+                      )
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -167,7 +240,10 @@ const EventScheduleContent = () => {
                   <tr>
                     <EventCell event={contextData.schedule.day2.events[1]} />
                     <LunchCell text={contextData.schedule.day2.lunchBreak[0]} />
-                    <td rowSpan={8} className="border border-gray-300 px-3 py-2"></td>
+                    <td
+                      rowSpan={8}
+                      className="border border-gray-300 px-3 py-2"
+                    ></td>
                   </tr>
                   <tr>
                     <EventCell event={contextData.schedule.day2.events[2]} />

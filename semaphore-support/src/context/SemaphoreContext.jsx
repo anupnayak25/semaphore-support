@@ -563,7 +563,7 @@ const SemaphoreContextProvider = ({ children }) => {
           },
           {
             name: "NEON NEXUS(IT QUIZ)",
-            venue: "(SMV NC 12 & NC 36)",
+            venue: "(SAMBHRAM)",
             timeSlots: [0],
             colSpan: [1]
           },
@@ -587,13 +587,13 @@ const SemaphoreContextProvider = ({ children }) => {
           },
           {
             name: "HYPER LAUNCH(START UP)",
-            venue: "(NANDINI HALL)",
+            venue: "(SHAMBHAVI HALL)",
             timeSlots: [0],
             colSpan: [1]
           },
           {
             name: "TECHNO HIVE(TECH TALK)",
-            venue: "(SHAMBHAVI HALL)",
+            venue: "(SOWPARNIKA HALL)",
             timeSlots: [0],
             colSpan: [1]
           },
