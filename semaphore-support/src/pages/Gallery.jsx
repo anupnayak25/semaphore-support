@@ -19,7 +19,8 @@ const Gallery = () => {
   const [section, setSection] = useState('All');
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(0);
+  // use an explicit loadingMore flag to prevent concurrent loads
+  const [loadingMore, setLoadingMore] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
   const observerTarget = useRef(null);
@@ -83,38 +84,42 @@ const Gallery = () => {
 
   // Load more images when scrolling
   const loadMore = useCallback(() => {
-    const startIndex = page * ITEMS_PER_PAGE;
+    if (loadingMore) return; // guard against concurrent calls
+    setLoadingMore(true);
+
+    const startIndex = displayedImages.length; // offset-based
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const newImages = filtered.slice(startIndex, endIndex);
-    
+
     if (newImages.length > 0) {
       setDisplayedImages(prev => [...prev, ...newImages]);
-      setPage(prev => prev + 1);
       setHasMore(endIndex < filtered.length);
     } else {
       setHasMore(false);
     }
-  }, [page, filtered]);
+
+    // small timeout to coalesce multiple observer triggers
+    setTimeout(() => setLoadingMore(false), 0);
+  }, [displayedImages.length, filtered, loadingMore]);
 
   // Reset displayed images when filters change
   useEffect(() => {
     setDisplayedImages([]);
-    setPage(0);
     setHasMore(true);
   }, [day, year, section, images]);
 
   // Load initial images
   useEffect(() => {
-    if (displayedImages.length === 0 && filtered.length > 0) {
+    if (displayedImages.length === 0 && filtered.length > 0 && !loadingMore) {
       loadMore();
     }
-  }, [displayedImages.length, filtered.length, loadMore]);
+  }, [displayedImages.length, filtered.length, loadMore, loadingMore]);
 
   // Intersection Observer for infinite scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
+        if (entries[0].isIntersecting && hasMore && !loading && !loadingMore) {
           loadMore();
         }
       },
@@ -131,7 +136,7 @@ const Gallery = () => {
         observer.unobserve(currentTarget);
       }
     };
-  }, [hasMore, loading, loadMore]);
+  }, [hasMore, loading, loadingMore, loadMore]);
 
   const openLightbox = (img) => {
     setSelectedImage(img);
