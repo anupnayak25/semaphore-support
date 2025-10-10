@@ -4,14 +4,20 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDM6wBSaBzbw3Qyjq_ZzdVgDa6lYaFJqqQ",
-  authDomain: "semaphore-6ee8e.firebaseapp.com",
-  projectId: "semaphore-6ee8e",
-  storageBucket: "semaphore-6ee8e.firebasestorage.app",
-  messagingSenderId: "772827149593",
-  appId: "1:772827149593:web:cefdb8a8f59217b3610188",
-  measurementId: "G-CR4STRN6HG"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
+
+// Basic runtime check to help during local dev if env vars are missing
+if (!firebaseConfig.apiKey || !firebaseConfig.appId) {
+  // eslint-disable-next-line no-console
+  console.warn('[Firebase] Missing required VITE_FIREBASE_* env variables. Check your .env.local.');
+}
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

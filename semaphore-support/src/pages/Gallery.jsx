@@ -250,6 +250,9 @@ const Gallery = () => {
                       <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Day {img.day}</span>
                       {img.year && <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">{img.year}</span>}
                       <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Section {img.section}</span>
+                      {img.cloudName && (
+                        <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Cloud {img.cloudName}</span>
+                      )}
                     </div>
                     <div className="flex gap-2">
                       <button 
@@ -332,6 +335,9 @@ const Gallery = () => {
                 <span className="bg-black text-white px-4 py-2 rounded-full text-sm font-medium">Day: {selectedImage.day}</span>
                 {selectedImage.year && <span className="bg-black text-white px-4 py-2 rounded-full text-sm font-medium">Year: {selectedImage.year}</span>}
                 <span className="bg-black text-white px-4 py-2 rounded-full text-sm font-medium">Section: {selectedImage.section}</span>
+                {selectedImage.cloudName && (
+                  <span className="bg-black text-white px-4 py-2 rounded-full text-sm font-medium">Cloud: {selectedImage.cloudName}</span>
+                )}
               </div>
               <div className="flex flex-col md:flex-row gap-4">
                 <button 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { uploadToCloudinary } from '../utils/cloudinary';
+import { uploadToCloudinary, CLOUDINARY_CLOUD_1, CLOUDINARY_CLOUD_2 } from '../utils/cloudinary';
 import { db } from '../context/firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import toast from 'react-hot-toast';
@@ -8,6 +8,7 @@ import './Upload.css';
 
 const days = ['All', '1st', '2nd'];
 const years = ['All', '1st year', '2nd year'];
+const clouds = ['Auto', 'Cloud 1', 'Cloud 2'];
 const sections = ['All', 'a', 'b', 'c', 'mixed'];
 
 const Upload = () => {
@@ -16,6 +17,7 @@ const Upload = () => {
   const [day, setDay] = useState('All');
   const [year, setYear] = useState('All');
   const [section, setSection] = useState('All');
+  const [cloud, setCloud] = useState('Auto');
   const [uploading, setUploading] = useState(false);
 
   const handleFilesChange = (e) => {
@@ -46,7 +48,15 @@ const Upload = () => {
           toast.loading(`Uploading ${i + 1} of ${files.length}...`, { id: 'upload-progress' });
           
           const folder = import.meta.env.VITE_CLOUDINARY_FOLDER || 'semaphore-gallery';
-          const url = await uploadToCloudinary(file, folder);
+          // Decide which cloud to use
+          let targetCloud = CLOUDINARY_CLOUD_1;
+          if (cloud === 'Cloud 2') targetCloud = CLOUDINARY_CLOUD_2 || CLOUDINARY_CLOUD_1;
+          if (cloud === 'Auto') {
+            // Alternate clouds for distribution
+            targetCloud = (i % 2 === 0) ? (CLOUDINARY_CLOUD_1 || CLOUDINARY_CLOUD_2) : (CLOUDINARY_CLOUD_2 || CLOUDINARY_CLOUD_1);
+          }
+
+          const url = await uploadToCloudinary(file, folder, targetCloud);
           urls.push(url);
           
           await addDoc(collection(db, 'gallery'), {
@@ -55,6 +65,7 @@ const Upload = () => {
             day,
             year,
             section,
+            cloudName: targetCloud,
             uploadedBy: {
               name: user.displayName,
               email: user.email,
@@ -198,6 +209,18 @@ const Upload = () => {
                   >
                     {sections.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
+                </div>
+
+                <div className="flex flex-col gap-2 md:col-span-3">
+                  <label className="font-semibold text-black text-sm">Cloud:</label>
+                  <select 
+                    value={cloud} 
+                    onChange={e => setCloud(e.target.value)}
+                    className="px-3 py-2.5 border-2 border-black rounded-lg text-sm font-medium cursor-pointer transition-all bg-white hover:bg-gray-50 focus:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black/20"
+                  >
+                    {clouds.map(c => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                  <p className="text-xs text-gray-500">Auto: alternates between Cloud 1 ({CLOUDINARY_CLOUD_1}) and Cloud 2 ({CLOUDINARY_CLOUD_2}).</p>
                 </div>
               </div>
 
