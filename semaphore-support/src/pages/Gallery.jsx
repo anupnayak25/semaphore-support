@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { db } from '../context/firebase';
-import { collection, query, orderBy, getDocs, limit, startAfter } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import './Gallery.css';
 
@@ -10,6 +11,7 @@ const sections = ['All', 'a', 'b', 'c', 'mixed'];
 const ITEMS_PER_PAGE = 15;
 
 const Gallery = () => {
+  const { user } = useAuth();
   const [images, setImages] = useState([]);
   const [displayedImages, setDisplayedImages] = useState([]);
   const [day, setDay] = useState('All');
@@ -19,7 +21,15 @@ const Gallery = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
   const observerTarget = useRef(null);
+
+  const ALLOWED_EMAILS = [
+    'mrnayak27@gmail.com',
+    'nnm24mc014@nmamit.in',
+    'nnm24mc015@nmamit.in',
+  ];
+  const isAdmin = !!(user && ALLOWED_EMAILS.includes(user.email));
 
   // Fetch all images from Firestore
   useEffect(() => {
@@ -160,6 +170,53 @@ const Gallery = () => {
     }
   };
 
+  const handleDelete = async (img) => {
+    if (!isAdmin) return;
+    if (!img?.cloudinary?.public_id || !img?.cloudName) {
+      toast.error('Cannot delete: missing Cloudinary info.');
+      return;
+    }
+
+    const confirmMsg = `Delete this ${img.type || 'media'}? This will remove it from Cloudinary and the gallery.`;
+    if (!window.confirm(confirmMsg)) return;
+
+    setDeletingId(img.id);
+    try {
+      const payload = {
+        public_id: img.cloudinary.public_id,
+        resource_type: img.cloudinary.resource_type || (img.type === 'video' ? 'video' : 'image'),
+        cloudName: img.cloudName,
+      };
+
+      const token = user && (await user.getIdToken());
+      const res = await fetch('/api/delete-media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to delete from Cloudinary');
+      }
+
+      // Remove from Firestore
+      await deleteDoc(doc(db, 'gallery', img.id));
+
+      // Update local state
+      setImages(prev => prev.filter(i => i.id !== img.id));
+      setDisplayedImages(prev => prev.filter(i => i.id !== img.id));
+      if (selectedImage?.id === img.id) setSelectedImage(null);
+
+      toast.success('Deleted successfully');
+    } catch (err) {
+      console.error('Delete error:', err);
+      toast.error(err.message || 'Delete failed');
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white p-4 md:p-5">
       {/* Header with filters */}
@@ -269,6 +326,16 @@ const Gallery = () => {
                       >
                         🔗
                       </button>
+                      {isAdmin && (
+                        <button
+                          className="bg-red-500/80 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-red-500 md:hover:scale-110 flex items-center justify-center disabled:opacity-60"
+                          onClick={(e) => { e.stopPropagation(); handleDelete(img); }}
+                          title="Delete"
+                          disabled={deletingId === img.id}
+                        >
+                          {deletingId === img.id ? '⏳' : '🗑️'}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -354,6 +421,16 @@ const Gallery = () => {
                   <span className="text-xl">🔗</span>
                   <span>Share</span>
                 </button>
+                {isAdmin && (
+                  <button
+                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3 border-2 border-red-600 rounded-xl text-base font-semibold cursor-pointer transition-all bg-red-600 text-white md:hover:bg-white md:hover:text-red-600 md:hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60"
+                    onClick={() => handleDelete(selectedImage)}
+                    disabled={deletingId === selectedImage.id}
+                  >
+                    <span className="text-xl">{deletingId === selectedImage.id ? '⏳' : '🗑️'}</span>
+                    <span>{deletingId === selectedImage.id ? 'Deleting...' : 'Delete'}</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>

@@ -8,7 +8,6 @@ import './Upload.css';
 
 const days = ['All', '1st', '2nd'];
 const years = ['All', '1st year', '2nd year'];
-const clouds = ['Auto', 'Cloud 1', 'Cloud 2'];
 const sections = ['All', 'a', 'b', 'c', 'mixed'];
 
 const Upload = () => {
@@ -17,7 +16,7 @@ const Upload = () => {
   const [day, setDay] = useState('All');
   const [year, setYear] = useState('All');
   const [section, setSection] = useState('All');
-  const [cloud, setCloud] = useState('Auto');
+  // Cloud selection removed; uploads auto-distribute between available clouds
   const [uploading, setUploading] = useState(false);
 
   const handleFilesChange = (e) => {
@@ -48,24 +47,30 @@ const Upload = () => {
           toast.loading(`Uploading ${i + 1} of ${files.length}...`, { id: 'upload-progress' });
           
           const folder = import.meta.env.VITE_CLOUDINARY_FOLDER || 'semaphore-gallery';
-          // Decide which cloud to use
-          let targetCloud = CLOUDINARY_CLOUD_1;
-          if (cloud === 'Cloud 2') targetCloud = CLOUDINARY_CLOUD_2 || CLOUDINARY_CLOUD_1;
-          if (cloud === 'Auto') {
-            // Alternate clouds for distribution
-            targetCloud = (i % 2 === 0) ? (CLOUDINARY_CLOUD_1 || CLOUDINARY_CLOUD_2) : (CLOUDINARY_CLOUD_2 || CLOUDINARY_CLOUD_1);
-          }
+          // Auto-distribute: alternate between Cloud 1 and Cloud 2; fallback to whichever is defined
+          const targetCloud = (i % 2 === 0)
+            ? (CLOUDINARY_CLOUD_1 || CLOUDINARY_CLOUD_2)
+            : (CLOUDINARY_CLOUD_2 || CLOUDINARY_CLOUD_1);
 
-          const url = await uploadToCloudinary(file, folder, targetCloud);
+          const uploadRes = await uploadToCloudinary(file, folder, targetCloud);
+          const url = uploadRes.secure_url;
+          const publicId = uploadRes.public_id;
+          const resourceType = uploadRes.resource_type; // image or video
+          const originalFilename = uploadRes.original_filename;
           urls.push(url);
           
           await addDoc(collection(db, 'gallery'), {
             url,
-            type: file.type.startsWith('video') ? 'video' : 'image',
+            type: resourceType === 'video' || file.type.startsWith('video') ? 'video' : 'image',
             day,
             year,
             section,
             cloudName: targetCloud,
+            cloudinary: {
+              public_id: publicId,
+              resource_type: resourceType,
+              original_filename: originalFilename,
+            },
             uploadedBy: {
               name: user.displayName,
               email: user.email,
@@ -128,7 +133,7 @@ const Upload = () => {
           </div>
         ) : (
           <>
-            <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border-2 border-gray-200 mb-6">
+            {/* <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border-2 border-gray-200 mb-6">
               <img src={user.photoURL} alt="profile" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-black" />
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-black text-sm md:text-base truncate">{user.displayName}</div>
@@ -140,7 +145,7 @@ const Upload = () => {
               >
                 Logout
               </button>
-            </div>
+            </div> */}
 
             <form onSubmit={handleUpload} className="space-y-6">
               <div className="relative">
@@ -209,18 +214,6 @@ const Upload = () => {
                   >
                     {sections.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
-                </div>
-
-                <div className="flex flex-col gap-2 md:col-span-3">
-                  <label className="font-semibold text-black text-sm">Cloud:</label>
-                  <select 
-                    value={cloud} 
-                    onChange={e => setCloud(e.target.value)}
-                    className="px-3 py-2.5 border-2 border-black rounded-lg text-sm font-medium cursor-pointer transition-all bg-white hover:bg-gray-50 focus:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black/20"
-                  >
-                    {clouds.map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                  <p className="text-xs text-gray-500">Auto: alternates between Cloud 1 ({CLOUDINARY_CLOUD_1}) and Cloud 2 ({CLOUDINARY_CLOUD_2}).</p>
                 </div>
               </div>
 

@@ -15,7 +15,8 @@ export const uploadToCloudinary = async (file, folder, cloudName = CLOUDINARY_CL
   if (folder) formData.append('folder', folder);
   try {
     const response = await axios.post(url, formData);
-    return response.data.secure_url;
+    // Return full response so caller can get public_id, resource_type, etc.
+    return response.data;
   } catch (e) {
     console.error('Cloudinary upload failed', e);
     throw e;
