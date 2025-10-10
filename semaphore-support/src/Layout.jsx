@@ -28,8 +28,6 @@ function Layout() {
             {user ? (
               <div className="user-menu">
                 <button onClick={() => navigate('/upload')} className="nav-btn profile-btn">Upload</button>
-                <img src={user.photoURL} alt={user.displayName} className="nav-avatar" />
-                <span className="nav-username">{user.displayName}</span>
                 <button onClick={handleLogout} className="nav-btn logout-btn">
                   Logout
                 </button>

@@ -31,6 +31,31 @@ const Gallery = () => {
   ];
   const isAdmin = !!(user && ALLOWED_EMAILS.includes(user.email));
 
+  // Generate thumbnail URL for Cloudinary images
+  const getThumbnailUrl = (url, type) => {
+    if (!url) return url;
+    
+    // Check if it's a Cloudinary URL
+    if (url.includes('cloudinary.com')) {
+      try {
+        // For images: add transformation parameters for thumbnail
+        if (type === 'image') {
+          // Replace /upload/ with /upload/w_400,h_400,c_limit,q_auto:low,f_auto/
+          return url.replace('/upload/', '/upload/w_400,h_400,c_limit,q_auto:low,f_auto/');
+        } else if (type === 'video') {
+          // For videos: get a thumbnail image instead
+          return url.replace('/upload/', '/upload/w_400,h_400,c_fill,q_auto:low,so_0/').replace(/\.[^.]+$/, '.jpg');
+        }
+      } catch (error) {
+        console.error('Error generating thumbnail:', error);
+        return url;
+      }
+    }
+    
+    // Return original URL if not Cloudinary
+    return url;
+  };
+
   // Fetch all images from Firestore
   useEffect(() => {
     const fetchImages = async () => {
@@ -279,16 +304,17 @@ const Gallery = () => {
               >
                 {img.type === 'image' ? (
                   <img 
-                    src={img.url} 
+                    src={getThumbnailUrl(img.url, img.type)} 
                     alt="gallery" 
                     className="w-full block object-cover"
                     loading="lazy"
                   />
                 ) : (
-                  <video 
-                    src={img.url} 
+                  <img 
+                    src={getThumbnailUrl(img.url, img.type)} 
+                    alt="video thumbnail" 
                     className="w-full block object-cover"
-                    preload="metadata"
+                    loading="lazy"
                   />
                 )}
                 <div className="masonry-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 md:hover:opacity-100 transition-opacity pointer-events-none md:pointer-events-auto">
