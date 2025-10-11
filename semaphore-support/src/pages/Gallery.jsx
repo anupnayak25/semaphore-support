@@ -9,6 +9,7 @@ const days = ['All', '1st', '2nd'];
 const years = ['All', '1st year', '2nd year'];
 const sections = ['All', 'a', 'b', 'c', 'mixed'];
 const ITEMS_PER_PAGE = 15;
+const INITIAL_PREFETCH_COUNT = 50; // preload first 50 thumbnails before showing grid
 
 const Gallery = () => {
   const { user } = useAuth();
@@ -21,9 +22,14 @@ const Gallery = () => {
   const [hasMore, setHasMore] = useState(true);
   // use an explicit loadingMore flag to prevent concurrent loads
   const [loadingMore, setLoadingMore] = useState(false);
+  const loadingMoreRef = useRef(false); // immediate guard against fast multiple triggers
+  // multi-select state
+  const [selectedIds, setSelectedIds] = useState(new Set());
   const [selectedImage, setSelectedImage] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
   const observerTarget = useRef(null);
+  const masterCheckboxRef = useRef(null);
+  const [initialPrefetching, setInitialPrefetching] = useState(true); // gate UI until first N are cached
 
   const ALLOWED_EMAILS = [
     'mrnayak27@gmail.com',
@@ -82,9 +88,16 @@ const Gallery = () => {
     (section === 'All' || img.section === section)
   );
 
+  // Build a stable key for the first N items to prefetch so the effect doesn't thrash
+  const filteredPrefetchKey = filtered
+    .slice(0, INITIAL_PREFETCH_COUNT)
+    .map((i) => i.id)
+    .join('|');
+
   // Load more images when scrolling
   const loadMore = useCallback(() => {
-    if (loadingMore) return; // guard against concurrent calls
+    if (loadingMoreRef.current || loadingMore) return; // guard against concurrent calls
+    loadingMoreRef.current = true;
     setLoadingMore(true);
 
     const startIndex = displayedImages.length; // offset-based
@@ -92,38 +105,51 @@ const Gallery = () => {
     const newImages = filtered.slice(startIndex, endIndex);
 
     if (newImages.length > 0) {
-      setDisplayedImages(prev => [...prev, ...newImages]);
+      setDisplayedImages(prev => {
+        const seen = new Set(prev.map((i) => i.id));
+        const toAdd = newImages.filter((i) => !seen.has(i.id));
+        return [...prev, ...toAdd];
+      });
       setHasMore(endIndex < filtered.length);
     } else {
       setHasMore(false);
     }
 
-    // small timeout to coalesce multiple observer triggers
-    setTimeout(() => setLoadingMore(false), 0);
+    // release guards after state updates are queued
+    setLoadingMore(false);
+    loadingMoreRef.current = false;
   }, [displayedImages.length, filtered, loadingMore]);
 
   // Reset displayed images when filters change
   useEffect(() => {
     setDisplayedImages([]);
     setHasMore(true);
+    // clear selections when filters/data change to avoid stale selections
+    setSelectedIds(new Set());
+    // restart prefetch gate when data or filters change
+    setInitialPrefetching(true);
+    // also reset the immediate guard
+    loadingMoreRef.current = false;
   }, [day, year, section, images]);
 
   // Load initial images
   useEffect(() => {
+    if (initialPrefetching) return; // wait until first thumbnails prefetch
     if (displayedImages.length === 0 && filtered.length > 0 && !loadingMore) {
       loadMore();
     }
-  }, [displayedImages.length, filtered.length, loadMore, loadingMore]);
+  }, [displayedImages.length, filtered.length, loadMore, loadingMore, initialPrefetching]);
 
   // Intersection Observer for infinite scroll
   useEffect(() => {
+    if (initialPrefetching) return; // don't start observing during gate
     const observer = new IntersectionObserver(
       entries => {
-        if (entries[0].isIntersecting && hasMore && !loading && !loadingMore) {
+        if (entries[0].isIntersecting && hasMore && !loading && !loadingMore && !loadingMoreRef.current) {
           loadMore();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '200px 0px' }
     );
 
     const currentTarget = observerTarget.current;
@@ -136,7 +162,103 @@ const Gallery = () => {
         observer.unobserve(currentTarget);
       }
     };
-  }, [hasMore, loading, loadingMore, loadMore]);
+  }, [hasMore, loading, loadingMore, loadMore, initialPrefetching]);
+
+  // Prefetch first N thumbnails before showing the grid
+  useEffect(() => {
+    let cancelled = false;
+    const count = Math.min(INITIAL_PREFETCH_COUNT, filtered.length);
+    if (count === 0) {
+      setInitialPrefetching(false);
+      return;
+    }
+    setInitialPrefetching(true);
+    const urls = filtered.slice(0, count).map((i) => getThumbnailUrl(i.url, i.type));
+    let remaining = urls.length;
+    urls.forEach((src) => {
+      const img = new Image();
+      img.onload = img.onerror = () => {
+        if (cancelled) return;
+        remaining -= 1;
+        if (remaining <= 0) {
+          setInitialPrefetching(false);
+        }
+      };
+      img.src = src;
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [filteredPrefetchKey]);
+
+  // Master checkbox indeterminate state (some but not all visible selected)
+  useEffect(() => {
+    const visibleIds = new Set(displayedImages.map(i => i.id));
+    const selectedVisibleCount = [...selectedIds].filter(id => visibleIds.has(id)).length;
+    const allVisibleSelected = visibleIds.size > 0 && selectedVisibleCount === visibleIds.size;
+    const someVisibleSelected = selectedVisibleCount > 0 && !allVisibleSelected;
+    if (masterCheckboxRef.current) {
+      masterCheckboxRef.current.indeterminate = someVisibleSelected;
+    }
+  }, [displayedImages, selectedIds]);
+
+  const toggleSelect = (id) => {
+    setSelectedIds(prev => {
+      const s = new Set(prev);
+      if (s.has(id)) s.delete(id); else s.add(id);
+      return s;
+    });
+  };
+
+  const toggleSelectAllVisible = () => {
+    const visibleIds = displayedImages.map(i => i.id);
+    const allSelected = visibleIds.every(id => selectedIds.has(id));
+    setSelectedIds(prev => {
+      if (allSelected) {
+        const s = new Set(prev);
+        visibleIds.forEach(id => s.delete(id));
+        return s;
+      } else {
+        const s = new Set(prev);
+        visibleIds.forEach(id => s.add(id));
+        return s;
+      }
+    });
+  };
+
+  const handleDownloadMultiple = async () => {
+    const selected = images.filter(i => selectedIds.has(i.id));
+    if (selected.length === 0) return;
+    const toastId = toast.loading(`Preparing ${selected.length} download(s)...`);
+    try {
+      for (const img of selected) {
+        // reuse single download logic but without toasting each one
+        try {
+          const response = await fetch(img.url);
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          const extension = img.type === 'video' ? 'mp4' : 'jpg';
+          const yearPart = img.year ? `-${img.year.replace(/\s+/g, '-')}` : '';
+          link.download = `semaphore-${img.day}${yearPart}-${img.section}-${Date.now()}.${extension}`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } catch (e) {
+          console.error('Bulk download item failed:', e);
+          // fallback open in new tab for this item
+          try { window.open(img.url, '_blank'); } catch {}
+        }
+        // slight delay to avoid overwhelming the browser
+        await new Promise(r => setTimeout(r, 100));
+      }
+      toast.success(`Started downloads for ${selected.length} file(s).`, { id: toastId });
+    } catch (err) {
+      toast.error('Bulk download failed. Try again.', { id: toastId });
+    }
+  };
 
   const openLightbox = (img) => {
     setSelectedImage(img);
@@ -250,44 +372,73 @@ const Gallery = () => {
   return (
     <div className="min-h-screen bg-white p-4 md:p-5">
       {/* Header with filters */}
-      <div className="max-w-[1400px] mx-auto mb-6 md:mb-8 bg-white p-4 md:p-6 lg:p-8 border-[3px] border-black rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black m-0">Gallery</h2>
-        <div className="flex flex-wrap gap-2 md:gap-3 items-center self-end md:self-auto">
-          <div className="flex items-center gap-1.5">
-            <label className="text-xs md:text-sm font-semibold text-black">Day:</label>
-            <select 
-              value={day} 
-              onChange={e => setDay(e.target.value)} 
-              className="px-2 md:px-3 py-1 md:py-1.5 border-2 border-black rounded-lg text-xs md:text-sm cursor-pointer transition-all bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none min-w-[60px] md:min-w-[80px]"
-            >
-              {days.map(d => <option key={d} value={d}>{d}</option>)}
-            </select>
+      <div className="max-w-[1400px] mx-auto mb-6 md:mb-8 bg-white p-4 md:p-6 lg:p-8 border-[3px] border-black rounded-2xl">
+        {/* Title Row */}
+        <div className="flex items-center justify-between mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black m-0">Gallery</h2>
+        </div>
+
+        {/* Filters and Actions Row */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          {/* Filter Controls */}
+          <div className="flex flex-wrap gap-2 md:gap-3 items-center">
+            <div className="flex items-center gap-1.5">
+              <label className="text-xs md:text-sm font-semibold text-black">Day:</label>
+              <select 
+                value={day} 
+                onChange={e => setDay(e.target.value)} 
+                className="px-2 md:px-3 py-1 md:py-1.5 border-2 border-black rounded-lg text-xs md:text-sm cursor-pointer transition-all bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none min-w-[60px] md:min-w-[80px]"
+              >
+                {days.map(d => <option key={d} value={d}>{d}</option>)}
+              </select>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <label className="text-xs md:text-sm font-semibold text-black">Year:</label>
+              <select 
+                value={year} 
+                onChange={e => setYear(e.target.value)} 
+                className="px-2 md:px-3 py-1 md:py-1.5 border-2 border-black rounded-lg text-xs md:text-sm cursor-pointer transition-all bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none min-w-[60px] md:min-w-[80px]"
+              >
+                {years.map(y => <option key={y} value={y}>{y}</option>)}
+              </select>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <label className="text-xs md:text-sm font-semibold text-black">Section:</label>
+              <select 
+                value={section} 
+                onChange={e => setSection(e.target.value)} 
+                className="px-2 md:px-3 py-1 md:py-1.5 border-2 border-black rounded-lg text-xs md:text-sm cursor-pointer transition-all bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none min-w-[60px] md:min-w-[80px]"
+              >
+                {sections.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <label className="text-xs md:text-sm font-semibold text-black">Year:</label>
-            <select 
-              value={year} 
-              onChange={e => setYear(e.target.value)} 
-              className="px-2 md:px-3 py-1 md:py-1.5 border-2 border-black rounded-lg text-xs md:text-sm cursor-pointer transition-all bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none min-w-[60px] md:min-w-[80px]"
+
+          {/* Selection Actions */}
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-black">
+              <input 
+                type="checkbox" 
+                ref={masterCheckboxRef}
+                onChange={toggleSelectAllVisible}
+                className="w-4 h-4 border-1 border-black rounded-md cursor-pointer bg-white checked:bg-black checked:border-black appearance-none checked:after:content-['✓'] checked:after:text-white checked:after:text-xs checked:after:flex checked:after:items-center checked:after:justify-center checked:after:w-full checked:after:h-full"
+              />
+              <span className="hidden md:inline">Select All</span>
+              <span className="md:hidden">Select</span>
+            </label>
+            <button 
+              onClick={handleDownloadMultiple}
+              disabled={selectedIds.size === 0}
+              className={`flex-1 md:flex-none px-4 py-2 border-2 border-black rounded-lg text-sm font-semibold transition-all ${selectedIds.size === 0 ? 'bg-gray-200 text-gray-500 cursor-not-allowed border-gray-300' : 'bg-black text-white md:hover:bg-white md:hover:text-black'}`}
             >
-              {years.map(y => <option key={y} value={y}>{y}</option>)}
-            </select>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <label className="text-xs md:text-sm font-semibold text-black">Section:</label>
-            <select 
-              value={section} 
-              onChange={e => setSection(e.target.value)} 
-              className="px-2 md:px-3 py-1 md:py-1.5 border-2 border-black rounded-lg text-xs md:text-sm cursor-pointer transition-all bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none min-w-[60px] md:min-w-[80px]"
-            >
-              {sections.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
+              📥 Download ({selectedIds.size})
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Loading state */}
-      {loading ? (
+      {/* Loading state (include prefetch gate) */}
+      {loading || initialPrefetching ? (
         <div className="flex flex-col justify-center items-center py-16 gap-4">
           <div className="spinner"></div>
           <p className="text-gray-600 text-lg">Loading gallery...</p>
@@ -307,6 +458,17 @@ const Gallery = () => {
                 style={{ animationDelay: `${(index % ITEMS_PER_PAGE) * 0.05}s` }}
                 onClick={() => openLightbox(img)}
               >
+                {/* Selection checkbox */}
+                <div className="absolute top-2 left-2 z-10">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.has(img.id)}
+                    onChange={(e) => { e.stopPropagation(); toggleSelect(img.id); }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-5 h-5 border-1 border-black rounded-md cursor-pointer bg-white checked:bg-black checked:border-black appearance-none checked:after:content-['✓'] checked:after:text-white checked:after:text-sm checked:after:flex checked:after:items-center checked:after:justify-center checked:after:w-full checked:after:h-full"
+                    title="Select"
+                  />
+                </div>
                 {img.type === 'image' ? (
                   <img 
                     src={getThumbnailUrl(img.url, img.type)} 
@@ -393,7 +555,7 @@ const Gallery = () => {
 
       {/* Lightbox */}
       {selectedImage && (
-        <div className="lightbox fixed inset-0 bg-black/95 flex justify-center items-center z-[9999] p-5" onClick={closeLightbox}>
+        <div className="lightbox fixed inset-0 bg-black/95 flex justify-center items-center z-[9999] p-5 overflow-auto" onClick={closeLightbox}>
           <button 
             className="absolute top-5 right-5 bg-white border-none w-12 h-12 rounded-full text-3xl cursor-pointer flex items-center justify-center transition-all z-[10001] text-gray-800 font-light leading-none md:hover:bg-[#667eea] md:hover:text-white md:hover:rotate-90" 
             onClick={closeLightbox}
