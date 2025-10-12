@@ -42,7 +42,7 @@ function Layout() {
       </nav>
 
       <ScrollToTop/>
-      <Outlet />
+        <Outlet />
     </>
   );
 }

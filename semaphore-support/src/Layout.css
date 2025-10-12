@@ -1,9 +1,10 @@
+/* Layout variables */
+:root {
+  --nav-height: 72px;
+}
+
 /* Navbar */
 .navbar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
   background: #ffffff;
   border-bottom: 2px solid #000000;
   z-index: 1000;
@@ -215,4 +216,9 @@
 /* Smooth scroll offset for sticky nav */
 html {
   scroll-padding-top: 80px;
+}
+
+/* Content offset to prevent overlap with fixed navbar */
+.content-offset {
+  padding-top: var(--nav-height);
 }

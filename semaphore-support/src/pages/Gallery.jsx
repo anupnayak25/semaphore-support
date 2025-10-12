@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import Masonry from 'masonry-layout';
+import imagesLoaded from 'imagesloaded';
 import { db } from '../context/firebase';
 import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import JSZip from 'jszip';
 import './Gallery.css';
 
 const days = ['All', '1st', '2nd'];
@@ -30,6 +33,75 @@ const Gallery = () => {
   const observerTarget = useRef(null);
   const masterCheckboxRef = useRef(null);
   const [initialPrefetching, setInitialPrefetching] = useState(true); // gate UI until first N are cached
+  // layout mode: 'masonry' (current) or 'grid' (zero reflow)
+  const [layoutMode, setLayoutMode] = useState(() => {
+    try {
+      return localStorage.getItem('galleryLayout') || 'masonry';
+    } catch {
+      return 'masonry';
+    }
+  });
+
+  // persist layout preference
+  useEffect(() => {
+    try { localStorage.setItem('galleryLayout', layoutMode); } catch {}
+  }, [layoutMode]);
+
+  // Masonry instance refs
+  const masonryContainerRef = useRef(null);
+  const masonryInstanceRef = useRef(null);
+  const relayoutMasonry = useCallback(() => {
+    const container = masonryContainerRef.current;
+    if (!container) return;
+    if (!masonryInstanceRef.current) {
+      masonryInstanceRef.current = new Masonry(container, {
+        itemSelector: '.masonry-item',
+        columnWidth: '.masonry-sizer',
+        percentPosition: true,
+        gutter: 16,
+      });
+    } else {
+      masonryInstanceRef.current.layout();
+    }
+  }, []);
+
+  // Initialize Masonry when in masonry mode and items change
+  useEffect(() => {
+    if (layoutMode !== 'masonry') return;
+    const container = masonryContainerRef.current;
+    if (!container) return;
+    // ensure images are loaded before layout to avoid jumps
+    const imgLoad = imagesLoaded(container);
+    imgLoad.on('progress', () => {
+      relayoutMasonry();
+    });
+    imgLoad.on('always', () => {
+      relayoutMasonry();
+    });
+    // quick debounce relayout as items list changes
+    const t = setTimeout(relayoutMasonry, 50);
+    // relayout on resize (column count can change via media queries)
+    const onResize = () => relayoutMasonry();
+    window.addEventListener('resize', onResize);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [layoutMode, displayedImages, relayoutMasonry]);
+
+  // Destroy Masonry when switching away or on unmount
+  useEffect(() => {
+    if (layoutMode === 'grid' && masonryInstanceRef.current) {
+      masonryInstanceRef.current.destroy();
+      masonryInstanceRef.current = null;
+    }
+    return () => {
+      if (masonryInstanceRef.current) {
+        masonryInstanceRef.current.destroy();
+        masonryInstanceRef.current = null;
+      }
+    };
+  }, [layoutMode]);
 
   const ALLOWED_EMAILS = [
     'mrnayak27@gmail.com',
@@ -229,33 +301,39 @@ const Gallery = () => {
   const handleDownloadMultiple = async () => {
     const selected = images.filter(i => selectedIds.has(i.id));
     if (selected.length === 0) return;
-    const toastId = toast.loading(`Preparing ${selected.length} download(s)...`);
+    const toastId = toast.loading(`Collecting ${selected.length} file(s)...`);
     try {
+      const zip = new JSZip();
+      let successCount = 0;
       for (const img of selected) {
-        // reuse single download logic but without toasting each one
         try {
-          const response = await fetch(img.url);
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          const extension = img.type === 'video' ? 'mp4' : 'jpg';
+          const resp = await fetch(img.url);
+          const blob = await resp.blob();
+          const ext = img.type === 'video' ? 'mp4' : 'jpg';
           const yearPart = img.year ? `-${img.year.replace(/\s+/g, '-')}` : '';
-          link.download = `semaphore-${img.day}${yearPart}-${img.section}-${Date.now()}.${extension}`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
+          const safeSection = (img.section || 'sec').toString().replace(/\s+/g, '-');
+          const filename = `semaphore-${img.day}${yearPart}-${safeSection}-${img.id}.${ext}`;
+          zip.file(filename, blob);
+          successCount += 1;
+          toast.loading(`Added ${successCount}/${selected.length}…`, { id: toastId });
         } catch (e) {
-          console.error('Bulk download item failed:', e);
-          // fallback open in new tab for this item
-          try { window.open(img.url, '_blank'); } catch {}
+          console.error('Failed to add to zip:', e);
         }
-        // slight delay to avoid overwhelming the browser
-        await new Promise(r => setTimeout(r, 100));
       }
-      toast.success(`Started downloads for ${selected.length} file(s).`, { id: toastId });
+
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      const url = window.URL.createObjectURL(zipBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      const ts = new Date().toISOString().replace(/[:.]/g, '-');
+      link.download = `semaphore-selected-${ts}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      toast.success(`Downloaded ${successCount} file(s) as ZIP.`, { id: toastId });
     } catch (err) {
+      console.error('Zip download failed:', err);
       toast.error('Bulk download failed. Try again.', { id: toastId });
     }
   };
@@ -372,10 +450,42 @@ const Gallery = () => {
   return (
     <div className="min-h-screen bg-white p-4 md:p-5">
       {/* Header with filters */}
-      <div className="max-w-[1400px] mx-auto mb-6 md:mb-8 bg-white p-4 md:p-6 lg:p-8 border-[3px] border-black rounded-2xl">
+  <div className="sticky top-2 z-[900] max-w-[1400px] mx-auto mb-6 md:mb-8 bg-white p-4 md:p-6 lg:p-8 border-[3px] border-black rounded-2xl">
         {/* Title Row */}
         <div className="flex items-center justify-between mb-4 md:mb-6">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black m-0">Gallery</h2>
+          {/* Layout toggle switch */}
+          <div className="relative inline-flex select-none" aria-label="Layout toggle">
+            <div className="relative w-[200px] h-10 border-2 border-black rounded-xl bg-white overflow-hidden">
+              {/* Sliding indicator */}
+              <div
+                className={`absolute top-0 bottom-0 w-1/2 transition-transform duration-200 ${layoutMode === 'masonry' ? 'translate-x-0' : 'translate-x-full'} bg-black`}
+                aria-hidden="true"
+                style={{ borderRadius: '10px' }}
+              />
+              {/* Options */}
+              <button
+                onClick={() => setLayoutMode('masonry')}
+                className={`absolute left-0 top-0 w-1/2 h-full flex items-center justify-center gap-2 font-semibold ${layoutMode === 'masonry' ? 'text-white' : 'text-black'} transition-colors`}
+                title="Masonry layout - varied heights"
+                aria-label="Masonry layout"
+                aria-pressed={layoutMode === 'masonry'}
+              >
+                <span className="text-lg">🧱</span>
+                <span className="text-sm hidden sm:inline">Masonry</span>
+              </button>
+              <button
+                onClick={() => setLayoutMode('grid')}
+                className={`absolute right-0 top-0 w-1/2 h-full flex items-center justify-center gap-2 font-semibold ${layoutMode === 'grid' ? 'text-white' : 'text-black'} transition-colors`}
+                title="Grid layout - uniform heights"
+                aria-label="Grid layout"
+                aria-pressed={layoutMode === 'grid'}
+              >
+                <span className="text-lg">⬛</span>
+                <span className="text-sm hidden sm:inline">Grid</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Filters and Actions Row */}
@@ -449,92 +559,183 @@ const Gallery = () => {
         </div>
       ) : (
         <>
-          {/* Masonry Grid */}
-          <div className="masonry-grid max-w-[1400px] mx-auto">
-            {displayedImages.map((img, index) => (
-              <div 
-                key={img.id} 
-                className="masonry-item break-inside-avoid mb-3 md:mb-4 rounded-2xl overflow-hidden bg-white border-2 border-black cursor-pointer transition-all md:hover:-translate-y-1 md:hover:shadow-lg"
-                style={{ animationDelay: `${(index % ITEMS_PER_PAGE) * 0.05}s` }}
-                onClick={() => openLightbox(img)}
-              >
-                {/* Selection checkbox */}
-                <div className="absolute top-2 left-2 z-10">
-                  <input
-                    type="checkbox"
-                    checked={selectedIds.has(img.id)}
-                    onChange={(e) => { e.stopPropagation(); toggleSelect(img.id); }}
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-5 h-5 border-1 border-black rounded-md cursor-pointer bg-white checked:bg-black checked:border-black appearance-none checked:after:content-['✓'] checked:after:text-white checked:after:text-sm checked:after:flex checked:after:items-center checked:after:justify-center checked:after:w-full checked:after:h-full"
-                    title="Select"
-                  />
-                </div>
-                {img.type === 'image' ? (
-                  <img 
-                    src={getThumbnailUrl(img.url, img.type)} 
-                    alt="gallery" 
-                    className="w-full block object-cover"
-                    loading="lazy"
-                  />
-                ) : (
-                  <img 
-                    src={getThumbnailUrl(img.url, img.type)} 
-                    alt="video thumbnail" 
-                    className="w-full block object-cover"
-                    loading="lazy"
-                  />
-                )}
-                <div className="masonry-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 md:hover:opacity-100 transition-opacity pointer-events-none md:pointer-events-auto">
-                  <div className="text-white">
-                    <div className="flex items-center gap-2.5 mb-2.5">
-                      {img.uploadedBy?.photoURL && (
-                        <img 
-                          src={img.uploadedBy.photoURL} 
-                          alt={img.uploadedBy.name}
-                          className="w-8 h-8 rounded-full border-2 border-white"
-                        />
-                      )}
-                      <span className="font-semibold text-sm">{img.uploadedBy?.name || 'Anonymous'}</span>
-                    </div>
-                    <div className="flex gap-2 flex-wrap mb-2.5">
-                      <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Day {img.day}</span>
-                      {img.year && <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">{img.year}</span>}
-                      <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Section {img.section}</span>
-                      {img.cloudName && (
-                        <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Cloud {img.cloudName}</span>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <button 
-                        className="bg-white/30 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-white/50 md:hover:scale-110 flex items-center justify-center"
-                        onClick={(e) => { e.stopPropagation(); handleDownload(img); }}
-                        title="Download"
-                      >
-                        📥
-                      </button>
-                      <button 
-                        className="bg-white/30 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-white/50 md:hover:scale-110 flex items-center justify-center"
-                        onClick={(e) => { e.stopPropagation(); handleShare(img); }}
-                        title="Share"
-                      >
-                        🔗
-                      </button>
-                      {isAdmin && (
-                        <button
-                          className="bg-red-500/80 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-red-500 md:hover:scale-110 flex items-center justify-center disabled:opacity-60"
-                          onClick={(e) => { e.stopPropagation(); handleDelete(img); }}
-                          title="Delete"
-                          disabled={deletingId === img.id}
+          {/* Masonry or Grid depending on layoutMode */}
+          {layoutMode === 'masonry' ? (
+            <div ref={masonryContainerRef} className="masonry-grid max-w-[1400px] mx-auto">
+              {/* Sizer for Masonry column width (CSS sets width responsively) */}
+              <div className="masonry-sizer"></div>
+              {displayedImages.map((img, index) => (
+                <div 
+                  key={img.id} 
+                  className="masonry-item break-inside-avoid mb-3 md:mb-4 rounded-2xl overflow-hidden bg-white border-2 border-black cursor-pointer transition-all md:hover:-translate-y-1 md:hover:shadow-lg relative"
+                  style={{ animationDelay: `${(index % ITEMS_PER_PAGE) * 0.05}s` }}
+                  onClick={() => openLightbox(img)}
+                >
+                  {/* Selection checkbox */}
+                  <div className="absolute top-2 left-2 z-10">
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.has(img.id)}
+                      onChange={(e) => { e.stopPropagation(); toggleSelect(img.id); }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-5 h-5 border-1 border-black rounded-md cursor-pointer bg-white checked:bg-black checked:border-black appearance-none checked:after:content-['✓'] checked:after:text-white checked:after:text-sm checked:after:flex checked:after:items-center checked:after:justify-center checked:after:w-full checked:after:h-full"
+                      title="Select"
+                    />
+                  </div>
+                  {img.type === 'image' ? (
+                    <img 
+                      src={getThumbnailUrl(img.url, img.type)} 
+                      alt="gallery" 
+                      className="w-full block object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <img 
+                      src={getThumbnailUrl(img.url, img.type)} 
+                      alt="video thumbnail" 
+                      className="w-full block object-cover"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="masonry-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 md:hover:opacity-100 transition-opacity pointer-events-none md:pointer-events-auto">
+                    <div className="text-white">
+                      <div className="flex items-center gap-2.5 mb-2.5">
+                        {img.uploadedBy?.photoURL && (
+                          <img 
+                            src={img.uploadedBy.photoURL} 
+                            alt={img.uploadedBy.name}
+                            className="w-8 h-8 rounded-full border-2 border-white"
+                          />
+                        )}
+                        <span className="font-semibold text-sm">{img.uploadedBy?.name || 'Anonymous'}</span>
+                      </div>
+                      <div className="flex gap-2 flex-wrap mb-2.5">
+                        <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Day {img.day}</span>
+                        {img.year && <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">{img.year}</span>}
+                        <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Section {img.section}</span>
+                        {img.cloudName && (
+                          <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Cloud {img.cloudName}</span>
+                        )}
+                      </div>
+                      <div className="flex gap-2">
+                        <button 
+                          className="bg-white/30 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-white/50 md:hover:scale-110 flex items-center justify-center"
+                          onClick={(e) => { e.stopPropagation(); handleDownload(img); }}
+                          title="Download"
                         >
-                          {deletingId === img.id ? '⏳' : '🗑️'}
+                          📥
                         </button>
-                      )}
+                        <button 
+                          className="bg-white/30 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-white/50 md:hover:scale-110 flex items-center justify-center"
+                          onClick={(e) => { e.stopPropagation(); handleShare(img); }}
+                          title="Share"
+                        >
+                          🔗
+                        </button>
+                        {isAdmin && (
+                          <button
+                            className="bg-red-500/80 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-red-500 md:hover:scale-110 flex items-center justify-center disabled:opacity-60"
+                            onClick={(e) => { e.stopPropagation(); handleDelete(img); }}
+                            title="Delete"
+                            disabled={deletingId === img.id}
+                          >
+                            {deletingId === img.id ? '⏳' : '🗑️'}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {displayedImages.map((img, index) => (
+                <div
+                  key={img.id}
+                  className="rounded-2xl overflow-hidden bg-white border-2 border-black cursor-pointer transition-all md:hover:-translate-y-1 md:hover:shadow-lg relative"
+                  style={{ animationDelay: `${(index % ITEMS_PER_PAGE) * 0.05}s` }}
+                  onClick={() => openLightbox(img)}
+                >
+                  {/* Selection checkbox */}
+                  <div className="absolute top-2 left-2 z-10">
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.has(img.id)}
+                      onChange={(e) => { e.stopPropagation(); toggleSelect(img.id); }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-5 h-5 border-1 border-black rounded-md cursor-pointer bg-white checked:bg-black checked:border-black appearance-none checked:after:content-['✓'] checked:after:text-white checked:after:text-sm checked:after:flex checked:after:items-center checked:after:justify-center checked:after:w-full checked:after:h-full"
+                      title="Select"
+                    />
+                  </div>
+                  {/* Fixed-height card to avoid reflow */}
+                  {img.type === 'image' ? (
+                    <img
+                      src={getThumbnailUrl(img.url, img.type)}
+                      alt="gallery"
+                      className="w-full h-60 md:h-64 lg:h-72 object-cover block"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <img
+                      src={getThumbnailUrl(img.url, img.type)}
+                      alt="video thumbnail"
+                      className="w-full h-60 md:h-64 lg:h-72 object-cover block"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 md:hover:opacity-100 transition-opacity pointer-events-none md:pointer-events-auto">
+                    <div className="text-white">
+                      <div className="flex items-center gap-2.5 mb-2.5">
+                        {img.uploadedBy?.photoURL && (
+                          <img
+                            src={img.uploadedBy.photoURL}
+                            alt={img.uploadedBy.name}
+                            className="w-8 h-8 rounded-full border-2 border-white"
+                          />
+                        )}
+                        <span className="font-semibold text-sm">{img.uploadedBy?.name || 'Anonymous'}</span>
+                      </div>
+                      <div className="flex gap-2 flex-wrap mb-2.5">
+                        <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Day {img.day}</span>
+                        {img.year && <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">{img.year}</span>}
+                        <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Section {img.section}</span>
+                        {img.cloudName && (
+                          <span className="bg-white/20 backdrop-blur-lg px-2.5 py-1 rounded-xl text-xs font-medium">Cloud {img.cloudName}</span>
+                        )}
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          className="bg-white/30 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-white/50 md:hover:scale-110 flex items-center justify-center"
+                          onClick={(e) => { e.stopPropagation(); handleDownload(img); }}
+                          title="Download"
+                        >
+                          📥
+                        </button>
+                        <button
+                          className="bg-white/30 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-white/50 md:hover:scale-110 flex items-center justify-center"
+                          onClick={(e) => { e.stopPropagation(); handleShare(img); }}
+                          title="Share"
+                        >
+                          🔗
+                        </button>
+                        {isAdmin && (
+                          <button
+                            className="bg-red-500/80 backdrop-blur-lg border border-white/50 px-3 py-2 rounded-lg text-lg cursor-pointer transition-all md:hover:bg-red-500 md:hover:scale-110 flex items-center justify-center disabled:opacity-60"
+                            onClick={(e) => { e.stopPropagation(); handleDelete(img); }}
+                            title="Delete"
+                            disabled={deletingId === img.id}
+                          >
+                            {deletingId === img.id ? '⏳' : '🗑️'}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Infinite scroll trigger */}
           {hasMore && (

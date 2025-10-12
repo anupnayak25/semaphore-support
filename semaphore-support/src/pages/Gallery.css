@@ -1,25 +1,44 @@
 /* Essential CSS for Gallery - Masonry Grid & Animations */
 
-/* Masonry Grid Layout */
+/* Masonry Grid Layout (JS-driven: Masonry.js) */
 .masonry-grid {
-  /* Mobile default: 2 columns */
+  position: relative; /* required for absolute-positioned items */
+}
+
+/* Responsive column sizing for Masonry.js */
+.masonry-sizer,
+.masonry-grid .masonry-item {
+  width: 50%; /* 2 columns on mobile */
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .masonry-sizer,
+  .masonry-grid .masonry-item {
+    width: 33.3333%; /* 3 columns on tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-sizer,
+  .masonry-grid .masonry-item {
+    width: 25%; /* 4 columns on desktop */
+  }
+}
+
+/* Vertical spacing between items (horizontal spacing comes from Masonry gutter) */
+.masonry-grid .masonry-item { margin-bottom: 16px; }
+
+/* Optional: legacy CSS column fallback (unused now). Keep for reference */
+.masonry-columns {
   column-count: 2;
   column-gap: 10px;
 }
-
-/* Tablet: 3 columns */
 @media (min-width: 768px) {
-  .masonry-grid {
-    column-count: 3;
-    column-gap: 15px;
-  }
+  .masonry-columns { column-count: 3; column-gap: 15px; }
 }
-
-/* Desktop: 4 columns */
 @media (min-width: 1024px) {
-  .masonry-grid {
-    column-count: 4;
-  }
+  .masonry-columns { column-count: 4; }
 }
 
 /* Masonry Item Animation */
