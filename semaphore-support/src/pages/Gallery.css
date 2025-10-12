@@ -6,23 +6,39 @@
 }
 
 /* Responsive column sizing for Masonry.js */
+
+/* Responsive column sizing for Masonry.js */
 .masonry-sizer,
 .masonry-grid .masonry-item {
   width: 50%; /* 2 columns on mobile */
   box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .masonry-sizer,
   .masonry-grid .masonry-item {
-    width: 33.3333%; /* 3 columns on tablet */
+    width: 33.3333%; /* 3 columns on small tablets */
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .masonry-sizer,
   .masonry-grid .masonry-item {
-    width: 25%; /* 4 columns on desktop */
+    width: 25%; /* 4 columns on large tablets */
+  }
+}
+
+@media (min-width: 1200px) {
+  .masonry-sizer,
+  .masonry-grid .masonry-item {
+    width: 20%; /* 5 columns on desktop */
+  }
+}
+
+@media (min-width: 1600px) {
+  .masonry-sizer,
+  .masonry-grid .masonry-item {
+    width: 16.6667%; /* 6 columns on very large screens */
   }
 }
 
